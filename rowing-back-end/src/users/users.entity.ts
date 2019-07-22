@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import {Roles} from "../roles/roles.entity";
+
 
 @Entity()
 export class Users {
@@ -22,4 +24,7 @@ export class Users {
 
     @Column()
     country: string;
+
+    @ManyToOne(type => Roles )
+    role: Roles;
 }
