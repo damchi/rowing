@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CoachMenuComponent } from './components/coach-menu/coach-menu.component';
+import { PopupNewTrainingComponent } from './components/popup-new-training/popup-new-training.component';
 
 
 
@@ -28,6 +28,7 @@ import { CoachMenuComponent } from './components/coach-menu/coach-menu.component
     PlanningComponent,
     CategoriesComponent,
     CoachMenuComponent,
+    PopupNewTrainingComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,7 @@ import { CoachMenuComponent } from './components/coach-menu/coach-menu.component
     FormsModule,
     ReactiveFormsModule
   ],
-  entryComponents: [],
+  entryComponents: [PopupNewTrainingComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

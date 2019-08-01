@@ -4,6 +4,12 @@
     <list default="true" id="7a9905f2-6eb4-4de5-b113-44ae6b5bd318" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/util/error-struture.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/util/error-struture.ts" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,15 +27,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/util/error-struture.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app.component.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -75,13 +72,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+            <state relative-caret-position="150">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -156,12 +163,12 @@
         <option value="$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.html" />
-        <option value="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" />
-        <option value="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/util/error-struture.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.html" />
+        <option value="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" />
+        <option value="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" />
       </list>
     </option>
   </component>
@@ -184,6 +191,41 @@
             <path>
               <item name="rowing" type="b2602c69:ProjectViewProjectNode" />
               <item name="rowing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rowing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rowing" type="462c0819:PsiDirectoryNode" />
+              <item name="rowingFront" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rowing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rowing" type="462c0819:PsiDirectoryNode" />
+              <item name="rowingFront" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rowing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rowing" type="462c0819:PsiDirectoryNode" />
+              <item name="rowingFront" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rowing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rowing" type="462c0819:PsiDirectoryNode" />
+              <item name="rowingFront" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rowing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rowing" type="462c0819:PsiDirectoryNode" />
+              <item name="rowingFront" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="popup-new-training" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -236,12 +278,12 @@
       <updated>1563731242713</updated>
       <workItem from="1563731244012" duration="10555000" />
       <workItem from="1564695551184" duration="2640000" />
-      <workItem from="1564700171572" duration="260000" />
+      <workItem from="1564700171572" duration="535000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13455000" />
+    <option name="totallyTimeSpent" value="13730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="15" y="23" width="1440" height="828" extended-state="1" />
@@ -264,7 +306,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.6297335" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32398316" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -598,8 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" />
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" />
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.spec.ts" />
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.html" />
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.ts" />
@@ -656,10 +696,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

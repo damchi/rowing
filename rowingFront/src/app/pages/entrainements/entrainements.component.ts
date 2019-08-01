@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Entrainements} from '../../domaines/entrainements';
 import {EntrainementsService} from '../../services/entrainements.service';
 import {MatDialog} from '@angular/material';
+import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 // import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 
 @Component({
@@ -28,30 +29,30 @@ export class EntrainementsComponent implements OnInit {
       });
   }
 
-  // newTraining(training?: Entrainements) {
-  //   const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
-  //     width: '750px',
-  //     data: {training: training || new Entrainements()}
-  //   });
-  //
-  //   dialogPop.afterClosed().subscribe(result => {
-  //     if (result) {
-  //       this.save(result.training);
-  //     }
-  //   });
-  //
-  // }
+  newTraining(training?: Entrainements) {
+    const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
+      width: '750px',
+      data: {training: training || new Entrainements()}
+    });
 
-  // save(training: Entrainements) {
-  //   this.service.save(training).subscribe(
-  //     () => {
-  //       this.getAll();
-  //     },
-  //     (e: any) => {
-  //       alert(e.toString());
-  //     });
-  //
-  // }
+    dialogPop.afterClosed().subscribe(result => {
+      if (result) {
+        this.save(result.training);
+      }
+    });
+
+  }
+
+  save(training: Entrainements) {
+    this.service.save(training).subscribe(
+      () => {
+        this.getAll();
+      },
+      (e: any) => {
+        alert(e.toString());
+      });
+
+  }
 
   deleteTraining(training: Entrainements) {}
 
