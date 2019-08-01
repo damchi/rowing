@@ -14,6 +14,7 @@ import { HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CategoriesComponent } from './pages/categories/categories.component';
+import { CoachMenuComponent } from './components/coach-menu/coach-menu.component';
 
 
 
@@ -26,6 +27,7 @@ import { CategoriesComponent } from './pages/categories/categories.component';
     CoachComponent,
     PlanningComponent,
     CategoriesComponent,
+    CoachMenuComponent,
   ],
   imports: [
     BrowserModule,
