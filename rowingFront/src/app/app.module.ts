@@ -4,13 +4,28 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {LoginComponent} from "./pages/login/login.component";
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule} from "@angular/material";
+import {MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import { EntrainementsComponent } from './pages/entrainements/entrainements.component';
+import {CoachComponent} from './pages/coach/coach.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { PlanningComponent } from './pages/planning/planning.component';
+import {MatTableModule} from '@angular/material/table';
+import { HttpClientModule} from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { CategoriesComponent } from './pages/categories/categories.component';
+
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    EntrainementsComponent,
+    CoachComponent,
+    PlanningComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,8 +35,14 @@ import {MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule} fr
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
+    MatMenuModule,
+    MatTableModule,
+    HttpClientModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-
+  entryComponents: [],
   providers: [],
   bootstrap: [AppComponent]
 })
