@@ -1,5 +1,4 @@
-export class Categories {
-
+export class Roles {
   id: number;
   name: string;
 

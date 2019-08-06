@@ -15,6 +15,8 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CoachMenuComponent } from './components/coach-menu/coach-menu.component';
 import { PopupNewTrainingComponent } from './components/popup-new-training/popup-new-training.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 
 
@@ -43,7 +45,8 @@ import { PopupNewTrainingComponent } from './components/popup-new-training/popup
     HttpClientModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatRadioModule
   ],
   entryComponents: [PopupNewTrainingComponent],
   providers: [],

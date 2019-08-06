@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService {
+export class RolesService {
 
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get(`${environment.apiUrl}/categories`);
-  }
-}
+    return this.http.get(`${environment.apiUrl}/roles`);
+  }}

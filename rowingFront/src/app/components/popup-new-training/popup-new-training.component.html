@@ -1,1 +1,97 @@
-<p>popup-new-training works!</p>
+<h1 mat-dialog-title> {{data.training.id ? 'Modifier l\'entrainement' : 'Nouvel entrainenment'}}</h1>
+<div mat-dialog-content></div>
+<form [formGroup]="trainForm">
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="Nom de l'entrainement" formControlName="name" required>
+    <mat-error *ngFor="let validation of errorMessages.name">
+      <mat-error class="error-message" *ngIf="trainForm.get('name').hasError(validation.type) &&
+          (trainForm.get('name').dirty || trainForm.get('name').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
+  </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Categories des mambres</mat-label>
+      <mat-select formControlName="membres">
+        <mat-option *ngFor="let role of roles" [value]="role">{{role.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Categorie de l'entrainement</mat-label>
+      <mat-select formControlName="categorie" multiple>
+        <mat-option *ngFor="let categorie of categories" [value]="categorie">{{categorie.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+  <mat-radio-group formControlName="season" (change)="changeSeason($event)" >
+    <div class="radioGroup">
+      <div class="radio">
+        <mat-radio-button value="ete" [checked]="data.training.season == true">Été</mat-radio-button>
+      </div>
+      <div class="radio">
+        <mat-radio-button value="hiver" [checked]="data.training.season == false"> Hiver</mat-radio-button>
+      </div>
+    </div>
+    <mat-error class="error-message" *ngIf="trainForm.get('season').hasError('season')
+          && (trainForm.get('season').touched || trainForm.get('season').dirty)">
+      {{trainForm.get('season').errors.message}}
+    </mat-error>
+  </mat-radio-group>
+
+
+  <div class="input-container">
+    <div *ngIf="season == 'ete'">
+      <h3>Entrainenment d'été</h3>
+
+
+      <mat-form-field>
+        <input type="number" matInput placeholder="distance en km" formControlName="distance" required>
+        <mat-error *ngFor="let validation of errorMessages.distance">
+          <mat-error class="error-message" *ngIf="trainForm.get('distance').hasError(validation.type) &&
+          (trainForm.get('distance').dirty || trainForm.get('distance').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="number" matInput placeholder="Nombre strokes start" >
+      </mat-form-field>
+
+
+    </div>
+    <div *ngIf="season == 'hiver'">
+      <h3>Entrainenment d'hiver</h3>
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+<!--  <mat-form-field>-->
+<!--    <mat-label>Categorie de l'entrainement</mat-label>-->
+<!--    <mat-select [formControl]="categorie" multiple>-->
+<!--      <mat-option *ngFor="let categorie of categories" [value]="categorie">{{categorie.name}}</mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->
+
+
+
+<!--  <mat-form-field>-->
+<!--    <textarea type="number" matInput placeholder="Commentaires" formControlName="comments" required></textarea>-->
+<!--  </mat-form-field>-->
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="close()">Annuler</button>
+    <button mat-button color="primary" mat-raised-button (click)="create()">{{data.training.id ? 'Modifier' : 'Créer'}}
+    </button>
+  </div>
+</form>
