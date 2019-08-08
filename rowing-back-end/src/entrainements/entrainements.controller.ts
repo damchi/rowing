@@ -1,6 +1,7 @@
-import {Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {Entrainements} from '../entities/entrainements.entity';
 import {EntrainementsService} from './entrainements.service';
+import {DeleteResult, UpdateResult} from 'typeorm';
 
 @Controller('entrainements')
 export class EntrainementsController {
@@ -8,24 +9,25 @@ export class EntrainementsController {
     constructor( private  service: EntrainementsService) {}
 
     @Get()
-    findAll() {
+    findAll(): Promise<Entrainements[]> {
         return this.service.findAll();
     }
 
     //
-    @Post()
-    create( training: Entrainements) {
+    @Post('create')
+    create( @Body() training: Entrainements): Promise<Entrainements> {
         return this.service.save(training);
     }
-    //
-    // @Put()
-    // update( training: Entrainements) {
-    //     return this.service.updateTraining(training);
-    // }
-    //
-    // @Delete(':id')
-    // deleteUser(@Param() params) {
-    //     return this.service.deleteTraining(params.id);
-    // }
+
+    @Put(':id/update')
+    async update(@Param('id') id, @Body() entrainementsData: Entrainements): Promise<UpdateResult> {
+        entrainementsData.id = Number(id);
+        return this.service.updateTraining(entrainementsData);
+    }
+
+    @Delete(':id/delete')
+    async delete(@Param('id') id): Promise<any> {
+        return this.service.deleteTraining(id);
+    }
 
 }

@@ -7,7 +7,7 @@ import {environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class EntrainementsService {
+export class CoachEntrainementsService {
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class EntrainementsService {
   }
 
   save(training: Entrainements) {
-    return this.http.post(`${environment.apiUrl}/entrainements/save`, 'json=' +  encodeURIComponent(JSON.stringify(training)));
+    return this.http.post(`${environment.apiUrl}/entrainements/create`, 'json=' +  encodeURIComponent(JSON.stringify(training)));
   }
 
 }

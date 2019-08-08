@@ -22,6 +22,9 @@ export class Entrainements extends HistoriqueEntity {
     comments: string;
 
     @Column()
+    cadence: string;
+
+    @Column()
     season: boolean;
 
     @ManyToOne( () => Roles, (role: Roles) => role.name )

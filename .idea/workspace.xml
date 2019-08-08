@@ -3,10 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="7a9905f2-6eb4-4de5-b113-44ae6b5bd318" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entities/entrainements.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entities/entrainements.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/services/categories.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/services/categories.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/utils/stucture-error.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/utils/stucture-error.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/domaines/entrainements.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/domaines/entrainements.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/coach-categories.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/coach-categories.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/categories.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/coach-categories.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/services/entrainements.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/services/entrainements.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,71 +42,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-start-column="4" selection-end-line="18" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app.module.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
-              <folding>
-                <element signature="e#0#58#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app-routing.module.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -152,15 +107,15 @@
         <option value="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.html" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/util/error-struture.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.ts" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.html" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" />
         <option value="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" />
+        <option value="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.ts" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.1" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="15" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
@@ -171,7 +126,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,7 +164,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -257,16 +212,18 @@
       <workItem from="1563731244012" duration="10555000" />
       <workItem from="1564695551184" duration="2640000" />
       <workItem from="1564700171572" duration="1406000" />
+      <workItem from="1565131546022" duration="834000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14601000" />
+    <option name="totallyTimeSpent" value="15435000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="15" y="23" width="1440" height="828" extended-state="0" />
+    <frame x="15" y="23" width="1440" height="828" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -570,7 +527,7 @@
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/services/popup-new-training.service.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/services/entrainements.service.ts">
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" selection-start-line="22" selection-end-line="22" />
@@ -590,14 +547,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.ts">
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" lean-forward="true" selection-end-line="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.html">
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
           <caret line="43" selection-start-line="43" selection-end-line="43" />
@@ -621,37 +578,17 @@
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.spec.ts" />
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.html" />
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.ts" />
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/util/error-struture.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/util/error-struture.ts" />
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-start-column="4" selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app.module.ts">
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
@@ -665,23 +602,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.html">
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="60">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach/coach.component.html">
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state>
+          <caret selection-start-column="4" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>

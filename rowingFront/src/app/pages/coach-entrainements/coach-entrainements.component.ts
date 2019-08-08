@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {Entrainements} from '../../domaines/entrainements';
-import {EntrainementsService} from '../../services/entrainements.service';
+import {CoachEntrainementsService} from '../../services/coach-entrainements.service';
 import {MatDialog} from '@angular/material';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
-// import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
+import {AlertsService} from '../../services/alerts.service';
 
 @Component({
   selector: 'app-entrainements',
-  templateUrl: './entrainements.component.html',
-  styleUrls: ['./entrainements.component.css']
+  templateUrl: './coach-entrainements.component.html',
+  styleUrls: ['./coach-entrainements.component.css']
 })
-export class EntrainementsComponent implements OnInit {
+export class CoachEntrainementsComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'type', 'membres', 'start', 'distance', 'option'];
   trainings: Entrainements[];
 
-  constructor(private service: EntrainementsService, public dialog: MatDialog) { }
+  constructor(private service: CoachEntrainementsService, public dialog: MatDialog, private alertService: AlertsService) { }
 
   ngOnInit() {
     this.getAll();
@@ -48,8 +48,8 @@ export class EntrainementsComponent implements OnInit {
       () => {
         this.getAll();
       },
-      (e: any) => {
-        alert(e.toString());
+      error => {
+        this.alertService.error(error);
       });
 
   }

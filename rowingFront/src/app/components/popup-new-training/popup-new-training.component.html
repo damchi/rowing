@@ -57,7 +57,16 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input type="number" matInput placeholder="Nombre strokes start" >
+        <input type="text" matInput placeholder="Strokes par minutes" formControlName="cadence" required>
+        <mat-error *ngFor="let validation of errorMessages.cadence">
+          <mat-error class="error-message" *ngIf="trainForm.get('cadence').hasError(validation.type) &&
+          (trainForm.get('cadence').dirty || trainForm.get('cadence').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="number" matInput placeholder="Nombre strokes start" formControlName="start">
       </mat-form-field>
 
 
@@ -86,9 +95,9 @@
 
 
 
-<!--  <mat-form-field>-->
-<!--    <textarea type="number" matInput placeholder="Commentaires" formControlName="comments" required></textarea>-->
-<!--  </mat-form-field>-->
+  <mat-form-field>
+    <textarea type="number" matInput placeholder="Commentaires" formControlName="comments" required></textarea>
+  </mat-form-field>
   <div mat-dialog-actions>
     <button mat-button type="button" (click)="close()">Annuler</button>
     <button mat-button color="primary" mat-raised-button (click)="create()">{{data.training.id ? 'Modifier' : 'Créer'}}

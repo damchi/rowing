@@ -8,6 +8,7 @@ import {Entrainements} from '../../domaines/entrainements';
 import {StuctureError} from '../../utils/stucture-error';
 import {Roles} from '../../domaines/roles';
 import {RolesService} from '../../services/roles.service';
+import {MarkAsTouch} from '../../utils/mark-as-touch';
 
 export class ErrorMessages  {
   name: StuctureError[];
@@ -15,6 +16,7 @@ export class ErrorMessages  {
   distance: StuctureError[];
   membres: StuctureError[];
   season: StuctureError[];
+  cadence: StuctureError[];
 }
 
 export class PopupEntrainement  {
@@ -28,7 +30,7 @@ export class PopupEntrainement  {
 })
 
 
-export class PopupNewTrainingComponent implements OnInit {
+export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   @Output()
   change: EventEmitter<MatRadioChange>;
 
@@ -43,7 +45,9 @@ export class PopupNewTrainingComponent implements OnInit {
               public dialogPop: MatDialogRef<PopupNewTrainingComponent>,
               private service: PopupNewTrainingService,
               private serviceCat: CategoriesService,
-              private serviceMembres: RolesService) { }
+              private serviceMembres: RolesService) {
+    super();
+  }
 
 
 
@@ -72,6 +76,9 @@ export class PopupNewTrainingComponent implements OnInit {
       ],
       season: [
         {type: 'required', message: 'La saison de l\'entrainement est requise'}
+      ],
+      cadence: [
+        {type: 'required', message: 'La vitesse est requise'}
       ]
     };
     this.getCategories();
@@ -99,8 +106,30 @@ export class PopupNewTrainingComponent implements OnInit {
     if (this.season === 'ete') {
 
       this.trainForm.addControl('distance', new FormControl( this.data.training.distance, [Validators.required]));
+      this.trainForm.addControl('cadence', new FormControl( this.data.training.cadence, [Validators.required]));
+      this.trainForm.addControl('start', new FormControl( this.data.training.start));
     }
   }
 
-  create() {}
+  create() {
+    // if (this.trainForm.valid) {
+      const t = this.trainForm.value;
+      const e = new Entrainements();
+      e.id = this.data.training.id;
+      e.name = t.name;
+      e.category = t.categorie;
+      e.membre = t.membres;
+      e.season = t.season;
+      e.comments = t.comments;
+
+      if (t.season === 'ete') {
+        e.cadence = t.cadence;
+        e.start = t.start;
+        e.distance = t.distance;
+      }
+      this.dialogPop.close({training: e});
+    // } else {
+    //   this.markAsTouched(this.trainForm);
+    // }
+  }
 }

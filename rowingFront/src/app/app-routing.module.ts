@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CoachComponent} from './pages/coach/coach.component';
-import {EntrainementsComponent} from './pages/entrainements/entrainements.component';
-import {PlanningComponent} from './pages/planning/planning.component';
+import {CoachEntrainementsComponent} from './pages/coach-entrainements/coach-entrainements.component';
+import {CoachPlanningComponent} from './pages/coach-planning/coach-planning.component';
 
 
 const routes: Routes = [
@@ -12,11 +12,11 @@ const routes: Routes = [
     children: [
       {
         path: 'entrainement',
-        component: EntrainementsComponent,
+        component: CoachEntrainementsComponent,
       },
       {
         path: 'planning',
-        component: PlanningComponent,
+        component: CoachPlanningComponent,
       },
       {path: '**', redirectTo: '/coach/planning'}
 

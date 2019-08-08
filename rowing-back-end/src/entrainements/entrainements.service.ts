@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import {Entrainements} from '../entities/entrainements.entity';
-import { Repository } from 'typeorm';
+import {Repository, UpdateResult, DeleteResult} from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -13,12 +13,15 @@ export class EntrainementsService {
         });
     }
     //
-    async save(training: Entrainements) {
-        this.entrainementsRepository.save(training);
+    async save( training: Entrainements): Promise<Entrainements> {
+       return  this.entrainementsRepository.save(training);
     }
-    //
-    // async deleteTraining(training: Entrainements) {
-    //     this.entrainementsRepository.delete(training);
-    // }
+    async updateTraining(entrainements: Entrainements): Promise<UpdateResult> {
+        return await this.entrainementsRepository.update(entrainements.id, entrainements);
+    }
+
+    async deleteTraining(training: Entrainements): Promise<DeleteResult> {
+        return await this.entrainementsRepository.delete(training);
+    }
 
 }
