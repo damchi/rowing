@@ -25,7 +25,7 @@ export class Entrainements extends HistoriqueEntity {
     cadence: string;
 
     @Column()
-    season: boolean;
+    season: string;
 
     @ManyToOne( () => Roles, (role: Roles) => role.name )
     role: Roles;

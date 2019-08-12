@@ -12,6 +12,7 @@ export class EntrainementsService {
             where: [{ deleteAt: null }],
         });
     }
+
     //
     async save( training: Entrainements): Promise<Entrainements> {
        return  this.entrainementsRepository.save(training);

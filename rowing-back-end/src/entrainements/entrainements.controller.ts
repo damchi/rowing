@@ -13,7 +13,7 @@ export class EntrainementsController {
         return this.service.findAll();
     }
 
-    //
+
     @Post('create')
     create( @Body() training: Entrainements): Promise<Entrainements> {
         return this.service.save(training);

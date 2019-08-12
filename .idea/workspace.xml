@@ -3,29 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7a9905f2-6eb4-4de5-b113-44ae6b5bd318" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowing-back-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowing-back-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entities/entrainements.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entities/entrainements.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entities/historique.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entities/historique.entity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rowingFront/src/app/domaines/entrainements.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/domaines/entrainements.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/coach-categories.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/coach-categories.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/categories.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/categories/categories.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-categories/coach-categories.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/entrainements/entrainements.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-entrainements/coach-entrainements.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/pages/planning/planning.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/pages/coach-planning/coach-planning.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/services/entrainements.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/services/entrainements.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -212,12 +197,12 @@
       <workItem from="1563731244012" duration="10555000" />
       <workItem from="1564695551184" duration="2640000" />
       <workItem from="1564700171572" duration="1406000" />
-      <workItem from="1565131546022" duration="834000" />
+      <workItem from="1565131546022" duration="1069000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15435000" />
+    <option name="totallyTimeSpent" value="15670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="15" y="23" width="1440" height="828" extended-state="1" />

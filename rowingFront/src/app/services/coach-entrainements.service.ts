@@ -16,7 +16,7 @@ export class CoachEntrainementsService {
   }
 
   save(training: Entrainements) {
-    return this.http.post(`${environment.apiUrl}/entrainements/create`, 'json=' +  encodeURIComponent(JSON.stringify(training)));
+    return this.http.post(`${environment.apiUrl}/entrainements/create`,   JSON.stringify(training));
   }
 
 }

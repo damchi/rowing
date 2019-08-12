@@ -3,13 +3,13 @@ export class Entrainements {
   name: string;
   category: string;
   distance: number;
+  start: number;
   comments: string;
   cadence: string;
   membre: number;
-  start: number;
-  season: boolean;
+  season: string;
 
-  constructor(id?: number, name?: string, category?: string, distance?: number, comments?: string, cadence?: string, membre?: number, start?: number, season?: boolean) {
+  constructor(id?: number, name?: string, category?: string, distance?: number, comments?: string, cadence?: string, membre?: number, start?: number, season?: string) {
 
     this.id = id;
     this.name = name;
