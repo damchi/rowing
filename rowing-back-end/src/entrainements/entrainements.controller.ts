@@ -1,7 +1,8 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors} from '@nestjs/common';
 import {Entrainements} from '../entities/entrainements.entity';
 import {EntrainementsService} from './entrainements.service';
 import {DeleteResult, UpdateResult} from 'typeorm';
+import {classToPlain} from 'class-transformer';
 
 @Controller('entrainements')
 export class EntrainementsController {
@@ -9,13 +10,16 @@ export class EntrainementsController {
     constructor( private  service: EntrainementsService) {}
 
     @Get()
-    findAll(): Promise<Entrainements[]> {
-        return this.service.findAll();
-    }
+    async findAll() {
+        const trainingsEntities = await this.service.findAll();
+        const trainingsPlain = classToPlain(trainingsEntities);
+        return trainingsPlain;
 
+    }
 
     @Post('create')
     create( @Body() training: Entrainements): Promise<Entrainements> {
+
         return this.service.save(training);
     }
 

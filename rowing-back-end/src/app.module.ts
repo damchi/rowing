@@ -6,7 +6,8 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { EntrainementsModule } from './entrainements/entrainements.module';
 import { CategoriesModule } from './categories/categories.module';
-
+import {APP_INTERCEPTOR} from '@nestjs/core';
+import {DataInterceptor} from './util/data.interceptor';
 
 
 @Module({
@@ -26,7 +27,10 @@ import { CategoriesModule } from './categories/categories.module';
         EntrainementsModule,
         CategoriesModule],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService, {
+        provide: APP_INTERCEPTOR,
+        useClass: DataInterceptor,
+    }],
 })
 export class AppModule {
 

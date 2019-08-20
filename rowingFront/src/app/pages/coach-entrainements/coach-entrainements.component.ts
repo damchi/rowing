@@ -3,7 +3,7 @@ import {Entrainements} from '../../domaines/entrainements';
 import {CoachEntrainementsService} from '../../services/coach-entrainements.service';
 import {MatDialog} from '@angular/material';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
-import {AlertsService} from '../../services/alerts.service';
+import {ServiceService} from '../../services/service.service';
 
 @Component({
   selector: 'app-entrainements',
@@ -11,10 +11,10 @@ import {AlertsService} from '../../services/alerts.service';
   styleUrls: ['./coach-entrainements.component.css']
 })
 export class CoachEntrainementsComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'type', 'membres', 'start', 'distance', 'option'];
+  displayedColumns: string[] = ['nom', 'type', 'role', 'start', 'distance', 'option'];
   trainings: Entrainements[];
 
-  constructor(private service: CoachEntrainementsService, public dialog: MatDialog, private alertService: AlertsService) { }
+  constructor(private service: CoachEntrainementsService, public dialog: MatDialog, private alertService: ServiceService) { }
 
   ngOnInit() {
     this.getAll();

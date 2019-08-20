@@ -14,7 +14,7 @@ export class ErrorMessages  {
   name: StuctureError[];
   categorie: StuctureError[];
   distance: StuctureError[];
-  membres: StuctureError[];
+  role: StuctureError[];
   season: StuctureError[];
   cadence: StuctureError[];
 }
@@ -47,6 +47,10 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
               private serviceCat: CategoriesService,
               private serviceMembres: RolesService) {
     super();
+
+    if (this.data.training.season){
+      this.season = this.data.training.season;
+    }
   }
 
 
@@ -58,8 +62,9 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       comments: new FormControl( this.data.training.comments, [Validators.required]),
       season: new FormControl( this.data.training.season, [Validators.required]),
       categorie: new FormControl(this.data.training.category, [Validators.required]),
-      membres: new FormControl( this.data.training.membre, [Validators.required]),
+      role: new FormControl( this.data.training.role, [Validators.required]),
     });
+
 
     this.errorMessages = {
       name: [
@@ -71,7 +76,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       distance: [
         {type: 'required', message: 'La distance est requise'}
       ],
-      membres: [
+      role: [
         {type: 'required', message: 'La catégories des membres est requise'}
       ],
       season: [
@@ -83,6 +88,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     };
     this.getCategories();
     this.getCategoriesMembres();
+    this.addControl();
   }
 
   getCategories() {
@@ -102,8 +108,11 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   }
   changeSeason(event: MatRadioChange) {
     this.season = event.value;
+    this.addControl();
+  }
 
-    if (this.season === 'ete') {
+  addControl() {
+    if (this.season === 'ete' || this.data.training.season === 'ete') {
 
       this.trainForm.addControl('distance', new FormControl( this.data.training.distance, [Validators.required]));
       this.trainForm.addControl('cadence', new FormControl( this.data.training.cadence, [Validators.required]));
@@ -118,7 +127,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       e.id = this.data.training.id;
       e.name = t.name;
       e.category = t.categorie;
-      e.membre = t.membres;
+      e.role = t.role;
       e.season = t.season;
       e.comments = t.comments;
 

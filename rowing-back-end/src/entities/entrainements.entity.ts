@@ -2,6 +2,7 @@ import {Entity, Column, ManyToOne, ManyToMany, JoinTable} from 'typeorm';
 import {Roles} from './roles.entity';
 import {HistoriqueEntity} from './historique.entity';
 import {Categories} from './categories.entity';
+import {Exercices} from './exercices.entity';
 
 @Entity()
 export class Entrainements extends HistoriqueEntity {
@@ -27,6 +28,10 @@ export class Entrainements extends HistoriqueEntity {
     @Column()
     season: string;
 
-    @ManyToOne( () => Roles, (role: Roles) => role.name )
+    @ManyToOne(type => Roles, role => role.entrainements)
     role: Roles;
+
+    @ManyToMany( () => Exercices )
+    @JoinTable()
+    exercices: Exercices[];
 }

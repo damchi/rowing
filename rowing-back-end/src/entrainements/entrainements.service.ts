@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class EntrainementsService {
-    constructor( @InjectRepository(Entrainements) private readonly entrainementsRepository: Repository<Entrainements>) { }
+    constructor( @InjectRepository(Entrainements) private readonly entrainementsRepository: Repository<Entrainements> ) { }
 
     async findAll(): Promise<Entrainements[]> {
         return await this.entrainementsRepository.find({  relations: ['role', 'category'],
@@ -13,10 +13,10 @@ export class EntrainementsService {
         });
     }
 
-    //
     async save( training: Entrainements): Promise<Entrainements> {
-       return  this.entrainementsRepository.save(training);
+        return this.entrainementsRepository.save(training);
     }
+
     async updateTraining(entrainements: Entrainements): Promise<UpdateResult> {
         return await this.entrainementsRepository.update(entrainements.id, entrainements);
     }

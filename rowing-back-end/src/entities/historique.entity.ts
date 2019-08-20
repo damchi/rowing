@@ -11,8 +11,8 @@ export class HistoriqueEntity {
    @Exclude() @Column({ type: 'date', name: 'deleteAt', nullable: true })
     public deleteAt?: Date | null;
 
-    @Exclude() @Column()
-    createdAt: Date = new Date();
+    @Exclude() @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    createdAt: string;
 
     // @ManyToOne(user => Users, users => users.email)
     // createdBy: Roles;

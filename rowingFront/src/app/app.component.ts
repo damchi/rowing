@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertsService} from './services/alerts.service';
+import {ServiceService} from './services/service.service';
 import {MatSnackBar} from '@angular/material';
 
 
@@ -10,7 +10,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class AppComponent {
   title = 'rowingFront';
-constructor(private alertService: AlertsService, private snackBar: MatSnackBar) {
+constructor(private alertService: ServiceService, private snackBar: MatSnackBar) {
   this.alertService.onGood.subscribe((message: string) => {
     this.snackBar.open(message, 'Fermer', {
       duration: 4000,
