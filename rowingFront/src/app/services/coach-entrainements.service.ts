@@ -16,10 +16,7 @@ export class CoachEntrainementsService extends ServiceService {
   constructor(private http: HttpClient) {
     super();
   }
-  //
-  // getAll() {
-  //   return this.http.get(`${environment.apiUrl}/entrainements`);
-  // }
+
 
   getAll(): Observable<Entrainements[]> {
     return this.http.get<Entrainements[]>(`${environment.apiUrl}/entrainements`)
@@ -29,10 +26,6 @@ export class CoachEntrainementsService extends ServiceService {
       );
   }
 
-
-  // save(training: Entrainements) {
-  //   return this.http.post(`${environment.apiUrl}/entrainements/create`,   JSON.stringify(training));
-  // }
   save(training: Entrainements): Observable<Entrainements> {
     return this.http.post<Entrainements>(`${environment.apiUrl}/entrainements/create`, training, this.getOptions()).pipe(
       tap((train: Entrainements) => console.log(`added trainning w/ id=${train.id}`)),

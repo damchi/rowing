@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {Entrainements} from '../entities/entrainements.entity';
 import {Repository, UpdateResult, DeleteResult} from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,7 +8,7 @@ export class EntrainementsService {
     constructor( @InjectRepository(Entrainements) private readonly entrainementsRepository: Repository<Entrainements> ) { }
 
     async findAll(): Promise<Entrainements[]> {
-        return await this.entrainementsRepository.find({  relations: ['role', 'category'],
+        return await this.entrainementsRepository.find({  relations: ['role', 'category', 'exercices'],
             where: [{ deleteAt: null }],
         });
     }

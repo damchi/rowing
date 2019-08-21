@@ -1,0 +1,34 @@
+<h1 mat-dialog-title> {{data.exercice.id ? 'Modifier l\'entrainement' : 'Nouvel entrainenment'}}</h1>
+<div mat-dialog-content></div>
+<form [formGroup]="exerciceForm">
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="Nom de l'exercice" formControlName="name" required>
+    <mat-error *ngFor="let validation of errorMessages.name">
+      <mat-error class="error-message" *ngIf="exerciceForm.get('name').hasError(validation.type) &&
+          (exerciceForm.get('name').dirty || exerciceForm.get('name').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Categories de l'exercice</mat-label>
+    <mat-select formControlName="typeExercice">
+      <mat-option *ngFor="let type of typeExercice " [value]="type">{{type.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+
+
+
+  <mat-form-field>
+    <textarea type="number" matInput placeholder="Description" formControlName="description" required></textarea>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="close()">Annuler</button>
+    <button mat-button color="primary" mat-raised-button (click)="create()">{{data.exercice.id ? 'Modifier' : 'Créer'}}
+    </button>
+  </div>
+</form>

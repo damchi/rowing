@@ -19,7 +19,6 @@ export class EntrainementsController {
 
     @Post('create')
     create( @Body() training: Entrainements): Promise<Entrainements> {
-
         return this.service.save(training);
     }
 

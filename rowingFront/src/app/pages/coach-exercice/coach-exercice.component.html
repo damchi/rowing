@@ -1,0 +1,26 @@
+<div class="header">Liste des exercices</div>
+<button class="newButton" mat-raised-button (click)="newExercice()">Nouvel exercice</button>
+
+<table mat-table [dataSource]="exercices" >
+  <ng-container  matColumnDef="nom">
+    <th mat-header-cell  *matHeaderCellDef>Nom</th>
+    <td mat-cell *matCellDef="let element"> <div>{{element.name}}</div></td>
+  </ng-container>
+
+  <ng-container  matColumnDef="type">
+    <th mat-header-cell  *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let element"> <div>{{element.typeExercices.name}}</div></td>
+  </ng-container>
+
+  <ng-container matColumnDef="option">
+    <th mat-header-cell *matHeaderCellDef>Options</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="actions">
+        <button mat-raised-button (click)="newExercice(element)"><i class="material-icons">create</i></button>
+        <button mat-raised-button (click)="deleteExercice(element)"><i class="material-icons">close</i></button>
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

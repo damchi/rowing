@@ -8,9 +8,9 @@ export class Exercices extends HistoriqueEntity {
     @Column()
     name: string;
 
+    @Column()
+    description: string;
 
     @ManyToOne(type => TypeExercices, typeExercices => typeExercices.exercices)
     typeExercices: TypeExercices;
-
-
 }

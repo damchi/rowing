@@ -16,6 +16,8 @@ import { CoachCategoriesComponent } from './pages/coach-categories/coach-categor
 import { CoachMenuComponent } from './components/coach-menu/coach-menu.component';
 import { PopupNewTrainingComponent } from './components/popup-new-training/popup-new-training.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { CoachExerciceComponent } from './pages/coach-exercice/coach-exercice.component';
+import { PopupNewExerciceComponent } from './components/popup-new-exercice/popup-new-exercice.component';
 
 
 
@@ -31,6 +33,8 @@ import {MatRadioModule} from '@angular/material/radio';
     CoachCategoriesComponent,
     CoachMenuComponent,
     PopupNewTrainingComponent,
+    CoachExerciceComponent,
+    PopupNewExerciceComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatRadioModule,
     MatSnackBarModule
   ],
-  entryComponents: [PopupNewTrainingComponent],
+  entryComponents: [
+    PopupNewTrainingComponent,
+    PopupNewExerciceComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

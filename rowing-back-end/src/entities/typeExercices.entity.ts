@@ -3,7 +3,7 @@ import {HistoriqueEntity} from './historique.entity';
 import {Exercices} from './exercices.entity';
 
 @Entity()
-export class TypeExercices extends HistoriqueEntity{
+export class TypeExercices extends HistoriqueEntity {
     @Column()
     name: string;
 
