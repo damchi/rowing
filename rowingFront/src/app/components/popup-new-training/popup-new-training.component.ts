@@ -102,17 +102,14 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     });
   }
 
-//   this.carrousels.map( e => {
-//   if (idElem === e.id) {
-//   e.position = event.currentIndex;
-// } else {
-//   e.position = this.carrousels.indexOf(e);
-// }
-// });
 
   getExercices() {
     this.serviceExercice.getAll().subscribe( (exercice: Exercice[]) => {
       this.exercicesDrill = exercice;
+      if (  this.data.training) {
+        const idExercices = this.data.training.exercices.map(e => e.id)
+        this.trainForm.get('exercice').patchValue( this.exercicesDrill.filter( e => idExercices.indexOf(e.id) !== -1));
+      }
     });
   }
 
@@ -155,6 +152,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
         e.cadence = t.cadence;
         e.start = t.start;
         e.distance = t.distance;
+        e.exercices = t.exercice;
       }
       this.dialogPop.close({training: e});
     // } else {
