@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7a9905f2-6eb4-4de5-b113-44ae6b5bd318" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entities/exercices.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entities/exercices.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entities/typeExercices.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entities/typeExercices.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowing-back-end/src/entrainements/entrainements.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/components/coach-menu/coach-menu.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/components/popup-new-training/popup-new-training.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rowingFront/src/app/domaines/entrainements.ts" beforeDir="false" afterPath="$PROJECT_DIR$/rowingFront/src/app/domaines/entrainements.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +26,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="172">
               <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
@@ -121,7 +115,7 @@
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.1" />
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="15" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
@@ -236,15 +230,15 @@
       <workItem from="1564695551184" duration="2640000" />
       <workItem from="1564700171572" duration="1406000" />
       <workItem from="1565131546022" duration="2199000" />
-      <workItem from="1566338998414" duration="538000" />
+      <workItem from="1566338998414" duration="798000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17338000" />
+    <option name="totallyTimeSpent" value="17598000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="15" y="23" width="1440" height="828" extended-state="1" />
+    <frame x="15" y="23" width="1440" height="828" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.26037195" />
@@ -636,7 +630,7 @@
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/services/alerts.service.ts" />
     <entry file="file://$PROJECT_DIR$/rowingFront/src/app/services/coach-entrainements.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="172">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>

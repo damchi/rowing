@@ -1,3 +1,5 @@
+import {TypeExercice} from './type-exercice';
+
 export class Entrainements {
   id: number;
   name: string;
@@ -8,8 +10,9 @@ export class Entrainements {
   cadence: string;
   role: number;
   season: string;
+  exercices: TypeExercice[];
 
-  constructor(id?: number, name?: string, category?: string, distance?: number, comments?: string, cadence?: string, role?: number, start?: number, season?: string) {
+  constructor(id?: number, name?: string, category?: string, distance?: number, comments?: string, cadence?: string, role?: number, start?: number, season?: string, exercices?: TypeExercice[]) {
 
     this.id = id;
     this.name = name;
@@ -20,6 +23,7 @@ export class Entrainements {
     this.cadence = cadence;
     this.season = season;
     this.role = role;
+    this.exercices = exercices;
 
   }
 

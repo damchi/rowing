@@ -69,6 +69,14 @@
         <input type="number" matInput placeholder="Nombre strokes start" formControlName="start">
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-label>Exercice de l'entrainement</mat-label>
+        <mat-select formControlName="categorie" multiple>
+          <mat-option *ngFor="let exercice of exercicesDrill" [value]="exercice">
+            {{exercicesDrill}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
 
     </div>
     <div *ngIf="season == 'hiver'">

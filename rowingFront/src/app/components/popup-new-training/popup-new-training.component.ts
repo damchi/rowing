@@ -9,6 +9,8 @@ import {StuctureError} from '../../utils/stucture-error';
 import {Roles} from '../../domaines/roles';
 import {RolesService} from '../../services/roles.service';
 import {MarkAsTouch} from '../../utils/mark-as-touch';
+import {Exercice} from '../../domaines/exercice';
+import {CoachExerciceService} from '../../services/coach-exercice.service';
 
 export class ErrorMessages  {
   name: StuctureError[];
@@ -38,6 +40,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public errorMessages: ErrorMessages;
   public categories: Categories[];
   public roles: Roles[];
+  public exercicesDrill: Exercice[];
   public season: string;
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
@@ -45,10 +48,11 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
               public dialogPop: MatDialogRef<PopupNewTrainingComponent>,
               private service: PopupNewTrainingService,
               private serviceCat: CategoriesService,
-              private serviceMembres: RolesService) {
+              private serviceMembres: RolesService,
+              private serviceExercice: CoachExerciceService) {
     super();
 
-    if (this.data.training.season){
+    if (this.data.training.season) {
       this.season = this.data.training.season;
     }
   }
@@ -89,11 +93,26 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     this.getCategories();
     this.getCategoriesMembres();
     this.addControl();
+    this.getExercices();
   }
 
   getCategories() {
     this.serviceCat.getAll().subscribe( (categorie: Categories[]) => {
       this.categories = categorie;
+    });
+  }
+
+//   this.carrousels.map( e => {
+//   if (idElem === e.id) {
+//   e.position = event.currentIndex;
+// } else {
+//   e.position = this.carrousels.indexOf(e);
+// }
+// });
+
+  getExercices() {
+    this.serviceExercice.getAll().subscribe( (exercice: Exercice[]) => {
+      this.exercicesDrill = exercice;
     });
   }
 
@@ -117,6 +136,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       this.trainForm.addControl('distance', new FormControl( this.data.training.distance, [Validators.required]));
       this.trainForm.addControl('cadence', new FormControl( this.data.training.cadence, [Validators.required]));
       this.trainForm.addControl('start', new FormControl( this.data.training.start));
+      this.trainForm.addControl('exercice', new FormControl( this.data.training.exercices));
     }
   }
 
