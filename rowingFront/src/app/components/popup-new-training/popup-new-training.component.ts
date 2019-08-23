@@ -34,13 +34,15 @@ export class PopupEntrainement  {
 
 export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   @Output()
-  change: EventEmitter<MatRadioChange>;
+  changeRadio: EventEmitter<MatRadioChange>;
 
   public trainForm: FormGroup;
   public errorMessages: ErrorMessages;
   public categories: Categories[];
   public roles: Roles[];
   public exercicesDrill: Exercice[];
+  public exercicesMuscu: Exercice[];
+  public exercicesErgo: Exercice[];
   public season: string;
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
@@ -99,15 +101,21 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   getCategories() {
     this.serviceCat.getAll().subscribe( (categorie: Categories[]) => {
       this.categories = categorie;
+      if (  this.data.training) {
+        const idCategories = this.data.training.category.map(e => e.id);
+        this.trainForm.get('categorie').patchValue( this.categories.filter( e => idCategories.indexOf(e.id) !== -1));
+      }
     });
   }
 
 
   getExercices() {
-    this.serviceExercice.getAll().subscribe( (exercice: Exercice[]) => {
-      this.exercicesDrill = exercice;
+    this.serviceExercice.getAll().subscribe( (exercices: Exercice[]) => {
+      this.exercicesDrill = exercices.filter( e => e.typeExercices.id === 1);
+      this.exercicesMuscu = exercices.filter( e => e.typeExercices.id === 2);
+      this.exercicesErgo = exercices.filter( e => e.typeExercices.id === 3);
       if (  this.data.training) {
-        const idExercices = this.data.training.exercices.map(e => e.id)
+        const idExercices = this.data.training.exercices.map(e => e.id);
         this.trainForm.get('exercice').patchValue( this.exercicesDrill.filter( e => idExercices.indexOf(e.id) !== -1));
       }
     });
@@ -116,6 +124,12 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   getCategoriesMembres() {
     this.serviceMembres.getAll().subscribe( (roles: Roles[]) => {
       this.roles = roles;
+      if (  this.data.training) {
+        // a finir
+
+        const idRoles = this.data.training.role.id;
+        this.trainForm.get('role').patchValue( this.roles.filter( e => idRoles.indexOf(e.id) !== -1));
+      }
     });
   }
 

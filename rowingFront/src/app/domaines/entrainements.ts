@@ -1,18 +1,20 @@
 import {TypeExercice} from './type-exercice';
+import {Categories} from './categories';
+import {Roles} from './roles';
 
 export class Entrainements {
   id: number;
   name: string;
-  category: string;
+  category: Categories[];
   distance: number;
   start: number;
   comments: string;
   cadence: string;
-  role: number;
+  role: Roles;
   season: string;
   exercices: TypeExercice[];
 
-constructor(id?: number, name?: string, category?: string, distance?: number, comments?: string, cadence?: string, role?: number, start?: number, season?: string, exercices?: TypeExercice[]) {
+constructor(id?: number, name?: string, category?: Categories[], distance?: number, comments?: string, cadence?: string, role?: Roles, start?: number, season?: string, exercices?: TypeExercice[]) {
 
     this.id = id;
     this.name = name;

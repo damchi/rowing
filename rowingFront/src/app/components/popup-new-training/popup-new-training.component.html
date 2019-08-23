@@ -72,10 +72,8 @@
       <mat-form-field>
         <mat-label>Exercice de l'entrainement</mat-label>
         <mat-select formControlName="exercice" multiple>
-          <div *ngFor="let exercice of exercicesDrill">
-            <mat-option  *ngIf="exercice.typeExercices.id == 1" [value]="exercice"> {{exercice.name}}
+            <mat-option  *ngFor="let exercice of exercicesDrill"[value]="exercice"> {{exercice.name}}
             </mat-option>
-          </div>
         </mat-select>
       </mat-form-field>
 
