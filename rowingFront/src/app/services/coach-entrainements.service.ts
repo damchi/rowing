@@ -33,4 +33,11 @@ export class CoachEntrainementsService extends ServiceService {
     );
   }
 
+  update(id: number, training: Entrainements): Observable<Entrainements> {
+    return this.http.put(`${environment.apiUrl}/entrainements/${training.id}/update`, training, this.getOptions()).pipe(
+      tap((train: Entrainements) => console.log(`update trainning w/ id=${train.id}`)),
+      catchError(this.handleError<Entrainements>('update'))
+    );
+  }
+
 }

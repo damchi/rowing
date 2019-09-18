@@ -3,6 +3,7 @@ import {Roles} from './roles.entity';
 import {HistoriqueEntity} from './historique.entity';
 import {Categories} from './categories.entity';
 import {Exercices} from './exercices.entity';
+import {Season} from './season.entity';
 
 @Entity()
 export class Entrainements extends HistoriqueEntity {
@@ -23,10 +24,16 @@ export class Entrainements extends HistoriqueEntity {
     comments: string;
 
     @Column()
-    cadence: string;
+    warmUp: string;
 
     @Column()
-    season: string;
+    cadence: string;
+
+    @ManyToOne(type => Season, season => season.name)
+    season: Season;
+
+    @Column()
+    rest: string;
 
     @ManyToOne(type => Roles, role => role.entrainements)
     role: Roles;

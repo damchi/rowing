@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef, MatRadioChange} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatRadioChange, MatSelectChange} from '@angular/material';
 import {PopupNewTrainingService} from '../../services/popup-new-training.service';
 import {CategoriesService} from '../../services/categories.service';
 import {Categories} from '../../domaines/categories';
@@ -11,6 +11,8 @@ import {RolesService} from '../../services/roles.service';
 import {MarkAsTouch} from '../../utils/mark-as-touch';
 import {Exercice} from '../../domaines/exercice';
 import {CoachExerciceService} from '../../services/coach-exercice.service';
+import {SeasonService} from '../../services/season.service';
+import {Season} from '../../domaines/season';
 
 export class ErrorMessages  {
   name: StuctureError[];
@@ -19,6 +21,8 @@ export class ErrorMessages  {
   role: StuctureError[];
   season: StuctureError[];
   cadence: StuctureError[];
+  rest: StuctureError[];
+  warmUp: StuctureError[];
 }
 
 export class PopupEntrainement  {
@@ -34,7 +38,7 @@ export class PopupEntrainement  {
 
 export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   @Output()
-  changeRadio: EventEmitter<MatRadioChange>;
+  ChangeSelect: EventEmitter<MatSelectChange>;
 
   public trainForm: FormGroup;
   public errorMessages: ErrorMessages;
@@ -43,7 +47,9 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public exercicesDrill: Exercice[];
   public exercicesMuscu: Exercice[];
   public exercicesErgo: Exercice[];
-  public season: string;
+  public exercicesCorps: Exercice[];
+  public season: Season[];
+  public seasonCurrent: number;
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
               public data: PopupEntrainement,
@@ -51,11 +57,12 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
               private service: PopupNewTrainingService,
               private serviceCat: CategoriesService,
               private serviceMembres: RolesService,
-              private serviceExercice: CoachExerciceService) {
+              private serviceExercice: CoachExerciceService,
+              private  serviceSeason: SeasonService) {
     super();
 
     if (this.data.training.season) {
-      this.season = this.data.training.season;
+      this.seasonCurrent = this.data.training.season.id;
     }
   }
 
@@ -69,6 +76,8 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       season: new FormControl( this.data.training.season, [Validators.required]),
       categorie: new FormControl(this.data.training.category, [Validators.required]),
       role: new FormControl( this.data.training.role, [Validators.required]),
+      rest: new FormControl( this.data.training.rest, [Validators.required]),
+      warmUp: new FormControl( this.data.training.warmUp, [Validators.required]),
     });
 
 
@@ -90,8 +99,15 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       ],
       cadence: [
         {type: 'required', message: 'La vitesse est requise'}
+      ],
+      rest: [
+        {type: 'required', message: 'La temps de repos est requis'}
+      ],
+      warmUp: [
+        {type: 'required', message: 'La temps de repos est requis'}
       ]
     };
+    this.getSeason();
     this.getCategories();
     this.getCategoriesMembres();
     this.addControl();
@@ -101,7 +117,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   getCategories() {
     this.serviceCat.getAll().subscribe( (categorie: Categories[]) => {
       this.categories = categorie;
-      if (  this.data.training) {
+      if (this.data.training.category) {
         const idCategories = this.data.training.category.map(e => e.id);
         this.trainForm.get('categorie').patchValue( this.categories.filter( e => idCategories.indexOf(e.id) !== -1));
       }
@@ -111,24 +127,32 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
   getExercices() {
     this.serviceExercice.getAll().subscribe( (exercices: Exercice[]) => {
-      this.exercicesDrill = exercices.filter( e => e.typeExercices.id === 1);
-      this.exercicesMuscu = exercices.filter( e => e.typeExercices.id === 2);
-      this.exercicesErgo = exercices.filter( e => e.typeExercices.id === 3);
-      if (  this.data.training) {
-        const idExercices = this.data.training.exercices.map(e => e.id);
-        this.trainForm.get('exercice').patchValue( this.exercicesDrill.filter( e => idExercices.indexOf(e.id) !== -1));
-      }
-    });
+    this.exercicesDrill = exercices.filter( e => e.typeExercices.id === 1);
+    this.exercicesErgo = exercices.filter( e => e.typeExercices.id === 2);
+    this.exercicesMuscu = exercices.filter( e => e.typeExercices.id === 3);
+    this.exercicesCorps = exercices.filter( e => e.typeExercices.id === 4);
+    if (  this.data.training.exercices) {
+      const idExercices = this.data.training.exercices.map(e => e.id);
+      this.trainForm.get('exercice').patchValue( this.exercicesDrill.filter( e => idExercices.indexOf(e.id) !== -1));
+    }
+});
   }
 
   getCategoriesMembres() {
     this.serviceMembres.getAll().subscribe( (roles: Roles[]) => {
       this.roles = roles;
-      if (  this.data.training) {
-        // a finir
+      if (this.data.training.role) {
+        this.trainForm.get('role').patchValue(this.data.training.role.id);
+        // this.trainForm.get('role').patchValue(this.roles.filter(e => this.data.training.role.id !== -1 ));
+      }
+    });
+  }
 
-        const idRoles = this.data.training.role.id;
-        this.trainForm.get('role').patchValue( this.roles.filter( e => idRoles.indexOf(e.id) !== -1));
+  getSeason() {
+    this.serviceSeason.getAll().subscribe( (season: Season[]) => {
+      this.season = season;
+      if (this.data.training.season) {
+        this.trainForm.get('season').patchValue(this.season.find(e => this.data.training.season.id !== -1 ));
       }
     });
   }
@@ -136,14 +160,25 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   close() {
     this.dialogPop.close();
   }
-  changeSeason(event: MatRadioChange) {
-    this.season = event.value;
+  changeSeason(event: MatSelectChange) {
+    if (this.seasonCurrent && this.seasonCurrent === 1) {
+      this.trainForm.removeControl('distance');
+      this.trainForm.removeControl('cadence');
+      this.trainForm.removeControl('start');
+      this.trainForm.removeControl('exercice');
+      this.trainForm.removeControl('repos');
+      this.data.training.distance = null;
+      this.data.training.cadence = null;
+      this.data.training.start = null;
+      this.data.training.exercices = null;
+      this.data.training.rest = null;
+    }
+    this.seasonCurrent = event.value.id;
     this.addControl();
   }
 
   addControl() {
-    if (this.season === 'ete' || this.data.training.season === 'ete') {
-
+    if (this.seasonCurrent === 1 || ( this.data.training.season && this.data.training.season.id === 1)) {
       this.trainForm.addControl('distance', new FormControl( this.data.training.distance, [Validators.required]));
       this.trainForm.addControl('cadence', new FormControl( this.data.training.cadence, [Validators.required]));
       this.trainForm.addControl('start', new FormControl( this.data.training.start));
@@ -161,8 +196,10 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       e.role = t.role;
       e.season = t.season;
       e.comments = t.comments;
+      e.rest = t.rest;
+      e.warmUp = t.warmUp;
 
-      if (t.season === 'ete') {
+      if (t.season.id === 1) {
         e.cadence = t.cadence;
         e.start = t.start;
         e.distance = t.distance;

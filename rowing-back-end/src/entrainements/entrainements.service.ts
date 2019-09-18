@@ -8,7 +8,7 @@ export class EntrainementsService {
     constructor( @InjectRepository(Entrainements) private readonly entrainementsRepository: Repository<Entrainements> ) { }
 
     async findAll(): Promise<Entrainements[]> {
-        return await this.entrainementsRepository.find({  relations: ['role', 'category', 'exercices'],
+        return await this.entrainementsRepository.find({  relations: ['role', 'category', 'exercices', 'season'],
             where: [{ deleteAt: null }],
         });
     }
@@ -17,8 +17,8 @@ export class EntrainementsService {
         return this.entrainementsRepository.save(training);
     }
 
-    async updateTraining(entrainements: Entrainements): Promise<UpdateResult> {
-        return await this.entrainementsRepository.update(entrainements.id, entrainements);
+    async updateTraining(entrainement: Entrainements): Promise<UpdateResult> {
+        return await this.entrainementsRepository.update(entrainement.id, entrainement);
     }
 
     async deleteTraining(training: Entrainements): Promise<DeleteResult> {

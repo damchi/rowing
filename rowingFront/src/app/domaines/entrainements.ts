@@ -1,6 +1,7 @@
 import {TypeExercice} from './type-exercice';
 import {Categories} from './categories';
 import {Roles} from './roles';
+import {Season} from './season';
 
 export class Entrainements {
   id: number;
@@ -11,10 +12,14 @@ export class Entrainements {
   comments: string;
   cadence: string;
   role: Roles;
-  season: string;
+  season: Season;
   exercices: TypeExercice[];
+  rest: string;
+  warmUp: string;
 
-constructor(id?: number, name?: string, category?: Categories[], distance?: number, comments?: string, cadence?: string, role?: Roles, start?: number, season?: string, exercices?: TypeExercice[]) {
+constructor(id?: number, name?: string, category?: Categories[], distance?: number,
+            comments?: string, cadence?: string, role?: Roles, start?: number,
+            season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string) {
 
     this.id = id;
     this.name = name;
@@ -26,6 +31,8 @@ constructor(id?: number, name?: string, category?: Categories[], distance?: numb
     this.season = season;
     this.role = role;
     this.exercices = exercices;
+    this.rest = rest;
+    this.warmUp = warmUp;
 
   }
 

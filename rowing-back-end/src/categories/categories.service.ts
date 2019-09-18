@@ -9,7 +9,7 @@ export class CategoriesService {
 
     async findAll(): Promise<Categories[]> {
         return await this.categoriesRepository.find({
-            where: [{ 'deleteAt': null }],
+            where: [{ deleteAt: null }],
         });
     }
 }
