@@ -4,6 +4,7 @@ import {CoachEntrainementsService} from '../../services/coach-entrainements.serv
 import {MatDialog} from '@angular/material';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {ServiceService} from '../../services/service.service';
+import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-entrainements',
@@ -13,6 +14,7 @@ import {ServiceService} from '../../services/service.service';
 export class CoachEntrainementsComponent implements OnInit {
   displayedColumns: string[] = ['nom', 'type', 'role', 'start', 'distance', 'option'];
   trainings: Entrainements[];
+  training: Entrainements;
 
   constructor(private service: CoachEntrainementsService, public dialog: MatDialog, private alertService: ServiceService) { }
 
@@ -44,15 +46,15 @@ export class CoachEntrainementsComponent implements OnInit {
   }
 
   save(training: Entrainements) {
-    // if (training.id) {
-    //   this.service.update(training.id, training).subscribe(
-    //     () => {
-    //       this.getAll();
-    //     },
-    //     error => {
-    //       this.alertService.error(error);
-    //     });
-    // } else {
+    if (training.id) {
+      this.service.update(training.id, training).subscribe(
+        () => {
+          this.getAll();
+        },
+        error => {
+          this.alertService.error(error);
+        });
+    } else {
       this.service.save(training).subscribe(
         () => {
           this.getAll();
@@ -60,11 +62,35 @@ export class CoachEntrainementsComponent implements OnInit {
         error => {
           this.alertService.error(error);
         });
-    // }
+    }
   }
 
-  deleteTraining(training: Entrainements) {}
 
+deleteTraining(training: Entrainements) {
+    this.training = training;
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer cet entrainement?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.doDelete();
+      }
+    });
+  }
+
+  doDelete() {
+    this.service.delete(this.training.id, this.training).subscribe(() => {
+        this.getAll();
+      },
+      error => {
+        this.alertService.error(error);
+      });
+  }
 
 
 }

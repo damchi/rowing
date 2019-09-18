@@ -1,0 +1,6 @@
+<h1 mat-dialog-title *ngIf="data.title" >{{data.title}}</h1>
+<div class="message">{{data.message}}</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Non</button>
+  <button mat-button color="primary" mat-raised-button [mat-dialog-close]="true">Oui</button>
+</div>

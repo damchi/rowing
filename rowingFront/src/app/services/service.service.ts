@@ -31,6 +31,6 @@ export class ServiceService {
 
   public getOptions() {
     const headers = new HttpHeaders({'Content-Type': 'application/json'})
-    return {headers: headers};
+    return { headers: headers};
   }
 }

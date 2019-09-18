@@ -33,6 +33,13 @@ export class CoachEntrainementsService extends ServiceService {
     );
   }
 
+
+  delete(id: number, training: Entrainements): Observable<Entrainements> {
+    return this.http.delete(`${environment.apiUrl}/entrainements/${training.id}/delete`, this.getOptions()).pipe(
+      tap((train: Entrainements) => console.log(`update trainning w/ id=${train.id}`)),
+      catchError(this.handleError<Entrainements>('delete'))
+    );
+  }
   update(id: number, training: Entrainements): Observable<Entrainements> {
     return this.http.put(`${environment.apiUrl}/entrainements/${training.id}/update`, training, this.getOptions()).pipe(
       tap((train: Entrainements) => console.log(`update trainning w/ id=${train.id}`)),

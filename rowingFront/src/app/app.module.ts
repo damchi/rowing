@@ -18,6 +18,8 @@ import { PopupNewTrainingComponent } from './components/popup-new-training/popup
 import {MatRadioModule} from '@angular/material/radio';
 import { CoachExerciceComponent } from './pages/coach-exercice/coach-exercice.component';
 import { PopupNewExerciceComponent } from './components/popup-new-exercice/popup-new-exercice.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
 
 
 
@@ -35,6 +37,7 @@ import { PopupNewExerciceComponent } from './components/popup-new-exercice/popup
     PopupNewTrainingComponent,
     CoachExerciceComponent,
     PopupNewExerciceComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { PopupNewExerciceComponent } from './components/popup-new-exercice/popup
   ],
   entryComponents: [
     PopupNewTrainingComponent,
-    PopupNewExerciceComponent],
+    PopupNewExerciceComponent,
+    ConfirmDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
