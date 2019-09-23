@@ -72,7 +72,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
     this.trainForm = this.fb.group({
       name: new FormControl( this.data.training.name, [Validators.required]),
-      comments: new FormControl( this.data.training.comments, [Validators.required]),
+      comments: new FormControl( this.data.training.comments),
       season: new FormControl( this.data.training.season, [Validators.required]),
       categorie: new FormControl(this.data.training.category, [Validators.required]),
       role: new FormControl( this.data.training.role, [Validators.required]),
@@ -104,7 +104,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
         {type: 'required', message: 'La temps de repos est requis'}
       ],
       warmUp: [
-        {type: 'required', message: 'La temps de repos est requis'}
+        {type: 'required', message: 'L\'échauffement est requis'}
       ]
     };
     this.getSeason();
@@ -140,10 +140,10 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
   getCategoriesMembres() {
     this.serviceMembres.getAll().subscribe( (roles: Roles[]) => {
-      this.roles = roles;
+
+      this.roles = roles.filter( e =>  e.id !== 1 && e.id !== 2 ) ;
       if (this.data.training.role) {
         this.trainForm.get('role').patchValue(this.data.training.role.id);
-        // this.trainForm.get('role').patchValue(this.roles.filter(e => this.data.training.role.id !== -1 ));
       }
     });
   }
@@ -187,7 +187,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   }
 
   create() {
-    // if (this.trainForm.valid) {
+    if (this.trainForm.valid) {
       const t = this.trainForm.value;
       const e = new Entrainements();
       e.id = this.data.training.id;
@@ -206,8 +206,8 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
         e.exercices = t.exercice;
       }
       this.dialogPop.close({training: e});
-    // } else {
-    //   this.markAsTouched(this.trainForm);
-    // }
+    } else {
+      this.markAsTouched(this.trainForm);
+    }
   }
 }

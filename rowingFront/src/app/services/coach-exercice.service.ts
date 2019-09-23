@@ -29,6 +29,11 @@ export class CoachExerciceService extends ServiceService {
       catchError(this.handleError<Exercice>('save'))
     );
   }
-
+  update(id: number, exercice: Exercice): Observable<Exercice> {
+    return this.http.put(`${environment.apiUrl}/exercices/${exercice.id}/update`, exercice, this.getOptions()).pipe(
+      tap((exercices: Exercice) => console.log(`update exercices w/ id=${exercices.id}`)),
+      catchError(this.handleError<Exercice>('update'))
+    );
+  }
 
 }

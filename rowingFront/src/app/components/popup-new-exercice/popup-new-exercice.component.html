@@ -14,7 +14,7 @@
   <mat-form-field>
     <mat-label>Categories de l'exercice</mat-label>
     <mat-select formControlName="typeExercice">
-      <mat-option *ngFor="let type of typeExercice " [value]="type">{{type.name}}</mat-option>
+      <mat-option *ngFor="let type of typeExercice " [value]="type.id">{{type.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 

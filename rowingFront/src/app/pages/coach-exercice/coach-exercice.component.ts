@@ -3,7 +3,6 @@ import {CoachExerciceService} from '../../services/coach-exercice.service';
 import {MatDialog} from '@angular/material';
 import {Exercice} from '../../domaines/exercice';
 import {PopupNewExerciceComponent} from '../../components/popup-new-exercice/popup-new-exercice.component';
-import {Entrainements} from '../../domaines/entrainements';
 import {ServiceService} from '../../services/service.service';
 
 
@@ -45,14 +44,23 @@ export class CoachExerciceComponent implements OnInit {
   }
 
   save(exercice: Exercice) {
-    this.service.save(exercice).subscribe(
-      () => {
-        this.getAll();
-      },
-      error => {
-        this.alertService.error(error);
-      });
-
+    if (exercice.id) {
+      this.service.update(exercice.id, exercice).subscribe(
+        () => {
+          this.getAll();
+        },
+        error => {
+          this.alertService.error(error);
+        });
+    } else {
+      this.service.save(exercice).subscribe(
+        () => {
+          this.getAll();
+        },
+        error => {
+          this.alertService.error(error);
+        });
+    }
   }
 
   deleteExercice(exercice: Exercice) {}

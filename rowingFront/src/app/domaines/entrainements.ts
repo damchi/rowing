@@ -7,7 +7,7 @@ export class Entrainements {
   id: number;
   name: string;
   category: Categories[];
-  distance: number;
+  distance: string;
   start: number;
   comments: string;
   cadence: string;
@@ -17,7 +17,7 @@ export class Entrainements {
   rest: string;
   warmUp: string;
 
-constructor(id?: number, name?: string, category?: Categories[], distance?: number,
+constructor(id?: number, name?: string, category?: Categories[], distance?: string,
             comments?: string, cadence?: string, role?: Roles, start?: number,
             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string) {
 

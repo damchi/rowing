@@ -16,6 +16,11 @@
       <mat-select formControlName="role">
         <mat-option *ngFor="let role of roles" [value]="role.id">{{role.name}}</mat-option>
       </mat-select>
+      <mat-error *ngFor="let validation of errorMessages.role">
+        <mat-error class="error-message" *ngIf="trainForm.get('role').hasError(validation.type) &&
+          (trainForm.get('role').dirty || trainForm.get('role').touched)">{{validation.message}}
+        </mat-error>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -23,11 +28,21 @@
       <mat-select formControlName="categorie" multiple>
         <mat-option *ngFor="let categorie of categories" [value]="categorie">{{categorie.name}}</mat-option>
       </mat-select>
+      <mat-error *ngFor="let validation of errorMessages.categorie">
+        <mat-error class="error-message" *ngIf="trainForm.get('categorie').hasError(validation.type) &&
+          (trainForm.get('categorie').dirty || trainForm.get('categorie').touched)">{{validation.message}}
+        </mat-error>
+      </mat-error>
     </mat-form-field>
 
   <h3>Warm Up</h3>
   <mat-form-field>
     <textarea  matInput placeholder="WarmUp" formControlName="warmUp"></textarea>
+    <mat-error *ngFor="let validation of errorMessages.warmUp">
+      <mat-error class="error-message" *ngIf="trainForm.get('warmUp').hasError(validation.type) &&
+          (trainForm.get('warmUp').dirty || trainForm.get('warmUp').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -35,6 +50,11 @@
       <mat-select formControlName="season" (selectionChange)="changeSeason($event)">
         <mat-option *ngFor="let season of season" [value]="season">{{season.name}}</mat-option>
       </mat-select>
+    <mat-error *ngFor="let validation of errorMessages.season">
+      <mat-error class="error-message" *ngIf="trainForm.get('season').hasError(validation.type) &&
+          (trainForm.get('season').dirty || trainForm.get('season').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
   </mat-form-field>
 
   <div class="input-container">
@@ -44,7 +64,7 @@
 
 
       <mat-form-field>
-        <input type="number" matInput placeholder="distance en km" formControlName="distance" required>
+        <input type="text" matInput placeholder="Ex: 4 x 2000m " formControlName="distance" required>
         <mat-error *ngFor="let validation of errorMessages.distance">
           <mat-error class="error-message" *ngIf="trainForm.get('distance').hasError(validation.type) &&
           (trainForm.get('distance').dirty || trainForm.get('distance').touched)">{{validation.message}}
@@ -53,7 +73,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input type="text" matInput placeholder="Strokes par minutes" formControlName="cadence" required>
+        <input type="text" matInput placeholder="Strokes rate" formControlName="cadence" required>
         <mat-error *ngFor="let validation of errorMessages.cadence">
           <mat-error class="error-message" *ngIf="trainForm.get('cadence').hasError(validation.type) &&
           (trainForm.get('cadence').dirty || trainForm.get('cadence').touched)">{{validation.message}}
@@ -68,7 +88,7 @@
       <mat-form-field>
         <mat-label>Exercice de l'entrainement</mat-label>
         <mat-select formControlName="exercice" multiple>
-            <mat-option  *ngFor="let exercice of exercicesDrill"[value]="exercice"> {{exercice.name}}
+            <mat-option  *ngFor="let exercice of exercicesDrill" [value]="exercice"> {{exercice.name}}
             </mat-option>
         </mat-select>
       </mat-form-field>
@@ -76,6 +96,11 @@
 
       <mat-form-field>
         <textarea  matInput placeholder="Repos" formControlName="rest" required></textarea>
+        <mat-error *ngFor="let validation of errorMessages.rest">
+          <mat-error class="error-message" *ngIf="trainForm.get('rest').hasError(validation.type) &&
+          (trainForm.get('rest').dirty || trainForm.get('rest').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
       </mat-form-field>
 
     </div>
@@ -88,7 +113,8 @@
   </div>
 
   <mat-form-field>
-    <textarea  matInput placeholder="Commentaires" formControlName="comments" required></textarea>
+    <textarea  matInput placeholder="Commentaires" formControlName="comments" ></textarea>
+
   </mat-form-field>
   <div mat-dialog-actions>
     <button mat-button type="button" (click)="close()">Annuler</button>

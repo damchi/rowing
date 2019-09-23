@@ -68,6 +68,9 @@ export class PopupNewExerciceComponent extends MarkAsTouch implements OnInit {
   getTypeExercice() {
     this.serviceTypeExercice.getAll().subscribe( (type: TypeExercice[]) => {
       this.typeExercice = type;
+      if (this.data.exercice.typeExercices) {
+        this.exerciceForm.get('typeExercice').patchValue(this.data.exercice.typeExercices.id);
+      }
     });
   }
 

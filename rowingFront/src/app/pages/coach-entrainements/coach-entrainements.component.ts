@@ -46,15 +46,15 @@ export class CoachEntrainementsComponent implements OnInit {
   }
 
   save(training: Entrainements) {
-    if (training.id) {
-      this.service.update(training.id, training).subscribe(
-        () => {
-          this.getAll();
-        },
-        error => {
-          this.alertService.error(error);
-        });
-    } else {
+    // if (training.id) {
+    //   this.service.update(training.id, training).subscribe(
+    //     () => {
+    //       this.getAll();
+    //     },
+    //     error => {
+    //       this.alertService.error(error);
+    //     });
+    // } else {
       this.service.save(training).subscribe(
         () => {
           this.getAll();
@@ -62,7 +62,7 @@ export class CoachEntrainementsComponent implements OnInit {
         error => {
           this.alertService.error(error);
         });
-    }
+    // }
   }
 
 
