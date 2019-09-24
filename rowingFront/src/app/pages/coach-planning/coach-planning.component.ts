@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CalendarView} from 'angular-calendar';
+import {Entrainements} from '../../domaines/entrainements';
+import {CoachEntrainementsService} from '../../services/coach-entrainements.service';
 
 
 @Component({
@@ -8,14 +9,19 @@ import {CalendarView} from 'angular-calendar';
   styleUrls: ['./coach-planning.component.css']
 })
 export class CoachPlanningComponent implements OnInit {
-  CalendarView = CalendarView;
-
-  view = CalendarView.Month;
-
-  viewDate = new Date();
-  constructor() { }
+  trainings: Entrainements[] =[];
+  constructor(private serviceTraining: CoachEntrainementsService) { }
 
   ngOnInit() {
+    this.getAllTraining();
   }
 
+  getAllTraining() {
+    this.serviceTraining.getAll().subscribe( (trainings: Entrainements[]) => {
+        this.trainings = trainings;
+      },
+      error => {
+        alert(error.toString());
+      });
+  }
 }

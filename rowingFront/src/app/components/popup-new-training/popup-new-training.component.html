@@ -108,13 +108,19 @@
       <h3>Entrainenment d'hiver</h3>
 
 
-
     </div>
   </div>
 
   <mat-form-field>
     <textarea  matInput placeholder="Commentaires" formControlName="comments" ></textarea>
-
+  </mat-form-field>
+  <mat-form-field>
+    <input type="color" matInput placeholder="Couleur" formControlName="color">
+    <mat-error *ngFor="let validation of errorMessages.color">
+      <mat-error class="error-message" *ngIf="trainForm.get('color').hasError(validation.type) &&
+          (trainForm.get('color').dirty || trainForm.get('color').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
   </mat-form-field>
   <div mat-dialog-actions>
     <button mat-button type="button" (click)="close()">Annuler</button>

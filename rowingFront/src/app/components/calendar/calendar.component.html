@@ -7,16 +7,16 @@
       dragOverClass="drag-over"
     >
       <div class="card-body">
-        <p *ngIf="externalEvents.length === 0"><em>No events added</em></p>
+        <p *ngIf="training.length === 0"><em>No events added</em></p>
         <ul>
           <li
-            *ngFor="let event of externalEvents"
+            *ngFor="let event of training"
             mwlDraggable
             [dropData]="{event: event}"
             dragActiveClass="drag-active"
           >
-            <a href="javascript:;" [style.color]="event.color.primary">
-              {{ event.title }}
+            <a href="javascript:;" [style.color]="event.color">
+              {{ event.name }}
             </a>
           </li>
         </ul>

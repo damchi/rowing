@@ -23,6 +23,7 @@ export class ErrorMessages  {
   cadence: StuctureError[];
   rest: StuctureError[];
   warmUp: StuctureError[];
+  color: StuctureError[];
 }
 
 export class PopupEntrainement  {
@@ -50,6 +51,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public exercicesCorps: Exercice[];
   public season: Season[];
   public seasonCurrent: number;
+  public color: string;
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
               public data: PopupEntrainement,
@@ -78,6 +80,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       role: new FormControl( this.data.training.role, [Validators.required]),
       rest: new FormControl( this.data.training.rest, [Validators.required]),
       warmUp: new FormControl( this.data.training.warmUp, [Validators.required]),
+      color: new FormControl( this.data.training.color, [Validators.required]),
     });
 
 
@@ -105,6 +108,9 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       ],
       warmUp: [
         {type: 'required', message: 'L\'échauffement est requis'}
+      ],
+      color: [
+        {type: 'required', message: 'La couleur est requise'}
       ]
     };
     this.getSeason();
@@ -198,6 +204,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       e.comments = t.comments;
       e.rest = t.rest;
       e.warmUp = t.warmUp;
+      e.color = t.color;
 
       if (t.season.id === 1) {
         e.cadence = t.cadence;
