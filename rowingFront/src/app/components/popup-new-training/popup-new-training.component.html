@@ -3,10 +3,10 @@
 <form [formGroup]="trainForm">
 
   <mat-form-field>
-    <input type="text" matInput placeholder="Nom de l'entrainement" formControlName="name" required>
-    <mat-error *ngFor="let validation of errorMessages.name">
-      <mat-error class="error-message" *ngIf="trainForm.get('name').hasError(validation.type) &&
-          (trainForm.get('name').dirty || trainForm.get('name').touched)">{{validation.message}}
+    <input type="text" matInput placeholder="Nom de l'entrainement" formControlName="title" required>
+    <mat-error *ngFor="let validation of errorMessages.title">
+      <mat-error class="error-message" *ngIf="trainForm.get('title').hasError(validation.type) &&
+          (trainForm.get('title').dirty || trainForm.get('title').touched)">{{validation.message}}
       </mat-error>
     </mat-error>
   </mat-form-field>
@@ -82,7 +82,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input type="number" matInput placeholder="Nombre strokes start" formControlName="start">
+        <input type="number" matInput placeholder="Nombre strokes start" formControlName="strokesStart">
       </mat-form-field>
 
       <mat-form-field>

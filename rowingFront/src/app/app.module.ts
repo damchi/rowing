@@ -19,12 +19,24 @@ import {MatRadioModule} from '@angular/material/radio';
 import { CoachExerciceComponent } from './pages/coach-exercice/coach-exercice.component';
 import { PopupNewExerciceComponent } from './components/popup-new-exercice/popup-new-exercice.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DragAndDropModule } from 'angular-draggable-droppable';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
+import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
+import { MaskedTextBoxModule, UploaderAllModule } from '@syncfusion/ej2-angular-inputs';
+import { ToolbarAllModule, ContextMenuAllModule } from '@syncfusion/ej2-angular-navigations';
+import { ButtonAllModule  } from '@syncfusion/ej2-angular-buttons';
+import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
+import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
+import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
+import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-angular-schedule';
+
+
+
+
 
 
 
@@ -44,7 +56,6 @@ import { CalendarHeaderComponent } from './components/calendar-header/calendar-h
     ConfirmDialogComponent,
     CalendarComponent,
     CalendarHeaderComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -64,10 +75,22 @@ import { CalendarHeaderComponent } from './components/calendar-header/calendar-h
     MatSnackBarModule,
     DragAndDropModule,
     CommonModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
+    CalendarModule,
+    TreeViewModule,
+    DropDownListAllModule,
+    MultiSelectAllModule,
+    MaskedTextBoxModule,
+    UploaderAllModule,
+    ToolbarAllModule,
+    ContextMenuAllModule,
+    ButtonAllModule,
+    CheckBoxAllModule,
+    DatePickerAllModule,
+    TimePickerAllModule,
+    DateTimePickerAllModule,
+    NumericTextBoxAllModule,
+    ScheduleAllModule,
+    RecurrenceEditorAllModule
   ],
   entryComponents: [
     PopupNewTrainingComponent,

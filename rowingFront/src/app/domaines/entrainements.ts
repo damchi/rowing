@@ -2,10 +2,12 @@ import {TypeExercice} from './type-exercice';
 import {Categories} from './categories';
 import {Roles} from './roles';
 import {Season} from './season';
+// import {CalendarEvent} from 'calendar-utils';
 
-export class Entrainements {
+// export class Entrainements implements CalendarEvent {
+export class Entrainements  {
   id: number;
-  name: string;
+  title: string;
   category: Categories[];
   distance: string;
   strokesStart: number;
@@ -20,12 +22,12 @@ export class Entrainements {
   start: Date;
   draggable: boolean;
 
-constructor(id?: number, name?: string, category?: Categories[], distance?: string,
+constructor(id?: number, title?: string, category?: Categories[], distance?: string,
             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string, color?: string, start?: Date, draggable?: boolean) {
 
     this.id = id;
-    this.name = name;
+    this.title = title;
     this.category = category;
     this.distance = distance;
     this.strokesStart = strokesStart;

@@ -12,9 +12,9 @@ import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-di
   styleUrls: ['./coach-entrainements.component.css']
 })
 export class CoachEntrainementsComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'type', 'role', 'start', 'distance', 'option'];
-  trainings: Entrainements[];
-  training: Entrainements;
+  public displayedColumns: string[] = ['nom', 'type', 'role', 'distance', 'option'];
+ public trainings: Entrainements[];
+ public training: Entrainements;
 
   constructor(private service: CoachEntrainementsService, public dialog: MatDialog, private alertService: ServiceService) { }
 

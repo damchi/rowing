@@ -1,61 +1,51 @@
-<div class="row">
-  <div class="col-md-3">
-    <div
-      class="card"
-      mwlDroppable
-      (drop)="externalDrop($event.dropData.event)"
-      dragOverClass="drag-over"
-    >
-      <div class="card-body">
-        <p *ngIf="training.length === 0"><em>No events added</em></p>
-        <ul>
-          <li
-            *ngFor="let event of training"
-            mwlDraggable
-            [dropData]="{event: event}"
-            dragActiveClass="drag-active"
-          >
-            <a href="javascript:;" [style.color]="event.color">
-              {{ event.name }}
-            </a>
-          </li>
-        </ul>
+<div class="control-section">
+  <div class="drag-sample-wrapper">
+    <div class="schedule-container">
+      <div class="title-container">
+        <h1 class="title-text">Planning</h1>
+
       </div>
+      <ejs-schedule #scheduleObj cssClass='schedule-drag-drop' width='100%' height='650px' [group]="group" [currentView]="currentView" [selectedDate]="selectedDate" [workHours]="workHours" [eventSettings]="eventSettings" (actionBegin)="onActionBegin($event)"
+                    (drag)="onItemDrag($event)">
+        <e-resources>
+          <e-resource field='DepartmentID' title='Department' name='Departments' [dataSource]='departmentDataSource' textField='Text' idField='Id' colorField='Color'>
+          </e-resource>
+          <e-resource field='ConsultantID' title='Consultant' name='Consultants' [dataSource]='consultantDataSource' [allowMultiple]='allowMultiple' textField='Text' idField='Id' groupIDField="GroupId" colorField='Color'>
+          </e-resource>
+        </e-resources>
+        <ng-template #resourceHeaderTemplate let-data>
+          <div class="template-wrap">
+            <div class="specialist-category">
+              <div *ngIf="getConsultantStatus(data)">
+<!--                <img src="./assets/schedule/images/{{getConsultantImageName(data)}}.png" class="specialist-image"/>-->
+              </div>
+              <div class="specialist-name">{{getConsultantName(data)}}</div>
+              <div class="specialist-designation">{{getConsultantDesignation(data)}}</div>
+            </div>
+          </div>
+        </ng-template>
+        <e-views>
+          <e-view option='TimelineDay'></e-view>
+          <e-view option='TimelineMonth'></e-view>
+        </e-views>
+      </ejs-schedule>
     </div>
-  </div>
+    <div class="treeview-container">
+      <div class="title-container">
+        <h1 class="title-text">Entrainements</h1>
+      </div>
 
-  <div class="col-md-9">
-    <app-calendar-header [(view)]="view" [(viewDate)]="viewDate">
-    </app-calendar-header>
+      <ejs-treeview #treeObj [fields]='field' cssClass='treeview-external-drag' [allowDragAndDrop]='allowDragAndDrop' (nodeDragStop)="onTreeDragStop($event)" (nodeDragging)="onItemDrag($event)">
 
-    <div [ngSwitch]="view">
-      <mwl-calendar-month-view
-        *ngSwitchCase="CalendarView.Month"
-        [viewDate]="viewDate"
-        [events]="events"
-        [activeDayIsOpen]="activeDayIsOpen"
-        [refresh]="refresh"
-        (eventTimesChanged)="eventDropped($event)"
-      >
-      </mwl-calendar-month-view>
-      <mwl-calendar-week-view
-        *ngSwitchCase="CalendarView.Week"
-        [viewDate]="viewDate"
-        [events]="events"
-        [refresh]="refresh"
-        [snapDraggedEvents]="false"
-        (eventTimesChanged)="eventDropped($event)"
-      >
-      </mwl-calendar-week-view>
-      <mwl-calendar-day-view
-        *ngSwitchCase="CalendarView.Day"
-        [viewDate]="viewDate"
-        [events]="events"
-        [refresh]="refresh"
-        [snapDraggedEvents]="false"
-        (eventTimesChanged)="eventDropped($event)"
-      >
-      </mwl-calendar-day-view>
+        <ng-template #nodeTemplate="" let-data="">
+          <div id="waiting">
+            <div id="waitdetails">
+              <div id="waitlist">{{data.title}}hhhh</div>
+<!--              <div id="waitcategory">{{data.DepartmentName}} - {{data.Description}}</div>-->
+            </div>
+          </div>
+        </ng-template>
+      </ejs-treeview>
     </div>
   </div>
 </div>

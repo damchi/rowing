@@ -15,7 +15,7 @@ import {SeasonService} from '../../services/season.service';
 import {Season} from '../../domaines/season';
 
 export class ErrorMessages  {
-  name: StuctureError[];
+  title: StuctureError[];
   categorie: StuctureError[];
   distance: StuctureError[];
   role: StuctureError[];
@@ -73,7 +73,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   ngOnInit() {
 
     this.trainForm = this.fb.group({
-      name: new FormControl( this.data.training.name, [Validators.required]),
+      title: new FormControl( this.data.training.title, [Validators.required]),
       comments: new FormControl( this.data.training.comments),
       season: new FormControl( this.data.training.season, [Validators.required]),
       categorie: new FormControl(this.data.training.category, [Validators.required]),
@@ -85,7 +85,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
 
     this.errorMessages = {
-      name: [
+      title: [
         {type: 'required', message: 'La nom est requis'}
       ],
       categorie: [
@@ -170,12 +170,12 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     if (this.seasonCurrent && this.seasonCurrent === 1) {
       this.trainForm.removeControl('distance');
       this.trainForm.removeControl('cadence');
-      this.trainForm.removeControl('start');
+      this.trainForm.removeControl('strokesStart');
       this.trainForm.removeControl('exercice');
       this.trainForm.removeControl('repos');
       this.data.training.distance = null;
       this.data.training.cadence = null;
-      this.data.training.start = null;
+      this.data.training.strokesStart = null;
       this.data.training.exercices = null;
       this.data.training.rest = null;
     }
@@ -187,7 +187,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     if (this.seasonCurrent === 1 || ( this.data.training.season && this.data.training.season.id === 1)) {
       this.trainForm.addControl('distance', new FormControl( this.data.training.distance, [Validators.required]));
       this.trainForm.addControl('cadence', new FormControl( this.data.training.cadence, [Validators.required]));
-      this.trainForm.addControl('start', new FormControl( this.data.training.start));
+      this.trainForm.addControl('strokesStart', new FormControl( this.data.training.strokesStart));
       this.trainForm.addControl('exercice', new FormControl( this.data.training.exercices));
     }
   }
@@ -197,7 +197,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       const t = this.trainForm.value;
       const e = new Entrainements();
       e.id = this.data.training.id;
-      e.name = t.name;
+      e.title = t.title;
       e.category = t.categorie;
       e.role = t.role;
       e.season = t.season;
@@ -208,7 +208,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
       if (t.season.id === 1) {
         e.cadence = t.cadence;
-        e.start = t.start;
+        e.strokesStart = t.strokesStart;
         e.distance = t.distance;
         e.exercices = t.exercice;
       }
