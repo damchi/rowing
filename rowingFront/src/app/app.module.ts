@@ -23,21 +23,8 @@ import { DragAndDropModule } from 'angular-draggable-droppable';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
-import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
-import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
-import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
-import { MaskedTextBoxModule, UploaderAllModule } from '@syncfusion/ej2-angular-inputs';
-import { ToolbarAllModule, ContextMenuAllModule } from '@syncfusion/ej2-angular-navigations';
-import { ButtonAllModule  } from '@syncfusion/ej2-angular-buttons';
-import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
-import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
-import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
-import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-angular-schedule';
-
-
-
-
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 
@@ -75,22 +62,10 @@ import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-an
     MatSnackBarModule,
     DragAndDropModule,
     CommonModule,
-    CalendarModule,
-    TreeViewModule,
-    DropDownListAllModule,
-    MultiSelectAllModule,
-    MaskedTextBoxModule,
-    UploaderAllModule,
-    ToolbarAllModule,
-    ContextMenuAllModule,
-    ButtonAllModule,
-    CheckBoxAllModule,
-    DatePickerAllModule,
-    TimePickerAllModule,
-    DateTimePickerAllModule,
-    NumericTextBoxAllModule,
-    ScheduleAllModule,
-    RecurrenceEditorAllModule
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
   ],
   entryComponents: [
     PopupNewTrainingComponent,

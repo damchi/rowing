@@ -6,7 +6,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./calendar-header.component.css']
 })
 export class CalendarHeaderComponent {
-
   @Input() view: string;
 
   @Input() viewDate: Date;
