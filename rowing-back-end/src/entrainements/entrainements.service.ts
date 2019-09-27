@@ -22,7 +22,7 @@ export class EntrainementsService {
     }
 
     async deleteTraining(training: Entrainements): Promise<DeleteResult> {
-        return await this.entrainementsRepository.delete(training);
+        return await this.entrainementsRepository.update(training.id, training);
     }
 
 }

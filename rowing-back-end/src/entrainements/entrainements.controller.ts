@@ -19,6 +19,7 @@ export class EntrainementsController {
 
     @Post('create')
     create( @Body() training: Entrainements): Promise<Entrainements> {
+        training.draggable = true;
         return this.service.save(training);
     }
 
@@ -29,8 +30,15 @@ export class EntrainementsController {
     }
 
     @Delete(':id/delete')
-    async delete(@Param('id') id): Promise<any> {
-        return this.service.deleteTraining(id);
+    async delete(@Param('id') id, @Body() entrainementsData: Entrainements): Promise<DeleteResult> {
+        entrainementsData.id = Number(id);
+        entrainementsData.deleteAt = new Date();
+        return this.service.deleteTraining(entrainementsData);
     }
+
+    // @Delete(':id/delete')
+    // async delete(@Param('id') id): Promise<any> {
+    //     return this.service.deleteTraining(id);
+    // }
 
 }

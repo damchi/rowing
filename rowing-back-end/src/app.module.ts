@@ -20,7 +20,7 @@ import { SeasonModule } from './season/season.module';
             host: 'localhost',
             port: 5432,
             username: 'postgres',
-            password: 'postgres',
+            password: 'etcsoft',
             database: 'rowing',
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,

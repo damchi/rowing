@@ -8,25 +8,25 @@ import {Season} from './season.entity';
 @Entity()
 export class Entrainements extends HistoriqueEntity {
     @Column()
-    name: string;
+    title: string;
 
     @ManyToMany( () => Categories )
     @JoinTable()
     category: Categories[];
 
     @Column()
-    distance: number;
+    distance: string;
 
-    @Column()
-    start: number;
+    @Column({nullable: true})
+    strokesStart: number;
 
-    @Column()
+    @Column({nullable: true})
     comments: string;
 
     @Column()
     warmUp: string;
 
-    @Column()
+    @Column({nullable: true})
     cadence: string;
 
     @ManyToOne(type => Season, season => season.name)
@@ -34,6 +34,18 @@ export class Entrainements extends HistoriqueEntity {
 
     @Column()
     rest: string;
+
+    @Column()
+    color: string;
+
+    @Column({nullable: true})
+    start: Date;
+
+    @Column({nullable: true})
+    end: Date;
+
+    @Column()
+    draggable: boolean;
 
     @ManyToOne(type => Roles, role => role.entrainements)
     role: Roles;
