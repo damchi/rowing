@@ -21,38 +21,17 @@ export class CalendarComponent implements  OnChanges {
   CalendarView = CalendarView;
   view = CalendarView.Month;
   viewDate = new Date();
-  // externalEvents: CalendarEvent[] = [
-  //   {
-  //     title: 'Event 1',
-  //     color: {
-  //       primary: '#e3bc08',
-  //       secondary: '#FDF1BA'
-  //     },
-  //     start: new Date(),
-  //     draggable: true
-  //   },
-  //   {
-  //     title: 'Event 2',
-  //     color: {
-  //       primary: '#1e90ff',
-  //       secondary: '#D1E8FF'
-  //     },
-  //     start: new Date(),
-  //     draggable: true
-  //   }
-  // ];
-
-
 
   // events: CalendarEvent[] = [];
-  events: Entrainements[] = [];
+  events: EntrainementsPlanning[] = [];
 
   activeDayIsOpen = false;
   refresh = new Subject<void>();
 
   constructor() {
   }
-  ngOnChanges() {}
+  ngOnChanges() {
+  }
 
   eventDropped({
                  event,
@@ -65,13 +44,16 @@ export class CalendarComponent implements  OnChanges {
     // if (typeof allDay !== 'undefined') {
     //   event.allDay = allDay;
     // }
+    const e = new EntrainementsPlanning(event.id, newStart, newEnd, event, event.title);
     if (externalIndex > -1) {
-      // this.externalEvents.splice(externalIndex, 1);
-      this.events.push(event);
+      // this.trainings.splice(externalIndex, 1);
+      this.events.push(e);
     }
-    event.start = newStart;
+
+    const eventsIndex = this.events.lastIndexOf(e);
+    this.events[eventsIndex].start = newStart;
     if (newEnd) {
-      event.end = newEnd;
+      e.end = newEnd;
     }
     if (this.view === 'month') {
       this.viewDate = newStart;
@@ -87,11 +69,11 @@ export class CalendarComponent implements  OnChanges {
   //   }
   // }
 
-  externalDrop(event: Entrainements) {
-    if (this.trainings.indexOf(event) === -1) {
-      this.events = this.events.filter(iEvent => iEvent !== event);
-      // this.trainings.push(event);
-      this.events.push(event);
-    }
-  }
+  // externalDrop(event: Entrainements) {
+  //   if (this.trainings.indexOf(event) === -1) {
+  //     this.events = this.events.filter(iEvent => iEvent !== event);
+  //     // this.trainings.push(event);
+  //     this.events.push(event);
+  //   }
+  // }
 }

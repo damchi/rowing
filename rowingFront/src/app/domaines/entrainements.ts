@@ -2,6 +2,7 @@ import {TypeExercice} from './type-exercice';
 import {Categories} from './categories';
 import {Roles} from './roles';
 import {Season} from './season';
+import {CalendarEvent} from 'calendar-utils';
 // import {CalendarEvent} from 'calendar-utils';
 
 // export class Entrainements implements CalendarEvent {
@@ -26,6 +27,9 @@ export class Entrainements  {
 constructor(id?: number, title?: string, category?: Categories[], distance?: string,
             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string, color?: string, start?: Date, draggable?: boolean, end?: Date) {
+// constructor(id?: number, title?: string, category?: Categories[], distance?: string,
+//             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
+//             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string, color?: string,draggable?: boolean) {
 
     this.id = id;
     this.title = title;
