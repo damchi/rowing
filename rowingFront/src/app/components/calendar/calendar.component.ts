@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import {Entrainements} from '../../domaines/entrainements';
 import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
 
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -21,10 +22,7 @@ export class CalendarComponent implements  OnChanges {
   CalendarView = CalendarView;
   view = CalendarView.Month;
   viewDate = new Date();
-
-  // events: CalendarEvent[] = [];
-  events: EntrainementsPlanning[] = [];
-
+  events: CalendarEvent[] = [];
   activeDayIsOpen = false;
   refresh = new Subject<void>();
 
@@ -33,23 +31,30 @@ export class CalendarComponent implements  OnChanges {
   ngOnChanges() {
   }
 
-  eventDropped({
+  // eventDropped({
+  //                event,
+  //                newStart,
+  //                newEnd,
+  //                allDay
+  //              }: CalendarEventTimesChangedEvent): void {
+
+    eventDropped({
                  event,
                  newStart,
                  newEnd,
                  allDay
-               }: CalendarEventTimesChangedEvent): void {
+               }: any) {
     const externalIndex = this.trainings.indexOf(event);
     // const externalIndex = this.externalEvents.indexOf(event);
-    // if (typeof allDay !== 'undefined') {
-    //   event.allDay = allDay;
-    // }
+    if (typeof allDay !== 'undefined') {
+      event.allDay = allDay;
+    }
     const e = new EntrainementsPlanning(event.id, newStart, newEnd, event, event.title);
+
     if (externalIndex > -1) {
-      // this.trainings.splice(externalIndex, 1);
+      // this.externalEvents.splice(externalIndex, 1);
       this.events.push(e);
     }
-
     const eventsIndex = this.events.lastIndexOf(e);
     this.events[eventsIndex].start = newStart;
     if (newEnd) {
@@ -62,18 +67,11 @@ export class CalendarComponent implements  OnChanges {
     this.events = [...this.events];
   }
 
-  // externalDrop(event: CalendarEvent) {
-  //   if (this.externalEvents.indexOf(event) === -1) {
-  //     this.events = this.events.filter(iEvent => iEvent !== event);
-  //     this.externalEvents.push(event);
-  //   }
-  // }
-
-  // externalDrop(event: Entrainements) {
+  // externalDrop(event: EntrainementsPlanning) {
+  // // externalDrop(event: CalendarEvent) {
   //   if (this.trainings.indexOf(event) === -1) {
   //     this.events = this.events.filter(iEvent => iEvent !== event);
-  //     // this.trainings.push(event);
-  //     this.events.push(event);
+  //     this.trainings.push(event);
   //   }
   // }
 }

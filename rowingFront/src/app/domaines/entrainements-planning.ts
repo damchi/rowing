@@ -1,8 +1,4 @@
 import {Entrainements} from './entrainements';
-import {Categories} from './categories';
-import {Roles} from './roles';
-import {Season} from './season';
-import {TypeExercice} from './type-exercice';
 import {CalendarEvent} from 'calendar-utils';
 
 export class EntrainementsPlanning implements CalendarEvent {

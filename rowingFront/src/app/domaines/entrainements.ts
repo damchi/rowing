@@ -26,7 +26,8 @@ export class Entrainements  {
 
 constructor(id?: number, title?: string, category?: Categories[], distance?: string,
             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
-            season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string, color?: string, start?: Date, draggable?: boolean, end?: Date) {
+            season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string,
+            color?: string, start?: Date, draggable?: boolean, end?: Date) {
 // constructor(id?: number, title?: string, category?: Categories[], distance?: string,
 //             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
 //             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string, color?: string,draggable?: boolean) {
@@ -47,7 +48,6 @@ constructor(id?: number, title?: string, category?: Categories[], distance?: str
     this.start = start;
     this.end = end;
     this.draggable = draggable;
-
   }
 
 
