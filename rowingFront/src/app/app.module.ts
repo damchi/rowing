@@ -25,8 +25,7 @@ import { CommonModule } from '@angular/common';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
-
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -43,6 +42,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ConfirmDialogComponent,
     CalendarComponent,
     CalendarHeaderComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -62,6 +62,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     MatSnackBarModule,
     DragAndDropModule,
     CommonModule,
+    NgbModalModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -73,6 +74,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ConfirmDialogComponent],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [CalendarComponent],
+  exports: [CalendarComponent
+  ],
 })
 export class AppModule { }

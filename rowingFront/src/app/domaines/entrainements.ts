@@ -20,14 +20,14 @@ export class Entrainements  {
   rest: string;
   warmUp: string;
   color: string;
-  start: Date;
-  end: Date;
-  draggable: boolean;
+  // start: Date;
+  // end: Date;
+  // draggable: boolean;
 
 constructor(id?: number, title?: string, category?: Categories[], distance?: string,
             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string,
-            color?: string, start?: Date, draggable?: boolean, end?: Date) {
+            color?: string) {
 // constructor(id?: number, title?: string, category?: Categories[], distance?: string,
 //             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
 //             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string, color?: string,draggable?: boolean) {
@@ -45,9 +45,9 @@ constructor(id?: number, title?: string, category?: Categories[], distance?: str
     this.rest = rest;
     this.warmUp = warmUp;
     this.color = color;
-    this.start = start;
-    this.end = end;
-    this.draggable = draggable;
+    // this.start = start;
+    // this.end = end;
+    // this.draggable = draggable;
   }
 
 
