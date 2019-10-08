@@ -4,6 +4,7 @@ import {HistoriqueEntity} from './historique.entity';
 import {Categories} from './categories.entity';
 import {Exercices} from './exercices.entity';
 import {Season} from './season.entity';
+import {Color} from './color.entity';
 
 @Entity()
 export class Entrainements extends HistoriqueEntity {
@@ -35,8 +36,8 @@ export class Entrainements extends HistoriqueEntity {
     @Column()
     rest: string;
 
-    @Column()
-    color: string;
+    @ManyToOne(type => Color, color => color.primary, {cascade: true})
+    color: Color;
 
     @Column({nullable: true})
     start: Date;
@@ -44,7 +45,7 @@ export class Entrainements extends HistoriqueEntity {
     @Column({nullable: true})
     end: Date;
 
-    @Column()
+    @Column({nullable: true})
     draggable: boolean;
 
     @ManyToOne(type => Roles, role => role.entrainements)

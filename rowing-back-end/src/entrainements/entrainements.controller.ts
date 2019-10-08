@@ -1,13 +1,16 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Logger, Param, Post, Put, UseInterceptors} from '@nestjs/common';
 import {Entrainements} from '../entities/entrainements.entity';
 import {EntrainementsService} from './entrainements.service';
 import {DeleteResult, UpdateResult} from 'typeorm';
 import {classToPlain} from 'class-transformer';
+import {ColorService} from '../color/color.service';
 
 @Controller('entrainements')
 export class EntrainementsController {
+    private readonly logger = new Logger(EntrainementsController.name);
 
-    constructor( private  service: EntrainementsService) {}
+
+    constructor( private  service: EntrainementsService, private serviceColor: ColorService) {}
 
     @Get()
     async findAll() {

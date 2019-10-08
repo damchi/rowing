@@ -11,6 +11,7 @@ import {DataInterceptor} from './util/data.interceptor';
 import { ExercicesModule } from './exercices/exercices.module';
 import { TypeExercicesModule } from './type-exercices/type-exercices.module';
 import { SeasonModule } from './season/season.module';
+import { ColorModule } from './color/color.module';
 
 
 @Module({
@@ -20,7 +21,7 @@ import { SeasonModule } from './season/season.module';
             host: 'localhost',
             port: 5432,
             username: 'postgres',
-            password: 'etcsoft',
+            password: 'postgres',
             database: 'rowing',
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
             synchronize: true,
@@ -31,7 +32,9 @@ import { SeasonModule } from './season/season.module';
         CategoriesModule,
         ExercicesModule,
         TypeExercicesModule,
-        SeasonModule],
+        SeasonModule,
+        ColorModule,
+        ],
     controllers: [AppController],
     providers: [AppService, {
         provide: APP_INTERCEPTOR,
