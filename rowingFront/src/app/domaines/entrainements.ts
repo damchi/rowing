@@ -2,7 +2,8 @@ import {TypeExercice} from './type-exercice';
 import {Categories} from './categories';
 import {Roles} from './roles';
 import {Season} from './season';
-import {CalendarEvent} from 'calendar-utils';
+import {CalendarEvent, EventColor} from 'calendar-utils';
+import {Color} from './color';
 // import {CalendarEvent} from 'calendar-utils';
 
 // export class Entrainements implements CalendarEvent {
@@ -19,7 +20,7 @@ export class Entrainements  {
   exercices: TypeExercice[];
   rest: string;
   warmUp: string;
-  color: string;
+  color: Color;
   // start: Date;
   // end: Date;
   // draggable: boolean;
@@ -27,7 +28,7 @@ export class Entrainements  {
 constructor(id?: number, title?: string, category?: Categories[], distance?: string,
             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string,
-            color?: string) {
+            color?: Color) {
 // constructor(id?: number, title?: string, category?: Categories[], distance?: string,
 //             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
 //             season?: Season, exercices?: TypeExercice[], rest?: string, warmUp?: string, color?: string,draggable?: boolean) {

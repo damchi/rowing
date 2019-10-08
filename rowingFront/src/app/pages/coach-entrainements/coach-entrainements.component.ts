@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {ServiceService} from '../../services/service.service';
 import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
+import {Color} from '../../domaines/color';
 
 @Component({
   selector: 'app-entrainements',
@@ -34,7 +35,8 @@ export class CoachEntrainementsComponent implements OnInit {
   newTraining(training?: Entrainements) {
     const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
       width: '750px',
-      data: {training: training || new Entrainements()}
+      data: { training: training || new Entrainements() ,
+              colors: Color || new Color() }
     });
 
     dialogPop.afterClosed().subscribe(result => {

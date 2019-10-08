@@ -13,6 +13,8 @@ import {Exercice} from '../../domaines/exercice';
 import {CoachExerciceService} from '../../services/coach-exercice.service';
 import {SeasonService} from '../../services/season.service';
 import {Season} from '../../domaines/season';
+import {ColorService} from '../../services/color.service';
+import {Color} from '../../domaines/color';
 
 export class ErrorMessages  {
   title: StuctureError[];
@@ -28,6 +30,7 @@ export class ErrorMessages  {
 
 export class PopupEntrainement  {
   training: Entrainements;
+  colors: Color;
 }
 
 @Component({
@@ -51,7 +54,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public exercicesCorps: Exercice[];
   public season: Season[];
   public seasonCurrent: number;
-  public color: string;
+  public color: Color[];
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
               public data: PopupEntrainement,
@@ -60,7 +63,8 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
               private serviceCat: CategoriesService,
               private serviceMembres: RolesService,
               private serviceExercice: CoachExerciceService,
-              private  serviceSeason: SeasonService) {
+              private  serviceSeason: SeasonService,
+              private  serviceColor: ColorService ) {
     super();
 
     if (this.data.training.season) {
@@ -118,6 +122,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     this.getCategoriesMembres();
     this.addControl();
     this.getExercices();
+    this.getColor();
   }
 
   getCategories() {
@@ -163,6 +168,17 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     });
   }
 
+  getColor() {
+    this.serviceColor.getAll().subscribe( (color: Color[]) => {
+      this.color = color;
+      if (this.data.training.color) {
+        this.trainForm.get('color').patchValue(this.data.training.color.primary);
+      }
+    });
+  }
+
+
+
   close() {
     this.dialogPop.close();
   }
@@ -204,7 +220,16 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       e.comments = t.comments;
       e.rest = t.rest;
       e.warmUp = t.warmUp;
-      e.color = t.color;
+
+      if (t.color.id === undefined) {
+        const c = new Color();
+        c.id = this.data.colors.id;
+        c.primary = t.color;
+        e.color = c ;
+      } else {
+        e.color = t.color;
+      }
+
 
       if (t.season.id === 1) {
         e.cadence = t.cadence;

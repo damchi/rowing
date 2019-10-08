@@ -9,7 +9,7 @@ export class EntrainementsPlanning implements CalendarEvent {
   training: Entrainements;
   title: string;
   draggable: boolean;
-  action: CalendarEventAction[]
+  action: CalendarEventAction[];
 
   constructor(id?: number, start?: Date, end?: Date, training?: Entrainements, title?: string,
               draggable?: boolean, action?: CalendarEventAction[]) {
