@@ -14,8 +14,8 @@ import {Color} from '../../domaines/color';
 })
 export class CoachEntrainementsComponent implements OnInit {
   public displayedColumns: string[] = ['nom', 'type', 'role', 'distance', 'option'];
- public trainings: Entrainements[];
- public training: Entrainements;
+  public trainings: Entrainements[];
+  public training: Entrainements;
 
   constructor(private service: CoachEntrainementsService, public dialog: MatDialog, private alertService: ServiceService) { }
 

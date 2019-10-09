@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, OnChanges, Input, ViewChild, TemplateRef} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnChanges, Input, ViewChild, TemplateRef, OnInit} from '@angular/core';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -31,14 +31,15 @@ import {CalendarService} from '../../services/calendar.service';
 })
 
 
-export class CalendarComponent implements  OnChanges {
+export class CalendarComponent implements  OnChanges, OnInit {
   @Input() trainings: Entrainements[];
+  // @Input() events: CalendarEvent[];
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   CalendarView = CalendarView;
   view = CalendarView.Month;
   viewDate = new Date();
-  events: CalendarEvent[] = [];
+  // events: CalendarEvent[] = [];
   activeDayIsOpen = false;
   refresh = new Subject<void>();
 
@@ -63,61 +64,64 @@ export class CalendarComponent implements  OnChanges {
     }
   ];
 
-  // events: CalendarEvent[] = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color:  {
-  //       primary: '#ad2121',
-  //          secondary: '#FAE3E3'},
-  //     actions: this.actions,
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     draggable: true
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: {
-  //       primary: '#e3bc08',
-  //       secondary: '#FDF1BA'
-  //     },
-  //     actions: this.actions
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: {
-  //       primary: '#1e90ff',
-  //       secondary: '#D1E8FF'
-  //     },
-  //     allDay: true
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: new Date(),
-  //     title: 'A draggable and resizable event',
-  //     color: {
-  //       primary: '#e3bc08',
-  //       secondary: '#FDF1BA'
-  //     },
-  //     actions: this.actions,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     draggable: true
-  //   }
-  // ];
+  events: CalendarEvent[] = [
+    {
+      start: subDays(startOfDay(new Date()), 1),
+      end: addDays(new Date(), 1),
+      title: 'A 3 day event',
+      color:  {
+        primary: '#ad2121',
+           secondary: '#FAE3E3'},
+      actions: this.actions,
+      allDay: true,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true
+      },
+      draggable: true
+    },
+    {
+      start: startOfDay(new Date()),
+      title: 'An event with no end date',
+      color: {
+        primary: '#e3bc08',
+        secondary: '#FDF1BA'
+      },
+      actions: this.actions
+    },
+    {
+      start: subDays(endOfMonth(new Date()), 3),
+      end: addDays(endOfMonth(new Date()), 3),
+      title: 'A long event that spans 2 months',
+      color: {
+        primary: '#1e90ff',
+        secondary: '#D1E8FF'
+      },
+      allDay: true
+    },
+    {
+      start: addHours(startOfDay(new Date()), 2),
+      end: new Date(),
+      title: 'A draggable and resizable event',
+      color: {
+        primary: '#e3bc08',
+        secondary: '#FDF1BA'
+      },
+      actions: this.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true
+      },
+      draggable: true
+    }
+  ];
 
   constructor(private modal: NgbModal, private service: CalendarService) {}
 
   ngOnChanges() {
+  }
+
+  ngOnInit() {
     this.getAll();
   }
 
@@ -154,14 +158,9 @@ export class CalendarComponent implements  OnChanges {
       this.viewDate = newStart;
       this.activeDayIsOpen = true;
     }
-    // this.events = [...this.events];
+    this.events = [...this.events];
 
-    this.service.save(e).subscribe(
-      () => {
-        this.getAll();
-      },
-      error => {
-      });
+    // this.save(e);
   }
   getAll() {
     this.service.getAll().subscribe( (event: EntrainementsPlanning[]) => {
@@ -172,7 +171,17 @@ export class CalendarComponent implements  OnChanges {
       });
   }
 
+  save(e: EntrainementsPlanning) {
+    this.service.save(e).subscribe(
+      () => {
+        this.getAll();
+      },
+      error => {
+      });
+  }
+
   handleEvent(action: string, event: CalendarEvent): void {
+  // handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
@@ -189,6 +198,7 @@ export class CalendarComponent implements  OnChanges {
   //   this.activeDayIsOpen = false;
   // }
 
+  // dayClicked({ date, events }: { date: Date; events: EntrainementsPlanning[] }): void {
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
