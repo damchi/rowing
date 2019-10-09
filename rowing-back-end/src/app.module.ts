@@ -12,6 +12,7 @@ import { ExercicesModule } from './exercices/exercices.module';
 import { TypeExercicesModule } from './type-exercices/type-exercices.module';
 import { SeasonModule } from './season/season.module';
 import { ColorModule } from './color/color.module';
+import { EntrainementCalendarModule } from './entrainement-calendar/entrainement-calendar.module';
 
 
 @Module({
@@ -34,6 +35,7 @@ import { ColorModule } from './color/color.module';
         TypeExercicesModule,
         SeasonModule,
         ColorModule,
+        EntrainementCalendarModule,
         ],
     controllers: [AppController],
     providers: [AppService, {
