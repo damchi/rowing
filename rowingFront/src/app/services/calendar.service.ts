@@ -17,7 +17,7 @@ export class CalendarService extends ServiceService {
 
 
   getAll(): Observable<EntrainementsPlanning[]> {
-    return this.http.get<EntrainementsPlanning[]>(`${environment.apiUrl}/entrainements`)
+    return this.http.get<EntrainementsPlanning[]>(`${environment.apiUrl}/entrainementCalendar`)
       .pipe(
         tap(trainings => console.log('fetched trainnings')),
         catchError(this.handleError('getAll', []))
@@ -25,7 +25,7 @@ export class CalendarService extends ServiceService {
   }
 
   save(training: EntrainementsPlanning): Observable<EntrainementsPlanning> {
-    return this.http.post<EntrainementsPlanning>(`${environment.apiUrl}/entrainements/create`, training, this.getOptions()).pipe(
+    return this.http.post<EntrainementsPlanning>(`${environment.apiUrl}/entrainementCalendar/create`, training, this.getOptions()).pipe(
       tap((train: EntrainementsPlanning) => console.log(`added trainning w/ id=${train.id}`)),
       catchError(this.handleError<EntrainementsPlanning>('save'))
     );

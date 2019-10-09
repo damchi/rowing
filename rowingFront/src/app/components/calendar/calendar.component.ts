@@ -118,6 +118,7 @@ export class CalendarComponent implements  OnChanges {
   constructor(private modal: NgbModal, private service: CalendarService) {}
 
   ngOnChanges() {
+    this.getAll();
   }
 
   // eventDropped({
