@@ -3,8 +3,9 @@ import {ServiceService} from './service.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {EntrainementsPlanning} from '../domaines/entrainements-planning';
+import {colors} from '../components/calendar/calendar.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,8 @@ export class CalendarService extends ServiceService {
     super();
   }
 
-
-  getAll(): Observable<EntrainementsPlanning[]> {
-    return this.http.get<EntrainementsPlanning[]>(`${environment.apiUrl}/entrainementCalendar`)
+  getAll(params): Observable<EntrainementsPlanning[]> {
+    return this.http.get<EntrainementsPlanning[]>(`${environment.apiUrl}/entrainementCalendar`, {params})
       .pipe(
         tap(trainings => console.log('fetched trainnings')),
         catchError(this.handleError('getAll', []))
