@@ -16,8 +16,9 @@ export class CalendarService extends ServiceService {
     super();
   }
 
-  getAll(params): Observable<EntrainementsPlanning[]> {
-    return this.http.get<EntrainementsPlanning[]>(`${environment.apiUrl}/entrainementCalendar`, {params})
+
+  getAll(): Observable<EntrainementsPlanning[]> {
+    return this.http.get<EntrainementsPlanning[]>(`${environment.apiUrl}/entrainementCalendar`)
       .pipe(
         tap(trainings => console.log('fetched trainnings')),
         catchError(this.handleError('getAll', []))

@@ -33,6 +33,7 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarService} from '../../services/calendar.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 interface Film {
   id: number;
@@ -70,12 +71,16 @@ export class CalendarComponent implements  OnChanges, OnInit {
   //
 
 
-  view: string = 'month';
+  view: string;
   viewDate: Date = new Date();
 
-  events: Observable<Array<CalendarEvent>>;
-  // events: CalendarEvent[] = [];
-  activeDayIsOpen: boolean = false;
+  // events: Observable<Array<CalendarEvent>>;
+  events: CalendarEvent[] ;
+
+  activeDayIsOpen: boolean ;
+  refresh: Subject<any> = new Subject();
+
+
 
 
 
@@ -159,93 +164,58 @@ export class CalendarComponent implements  OnChanges, OnInit {
   //   }
   // ];
 
-  constructor(private modal: NgbModal, private service: CalendarService, private http: HttpClient) {}
+  constructor(private modal: NgbModal, private service: CalendarService) {}
 
   ngOnChanges() {
   }
 
   ngOnInit() {
-    this.fetchEvents();
-
-    // this.getAll();
+    // this.fetchEvents();
+    this. events = [];
+    this.view = 'month';
+    this.activeDayIsOpen = false
+    this.getAll();
+    this.refresh.next();
+    console.log(this.events);
   }
-  fetchEvents(): void {
-    const getStart: any = {
-      month: startOfMonth,
-      week: startOfWeek,
-      day: startOfDay
-    }[this.view];
-
-    const getEnd: any = {
-      month: endOfMonth,
-      week: endOfWeek,
-      day: endOfDay
-    }[this.view];
-
-    const params = new HttpParams()
-      .set(
-        'primary_release_date.gte',
-        format(getStart(this.viewDate), 'YYYY-MM-DD')
-      )
-      .set(
-        'primary_release_date.lte',
-        format(getEnd(this.viewDate), 'YYYY-MM-DD')
-      )
-      .set('api_key', '0ec33936a68018857d727958dca1424f');
-
-    this.service.getAll( params ).subscribe( (event: EntrainementsPlanning[]) => {
-        this.events = event.map(({ results }: { results: EntrainementsPlanning[] }) => {
-          return results.map((training: any) => {
-            return {
-              title: training.title,
-              start: new Date(
-                training.start + this.getTimezoneOffsetString(this.viewDate)
-              ),
-              color: training.training.color,
-              allDay: true,
-              meta: {
-                training
-              }
-            };
-          });
-        });
-      },
-      error => {
-        alert(error.toString());
-      });
-    //
-
-    //
-    // this.events = this.http
-    //   .get('https://api.themoviedb.org/3/discover/movie', { params })
-    //   .pipe(
-    //     map(({ results }: { results: Film[] }) => {
-    //       return results.map((film: Film) => {
-    //         return {
-    //           title: film.title,
-    //           start: new Date(
-    //             film.release_date + getTimezoneOffsetString(this.viewDate)
-    //           ),
-    //           color: colors.yellow,
-    //           allDay: true,
-    //           meta: {
-    //             film
-    //           }
-    //         };
-    //       });
-    //     })
-    //   );
-  }
-  getTimezoneOffsetString(date: Date): string {
-    const timezoneOffset = date.getTimezoneOffset();
-    const hoursOffset = String(
-      Math.floor(Math.abs(timezoneOffset / 60))
-    ).padStart(2, '0');
-    const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
-    const direction = timezoneOffset > 0 ? '-' : '+';
-
-    return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
-  }
+  // fetchEvents(): void {
+  //   const getStart: any = {
+  //     month: startOfMonth,
+  //     week: startOfWeek,
+  //     day: startOfDay
+  //   }[this.view];
+  //
+  //   const getEnd: any = {
+  //     month: endOfMonth,
+  //     week: endOfWeek,
+  //     day: endOfDay
+  //   }[this.view];
+  //
+  //   const params = new HttpParams()
+  //     .set(
+  //       'primary_release_date.gte',
+  //       format(getStart(this.viewDate), 'YYYY-MM-DD')
+  //     )
+  //     .set(
+  //       'primary_release_date.lte',
+  //       format(getEnd(this.viewDate), 'YYYY-MM-DD')
+  //     )
+  //     .set('api_key', '0ec33936a68018857d727958dca1424f');
+  //   //
+  //
+  //
+  //
+  // }
+  // getTimezoneOffsetString(date: Date): string {
+  //   const timezoneOffset = date.getTimezoneOffset();
+  //   const hoursOffset = String(
+  //     Math.floor(Math.abs(timezoneOffset / 60))
+  //   ).padStart(2, '0');
+  //   const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
+  //   const direction = timezoneOffset > 0 ? '-' : '+';
+  //
+  //   return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
+  // }
   dayClicked({
                date,
                events
@@ -266,11 +236,11 @@ export class CalendarComponent implements  OnChanges, OnInit {
       }
     }
   }
-
+  //
   eventClicked(event: CalendarEvent): void {
   // eventClicked(event: CalendarEvent<{ film: Film }>): void {
     window.open(
-      `https://www.themoviedb.org/movie/${event.meta.film.id}`,
+      `https://www.themoviedb.org/movie/${event.meta.ev.id}`,
       '_blank'
     );
   }
@@ -312,14 +282,21 @@ export class CalendarComponent implements  OnChanges, OnInit {
   //
   //   this.save(e);
   // }
-  // getAll() {
-  //   this.service.getAll().subscribe( (event: EntrainementsPlanning[]) => {
-  //       this.events = event;
-  //     },
-  //     error => {
-  //       alert(error.toString());
-  //     });
-  // }
+  getAll() {
+    this.service.getAll().subscribe(
+      (trainingCalendar: EntrainementsPlanning[]) => {
+        this.events = [];
+        for (const calendar in trainingCalendar) {
+          this.events.push({
+            start: startOfDay(trainingCalendar[calendar].start),
+            title: trainingCalendar[calendar].title,
+            color: trainingCalendar[calendar].training.color,
+            id: (trainingCalendar[calendar].id).toString(),
+          });
+        }
+      });
+    const t = this.events;
+  }
   //
   // save(e: EntrainementsPlanning) {
   //   this.service.save(e).subscribe(

@@ -158,8 +158,8 @@
   <app-calendar-header
     [(view)]="view"
     [(viewDate)]="viewDate"
-    (viewDateChange)="fetchEvents()"
-    (viewChange)="fetchEvents()"
+    (viewDateChange)="getAll()"
+    (viewChange)="getAll()"
   >
   </app-calendar-header>
 
@@ -170,7 +170,7 @@
     </div>
   </ng-template>
 
-  <div *ngIf="events | async; else loading; let events">
+
     <div [ngSwitch]="view">
       <mwl-calendar-month-view
         *ngSwitchCase="'month'"
@@ -196,4 +196,3 @@
       >
       </mwl-calendar-day-view>
     </div>
-  </div>
