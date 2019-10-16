@@ -19,6 +19,4 @@ export class EntrainementCalendar extends HistoriqueEntity {
 
     @Column()
     draggable: boolean;
-    @Column('text')
-    action: string;
 }
