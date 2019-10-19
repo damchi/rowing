@@ -131,62 +131,42 @@ export class CalendarComponent implements  OnChanges, OnInit {
     }
   }
 
-
-
-  //   eventDropped({
+  // eventDropped({
   //                event,
   //                newStart,
   //                newEnd,
   //                allDay
-  //              }: any) {
-  //   const externalIndex = this.trainings.indexOf(event);
-  //   // const externalIndex = this.externalEvents.indexOf(event);
-  //   if (typeof allDay !== 'undefined') {
-  //     event.allDay = allDay;
-  //   }
-  //   const e = new EntrainementsPlanning(event.id, newStart, newEnd, event, event.title, true, this.actions);
-  //
-  //   if (externalIndex > -1) {
-  //     // this.externalEvents.splice(externalIndex, 1);
-  //     this.events.push(e);
-  //   }
-  //   const eventsIndex = this.events.lastIndexOf(e);
-  //   this.events[eventsIndex].start = newStart;
-  //   if (newEnd) {
-  //     e.end = newEnd;
-  //   }
-  //   if (this.view === 'month') {
-  //     this.viewDate = newStart;
-  //     this.activeDayIsOpen = true;
-  //   }
-  //   this.events = [...this.events];
-  //
-  //   this.save(e);
-  // }
+  //              }: CalendarEventTimesChangedEvent): void {
 
   eventDropped({
                  event,
                  newStart,
                  newEnd,
                  allDay
-               }: CalendarEventTimesChangedEvent): void {
-    const externalIndex = this.events.indexOf(event);
+               }: any) {
+    const externalIndex = this.trainings.indexOf(event);
+    // const externalIndex = this.externalEvents.indexOf(event);
     if (typeof allDay !== 'undefined') {
       event.allDay = allDay;
     }
+    const e = new EntrainementsPlanning(event.id, newStart, newEnd, event, event.title, true, this.actions);
+
     if (externalIndex > -1) {
-      // this.events.splice(externalIndex, 1);
-      this.events.push(event);
+      // this.externalEvents.splice(externalIndex, 1);
+      this.events.push(e);
     }
-    event.start = newStart;
+    const eventsIndex = this.events.lastIndexOf(e);
+    this.events[eventsIndex].start = newStart;
     if (newEnd) {
-      event.end = newEnd;
+      e.end = newEnd;
     }
     if (this.view === 'month') {
       this.viewDate = newStart;
       this.activeDayIsOpen = true;
     }
     this.events = [...this.events];
+
+    this.save(e);
   }
   getAll() {
     this.service.getAll().subscribe(
