@@ -1,14 +1,3 @@
-import {Component, ChangeDetectionStrategy, OnChanges, Input, ViewChild, TemplateRef, OnInit} from '@angular/core';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarView,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar';
-import {Observable, Subject} from 'rxjs';
-import {Entrainements} from '../../domaines/entrainements';
-import { map } from 'rxjs/operators';
-import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
 // import {
 //   startOfDay,
 //   endOfDay,
@@ -32,53 +21,47 @@ import {
 } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarService} from '../../services/calendar.service';
+import {Component, ChangeDetectionStrategy, OnChanges, Input, ViewChild, TemplateRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarView,
+  CalendarEventTimesChangedEvent
+} from 'angular-calendar';
+import {Observable, Subject} from 'rxjs';
+import {Entrainements} from '../../domaines/entrainements';
+import { map } from 'rxjs/operators';
+import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {ServiceService} from '../../services/service.service';
-
-interface Film {
-  id: number;
-  title: string;
-  release_date: string;
-}
-export const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
-
-
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
 export class CalendarComponent implements  OnChanges, OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @Input() trainings: Entrainements[];
-
+  refresh: Subject<any> = new Subject();
   view: string;
   viewDate: Date = new Date();
-  events: CalendarEvent[] ;
+  events: EntrainementsPlanning[] ;
+  // events: CalendarEvent[] ;
   activeDayIsOpen: boolean ;
+
+  e: EntrainementsPlanning;
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
+
+
 
 
   actions: CalendarEventAction[] = [
@@ -102,11 +85,10 @@ export class CalendarComponent implements  OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this. events = [];
+    // this. events = [];
     this.view = 'month';
     this.activeDayIsOpen = false;
     this.getAll();
-
   }
 
 
@@ -123,7 +105,7 @@ export class CalendarComponent implements  OnChanges, OnInit {
         events.length === 0
       ) {
         this.activeDayIsOpen = false;
-        console.log(this.events);
+        // console.log(this.events);
       } else {
         this.activeDayIsOpen = true;
         this.viewDate = date;
@@ -131,48 +113,68 @@ export class CalendarComponent implements  OnChanges, OnInit {
     }
   }
 
-  // eventDropped({
-  //                event,
-  //                newStart,
-  //                newEnd,
-  //                allDay
-  //              }: CalendarEventTimesChangedEvent): void {
-
   eventDropped({
                  event,
                  newStart,
                  newEnd,
                  allDay
                }: any) {
-    const externalIndex = this.trainings.indexOf(event);
-    // const externalIndex = this.externalEvents.indexOf(event);
+
+    // let e = new EntrainementsPlanning();
+    // let eventsIndex;
+
     if (typeof allDay !== 'undefined') {
       event.allDay = allDay;
     }
-    const e = new EntrainementsPlanning(event.id, newStart, newEnd, event, event.title, true, this.actions);
 
-    if (externalIndex > -1) {
-      // this.externalEvents.splice(externalIndex, 1);
-      this.events.push(e);
+    if (event.end == null) {
+      newStart.setHours(newStart.getHours() - 1 );
+      newEnd = new Date(newStart);
+      newEnd.setHours(newEnd.getHours() + 2 );
+
+      this.e = {
+        start: newStart,
+        end: newEnd,
+        training: event,
+        title: event.title,
+        draggable: event.draggable,
+      };
+
+    } else {
+      this.e = {
+        id: event.id,
+        start: newStart,
+        end: newEnd,
+        title: event.title,
+      };
     }
-    const eventsIndex = this.events.lastIndexOf(e);
-    this.events[eventsIndex].start = newStart;
-    if (newEnd) {
-      e.end = newEnd;
-    }
+
     if (this.view === 'month') {
       this.viewDate = newStart;
       this.activeDayIsOpen = true;
     }
-    this.events = [...this.events];
-
-    this.save(e);
+    this.save(this.e);
   }
   getAll() {
     this.service.getAll().subscribe(
       (trainingCalendar: EntrainementsPlanning[]) => {
-        this.events = trainingCalendar;
+        // this.events = trainingCalendar;
+        this.events = [];
+        for (const calendar in trainingCalendar) {
+          this.events.push({
+            start: new Date(trainingCalendar[calendar].start),
+            draggable: trainingCalendar[calendar].draggable,
+            end: new Date(trainingCalendar[calendar].end),
+            title: trainingCalendar[calendar].title,
+            color: trainingCalendar[calendar].training.color,
+            id: trainingCalendar[calendar].id,
+            actions: this.actions,
+            training: trainingCalendar[calendar].training,
+          });
+        }
       });
+    this.refresh.next();
+
   }
 
   eventClicked(action: string, event: CalendarEvent): void {
@@ -181,15 +183,30 @@ export class CalendarComponent implements  OnChanges, OnInit {
   }
 
   save(event: EntrainementsPlanning) {
-    this.service.save(event).subscribe(
-      () => {
-        this.getAll();
-      },
-      error => {
-        this.alertService.error(error);
-      });
+    //
+    if (event.id) {
+      this.service.update(event.id, event).subscribe(
+        () => {
+          this.getAll();
+        },
+        error => {
+          this.alertService.error(error);
+        });
+    } else {
+      this.service.save(event).subscribe(
+        () => {
+          this.getAll();
+        },
+        error => {
+          this.alertService.error(error);
+        });
+    }
   }
-  externalDrop(event: CalendarEvent) {
+
+
+
+  externalDrop(event: EntrainementsPlanning) {
+  // externalDrop(event: CalendarEvent) {
     if (this.events.indexOf(event) === -1) {
       this.events = this.events.filter(iEvent => iEvent !== event);
       this.events.push(event);

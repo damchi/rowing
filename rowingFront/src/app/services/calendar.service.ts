@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {EntrainementsPlanning} from '../domaines/entrainements-planning';
-import {colors} from '../components/calendar/calendar.component';
+import {Entrainements} from '../domaines/entrainements';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,13 @@ export class CalendarService extends ServiceService {
     return this.http.post<EntrainementsPlanning>(`${environment.apiUrl}/entrainementCalendar/create`, training, this.getOptions()).pipe(
       tap((train: EntrainementsPlanning) => console.log(`added trainning w/ id=${train.id}`)),
       catchError(this.handleError<EntrainementsPlanning>('save'))
+    );
+  }
+
+  update(id: number, training: EntrainementsPlanning): Observable<EntrainementsPlanning> {
+    return this.http.put(`${environment.apiUrl}/entrainementCalendar/${training.id}/update`, training, this.getOptions()).pipe(
+      tap((train: EntrainementsPlanning) => console.log(`update trainning w/ id=${train.id}`)),
+      catchError(this.handleError<EntrainementsPlanning>('update'))
     );
   }
 }

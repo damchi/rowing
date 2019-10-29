@@ -13,8 +13,8 @@ export class EntrainementCalendar extends HistoriqueEntity {
     @Column()
     title: string;
 
-    @ManyToOne( type => Entrainements, training => training.id )
-    @JoinTable()
+
+    @ManyToOne( type => Entrainements, training => training.id, {  cascade: true})
     training: Entrainements;
 
     @Column()

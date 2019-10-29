@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {Entrainements} from '../entities/entrainements.entity';
 import {Repository, UpdateResult, DeleteResult} from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class EntrainementsService {
+
     constructor( @InjectRepository(Entrainements) private readonly entrainementsRepository: Repository<Entrainements> ) { }
 
     async findAll(): Promise<Entrainements[]> {

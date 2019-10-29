@@ -1,14 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {DeleteResult, Repository, UpdateResult} from 'typeorm';
 import {EntrainementCalendar} from '../entities/entrainementCalendar.entity';
 
 @Injectable()
 export class EntrainementCalendarService {
+    private readonly logger = new Logger(EntrainementCalendarService.name);
+
     constructor( @InjectRepository(EntrainementCalendar) private readonly entrainementsCalendarRepository: Repository<EntrainementCalendar> ) { }
 
     async findAll(): Promise<EntrainementCalendar[]> {
-        return await this.entrainementsCalendarRepository.find({  relations: ['training'],
+        return await this.entrainementsCalendarRepository.find({  relations: ['training', 'training.color'],
             where: [{ deleteAt: null }],
         });
     }
@@ -18,6 +20,8 @@ export class EntrainementCalendarService {
     }
 
     async updateTrainingCalendar(trainingCalendar: EntrainementCalendar): Promise<UpdateResult> {
+        this.logger.log(trainingCalendar);
+
         return await this.entrainementsCalendarRepository.update(trainingCalendar.id, trainingCalendar);
     }
 
