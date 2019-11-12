@@ -11,5 +11,8 @@ export class TypeExercicesService {
         return await this.typeExercicesRepository.find({where: [{ deleteAt: null }],
         });
     }
+    async save( typeExercice: TypeExercices): Promise<TypeExercices> {
+        return this.typeExercicesRepository.save(typeExercice);
+    }
 
 }

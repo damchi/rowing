@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import {Entrainements} from '../../domaines/entrainements';
 import {CoachEntrainementsService} from '../../services/coach-entrainements.service';
 import {MatDialog} from '@angular/material';
-import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {ServiceService} from '../../services/service.service';
-import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
+import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {Color} from '../../domaines/color';
+import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'app-entrainements',
+  selector: 'app-coach-entrainements',
   templateUrl: './coach-entrainements.component.html',
   styleUrls: ['./coach-entrainements.component.css']
 })
 export class CoachEntrainementsComponent implements OnInit {
-  public displayedColumns: string[] = ['nom', 'type', 'role', 'distance', 'option'];
+  public displayedColumns: string[] = ['nom', 'saison', 'type', 'role', 'entrainement', 'option'];
+  public displayedColumnsMobile: string[] = ['nom', 'saison', 'role', 'option'];
   public trainings: Entrainements[];
   public training: Entrainements;
 
@@ -36,7 +37,7 @@ export class CoachEntrainementsComponent implements OnInit {
     const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
       width: '750px',
       data: { training: training || new Entrainements() ,
-              colors: Color || new Color() }
+        colors: Color || new Color() }
     });
 
     dialogPop.afterClosed().subscribe(result => {
@@ -57,18 +58,18 @@ export class CoachEntrainementsComponent implements OnInit {
     //       this.alertService.error(error);
     //     });
     // } else {
-      this.service.save(training).subscribe(
-        () => {
-          this.getAll();
-        },
-        error => {
-          this.alertService.error(error);
-        });
+    this.service.save(training).subscribe(
+      () => {
+        this.getAll();
+      },
+      error => {
+        this.alertService.error(error);
+      });
     // }
   }
 
 
-deleteTraining(training: Entrainements) {
+  deleteTraining(training: Entrainements) {
     this.training = training;
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',

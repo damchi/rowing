@@ -9,7 +9,7 @@ export class EntrainementsService {
     constructor( @InjectRepository(Entrainements) private readonly entrainementsRepository: Repository<Entrainements> ) { }
 
     async findAll(): Promise<Entrainements[]> {
-        return await this.entrainementsRepository.find({  relations: ['role', 'category', 'exercices', 'season', 'color'],
+        return await this.entrainementsRepository.find({  relations: ['role', 'category', 'exerciceDrill', 'exerciceCore','exerciceMuscu', 'season', 'color'],
             where: [{ deleteAt: null }],
         });
     }

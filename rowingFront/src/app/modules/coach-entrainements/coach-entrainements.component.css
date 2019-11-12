@@ -1,0 +1,75 @@
+/*table{*/
+/*  width: 100%;*/
+/*}*/
+
+/*table th{*/
+/*  width: 20%;*/
+/*}*/
+/*.actions{*/
+/*  display: flex;*/
+/*}*/
+.head{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+.head button{
+
+}
+
+.head div, .head button{
+  padding: 10px;
+}
+.desktop{
+  display: none;
+}
+
+.actions{
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-around;
+}
+
+.actions button{
+  width: 30px;
+}
+
+.mat-table{
+  width: 100%;
+}
+
+.mobile .mat-table th{
+  width: 25%;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .head {
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
+
+  .mobile{
+    display: none;
+  }
+
+  .desktop{
+    display: block;
+  }
+  .desktop .mat-table th{
+    width: 16%;
+  }
+
+  .desktop .mat-table,  th.mat-header-cell{
+    text-align: center;
+  }
+
+  .actions{
+    flex-direction: row;
+    height: auto;
+  }
+}

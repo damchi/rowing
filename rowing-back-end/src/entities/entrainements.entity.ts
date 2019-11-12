@@ -16,7 +16,7 @@ export class Entrainements extends HistoriqueEntity {
     category: Categories[];
 
     @Column()
-    distance: string;
+    entrainement: string;
 
     @Column({nullable: true})
     strokesStart: number;
@@ -51,7 +51,16 @@ export class Entrainements extends HistoriqueEntity {
     @ManyToOne(type => Roles, role => role.entrainements)
     role: Roles;
 
-    @ManyToMany( () => Exercices )
+    @ManyToMany( () => Exercices, {cascade: true} )
     @JoinTable()
-    exercices: Exercices[];
+    exerciceDrill: Exercices[];
+
+    @ManyToMany( () => Exercices, {cascade: true} )
+    @JoinTable()
+    exerciceCore: Exercices[];
+
+    @ManyToMany( () => Exercices, {cascade: true} )
+    @JoinTable()
+    exerciceMuscu: Exercices[];
+
 }

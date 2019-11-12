@@ -4,77 +4,72 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatSelectModule} from '@angular/material';
-import { CoachEntrainementsComponent } from './pages/coach-entrainements/coach-entrainements.component';
 import {CoachComponent} from './pages/coach/coach.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { CoachPlanningComponent } from './pages/coach-planning/coach-planning.component';
+import { CoachPlanningComponent } from './modules/coach-planning/coach-planning.component';
 import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import { CoachCategoriesComponent } from './pages/coach-categories/coach-categories.component';
 import { CoachMenuComponent } from './components/coach-menu/coach-menu.component';
 import { PopupNewTrainingComponent } from './components/popup-new-training/popup-new-training.component';
 import {MatRadioModule} from '@angular/material/radio';
-import { CoachExerciceComponent } from './pages/coach-exercice/coach-exercice.component';
+import { CoachExerciceComponent } from './modules/coach-exercice/coach-exercice.component';
 import { PopupNewExerciceComponent } from './components/popup-new-exercice/popup-new-exercice.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { DragAndDropModule } from 'angular-draggable-droppable';
-import { CalendarComponent } from './components/calendar/calendar.component';
+import { CalendarComponent } from './modules/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {PopupCalendarTrainingComponent} from './components/popup-calendar-training/popup-calendar-training.component';
+import { PopupNewTypeExerciceComponent } from './components/popup-new-type-exercice/popup-new-type-exercice.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoachEntrainementsComponent,
-    CoachComponent,
-    CoachPlanningComponent,
-    CoachCategoriesComponent,
-    CoachMenuComponent,
-    PopupNewTrainingComponent,
-    CoachExerciceComponent,
-    PopupNewExerciceComponent,
+    // CoachPlanningComponent,
+    // CoachExerciceComponent,
+    // PopupNewExerciceComponent,
     ConfirmDialogComponent,
-    CalendarComponent,
-    CalendarHeaderComponent,
-
+    // CalendarComponent,
+    // CalendarHeaderComponent,
+    PopupCalendarTrainingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatInputModule,
-    MatMenuModule,
-    MatTableModule,
+
+    // MatFormFieldModule,
+    // MatSelectModule,
+    // MatInputModule,
+    // MatTableModule,
+    // MatButtonModule,
+    // MatMenuModule,
     HttpClientModule,
     MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatRadioModule,
+    // FormsModule,
+    // ReactiveFormsModule,
+    // MatRadioModule,
     MatSnackBarModule,
+
     DragAndDropModule,
     CommonModule,
-    NgbModalModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
+    // NgbModalModule,
+    // CalendarModule.forRoot({
+    //   provide: DateAdapter,
+    //   useFactory: adapterFactory
+    // }),
   ],
   entryComponents: [
-    PopupNewTrainingComponent,
-    PopupNewExerciceComponent,
+    // PopupNewExerciceComponent,
     ConfirmDialogComponent],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [CalendarComponent
-  ],
+  // exports: [CalendarComponent],
 })
 export class AppModule { }

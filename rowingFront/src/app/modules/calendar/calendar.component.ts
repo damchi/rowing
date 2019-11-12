@@ -28,13 +28,12 @@ import {
   CalendarView,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import {Entrainements} from '../../domaines/entrainements';
-import { map } from 'rxjs/operators';
 import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
 import {ServiceService} from '../../services/service.service';
+import {MatDialog} from '@angular/material';
+import {PopupCalendarTrainingComponent} from '../../components/popup-calendar-training/popup-calendar-training.component';
 
 @Component({
   selector: 'app-calendar',
@@ -79,7 +78,7 @@ export class CalendarComponent implements  OnChanges, OnInit {
       }
     }
   ];
-  constructor(private modal: NgbModal, private service: CalendarService, private alertService: ServiceService) {}
+  constructor(private modal: NgbModal, private service: CalendarService,  public dialog: MatDialog, private alertService: ServiceService) {}
 
   ngOnChanges() {
   }
@@ -178,8 +177,21 @@ export class CalendarComponent implements  OnChanges, OnInit {
   }
 
   eventClicked(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    // this.modalData = { event, action };
+    // this.modal.open(this.modalContent, { size: 'lg' });
+
+    const dialogPop = this.dialog.open(PopupCalendarTrainingComponent, {
+      width: '750px',
+      data: { training: event, actions: action  }
+
+    });
+
+    dialogPop.afterClosed().subscribe(result => {
+      if (result) {
+        this.save(result.exercice);
+      }
+    });
+
   }
 
   save(event: EntrainementsPlanning) {

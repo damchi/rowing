@@ -1,5 +1,5 @@
 <h1 mat-dialog-title> {{data.training.id ? 'Modifier l\'entrainement' : 'Nouvel entrainenment'}}</h1>
-<div mat-dialog-content></div>
+<div mat-dialog-content>
 <form [formGroup]="trainForm">
 
   <mat-form-field>
@@ -11,7 +11,7 @@
     </mat-error>
   </mat-form-field>
 
-    <mat-form-field>
+  <mat-form-field>
       <mat-label>Categories des membres</mat-label>
       <mat-select formControlName="role">
         <mat-option *ngFor="let role of roles" [value]="role.id">{{role.name}}</mat-option>
@@ -22,9 +22,8 @@
         </mat-error>
       </mat-error>
     </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Categorie de l'entrainement</mat-label>
+  <mat-form-field>
+      <mat-label>Categories de l'entrainement</mat-label>
       <mat-select formControlName="categorie" multiple>
         <mat-option *ngFor="let categorie of categories" [value]="categorie">{{categorie.name}}</mat-option>
       </mat-select>
@@ -35,7 +34,7 @@
       </mat-error>
     </mat-form-field>
 
-  <h3>Warm Up</h3>
+  <h5>Warm Up</h5>
   <mat-form-field>
     <textarea  matInput placeholder="WarmUp" formControlName="warmUp"></textarea>
     <mat-error *ngFor="let validation of errorMessages.warmUp">
@@ -48,7 +47,7 @@
   <mat-form-field>
       <mat-label>Saison</mat-label>
       <mat-select formControlName="season" (selectionChange)="changeSeason($event)">
-        <mat-option *ngFor="let season of season" [value]="season">{{season.name}}</mat-option>
+        <mat-option *ngFor="let season of season" [value]="season.id">{{season.name}}</mat-option>
       </mat-select>
     <mat-error *ngFor="let validation of errorMessages.season">
       <mat-error class="error-message" *ngIf="trainForm.get('season').hasError(validation.type) &&
@@ -59,27 +58,7 @@
 
   <div class="input-container">
     <div *ngIf="seasonCurrent == 1 ">
-      <h3>Entrainenment d'été</h3>
-
-
-
-      <mat-form-field>
-        <input type="text" matInput placeholder="Ex: 4 x 2000m " formControlName="distance" required>
-        <mat-error *ngFor="let validation of errorMessages.distance">
-          <mat-error class="error-message" *ngIf="trainForm.get('distance').hasError(validation.type) &&
-          (trainForm.get('distance').dirty || trainForm.get('distance').touched)">{{validation.message}}
-          </mat-error>
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input type="text" matInput placeholder="Strokes rate" formControlName="cadence" required>
-        <mat-error *ngFor="let validation of errorMessages.cadence">
-          <mat-error class="error-message" *ngIf="trainForm.get('cadence').hasError(validation.type) &&
-          (trainForm.get('cadence').dirty || trainForm.get('cadence').touched)">{{validation.message}}
-          </mat-error>
-        </mat-error>
-      </mat-form-field>
+      <h5>Entrainenment d'été</h5>
 
       <mat-form-field>
         <input type="number" matInput placeholder="Nombre strokes start" formControlName="strokesStart">
@@ -87,33 +66,72 @@
 
       <mat-form-field>
         <mat-label>Exercice de l'entrainement</mat-label>
-        <mat-select formControlName="exercice" multiple>
+        <mat-select formControlName="exerciceDrill" multiple>
             <mat-option  *ngFor="let exercice of exercicesDrill" [value]="exercice"> {{exercice.name}}
             </mat-option>
         </mat-select>
       </mat-form-field>
 
-
-      <mat-form-field>
-        <textarea  matInput placeholder="Repos" formControlName="rest" required></textarea>
-        <mat-error *ngFor="let validation of errorMessages.rest">
-          <mat-error class="error-message" *ngIf="trainForm.get('rest').hasError(validation.type) &&
-          (trainForm.get('rest').dirty || trainForm.get('rest').touched)">{{validation.message}}
-          </mat-error>
-        </mat-error>
-      </mat-form-field>
-
     </div>
     <div *ngIf="seasonCurrent == 2">
-      <h3>Entrainenment d'hiver</h3>
+      <h5>Entrainenment d'hiver</h5>
+      <h6>Muscu / corps</h6>
 
+      <mat-form-field>
+        <mat-label>Exercice de musculation</mat-label>
+        <mat-select formControlName="exerciceMuscu" multiple>
+          <mat-option  *ngFor="let exerciceMuscu of exercicesMuscu" [value]="exerciceMuscu"> {{exerciceMuscu.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngFor="let validation of errorMessages.exerciceMuscu">
+          <mat-error class="error-message" *ngIf="trainForm.get('exerciceMuscu').hasError(validation.type) &&
+          (trainForm.get('exerciceMuscu').dirty || trainForm.get('exerciceMuscu').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
 
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Exercice de corps</mat-label>
+        <mat-select formControlName="exerciceCore" multiple>
+          <mat-option  *ngFor="let exerciceCore of exercicesCore" [value]="exerciceCore"> {{exerciceCore.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
 
   <mat-form-field>
+    <input type="text" matInput placeholder="Ex: 4 x 2000m " formControlName="entrainement" required>
+    <mat-error *ngFor="let validation of errorMessages.entrainement">
+      <mat-error class="error-message" *ngIf="trainForm.get('entrainement').hasError(validation.type) &&
+          (trainForm.get('entrainement').dirty || trainForm.get('entrainement').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="Strokes rate" formControlName="cadence" required>
+    <mat-error *ngFor="let validation of errorMessages.cadence">
+      <mat-error class="error-message" *ngIf="trainForm.get('cadence').hasError(validation.type) &&
+          (trainForm.get('cadence').dirty || trainForm.get('cadence').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea  matInput placeholder="Repos" formControlName="rest" required></textarea>
+    <mat-error *ngFor="let validation of errorMessages.rest">
+      <mat-error class="error-message" *ngIf="trainForm.get('rest').hasError(validation.type) &&
+          (trainForm.get('rest').dirty || trainForm.get('rest').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
     <textarea  matInput placeholder="Commentaires" formControlName="comments" ></textarea>
   </mat-form-field>
+
   <mat-form-field>
     <input type="color" matInput placeholder="Couleur" formControlName="color">
     <mat-error *ngFor="let validation of errorMessages.color">
@@ -128,3 +146,4 @@
     </button>
   </div>
 </form>
+</div>

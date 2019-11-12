@@ -1,0 +1,24 @@
+<h1 mat-dialog-title> {{data.type.id ? 'Modifier la catégorie' : 'Nouvelle catégorie'}}</h1>
+<div mat-dialog-content>
+<form [formGroup]="typeExerciceForm">
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="Nom catégorie exercice" formControlName="name" required>
+    <mat-error *ngFor="let validation of errorMessages.name">
+      <mat-error class="error-message" *ngIf="typeExerciceForm.get('name').hasError(validation.type) &&
+          (typeExerciceForm.get('name').dirty || typeExerciceForm.get('name').touched)">{{validation.message}}
+      </mat-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea type="number" matInput placeholder="Description" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="close()">Annuler</button>
+    <button mat-button color="primary" mat-raised-button (click)="create()">{{data.type.id ? 'Modifier' : 'Créer'}}
+    </button>
+  </div>
+</form>
+</div>

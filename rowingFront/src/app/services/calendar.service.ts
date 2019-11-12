@@ -3,9 +3,8 @@ import {ServiceService} from './service.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {EntrainementsPlanning} from '../domaines/entrainements-planning';
-import {Entrainements} from '../domaines/entrainements';
 
 @Injectable({
   providedIn: 'root'

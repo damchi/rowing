@@ -7,6 +7,9 @@ export class TypeExercices extends HistoriqueEntity {
     @Column()
     name: string;
 
+    @Column({nullable: true})
+    description: string;
+
     @OneToMany(type => Exercices, exercices => exercices.id)
     exercices: Exercices[];
 

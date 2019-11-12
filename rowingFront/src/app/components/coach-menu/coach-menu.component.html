@@ -1,19 +1,24 @@
-<button mat-button [matMenuTriggerFor]="belowMenuEnt">Entrainement</button>
-<mat-menu #belowMenuEnt="matMenu" yPosition="below">
-  <button routerLink="/coach/entrainement" mat-menu-item>Créer un entrainement</button>
-  <button routerLink="/coach/exercice" mat-menu-item>Créer un exercice</button>
-  <button routerLink="/coach/plannig"  mat-menu-item>Planning entrainement</button>
-</mat-menu>
+<nav>
+  <button mat-button [matMenuTriggerFor]="belowMenuEnt">Entrainement</button>
+  <mat-menu #belowMenuEnt="matMenu" yPosition="below">
+    <button routerLink="/coach/entrainement" mat-menu-item>Créer un entrainement</button>
+    <button routerLink="/coach/exercice" mat-menu-item>Créer un exercice</button>
+    <button routerLink="/coach/plannig"  mat-menu-item>Planning entrainement</button>
+<!--    <button routerLink="/coach/typeExercice"  mat-menu-item>Catégorie excercice</button>-->
+  </mat-menu>
 
-<button mat-button [matMenuTriggerFor]="belowMenuMembres">Membres</button>
-<mat-menu #belowMenuMembres="matMenu" yPosition="below">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
+  <button mat-button [matMenuTriggerFor]="belowMenuMembres">Membres</button>
+  <mat-menu #belowMenuMembres="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
 
-<button mat-button [matMenuTriggerFor]="belowMenuGestion">Gestion</button>
-<mat-menu #belowMenuGestion="matMenu" yPosition="below">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
+  <button mat-button [matMenuTriggerFor]="belowMenuGestion">Gestion</button>
+  <mat-menu #belowMenuGestion="matMenu" yPosition="below">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
 
+
+
+</nav>
