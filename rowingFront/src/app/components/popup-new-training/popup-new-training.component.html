@@ -2,6 +2,51 @@
 <div mat-dialog-content>
 <form [formGroup]="trainForm">
 
+  <div *ngIf="data.calendar">
+      <mat-form-field>
+        <label>Date  début</label>
+        <input matInput [matDatepicker]="picker"  formControlName="dateStart" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngFor="let validation of errorMessages.dateStart">
+          <mat-error class="error-message" *ngIf="trainForm.get('dateStart').hasError(validation.type) &&
+            (trainForm.get('dateStart').dirty || trainForm.get('dateStart').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+     <mat-form-field>
+        <label>Date  fin</label>
+        <input matInput [matDatepicker]="pickerEnd"  formControlName="dateEnd" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+        <mat-error *ngFor="let validation of errorMessages.dateStart">
+          <mat-error class="error-message" *ngIf="trainForm.get('dateEnd').hasError(validation.type) &&
+            (trainForm.get('dateEnd').dirty || trainForm.get('dateEnd').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <label>Heure début</label>
+        <input matInput type="time" min="05:00" max="23:00" formControlName="timeStart" required>
+        <mat-error *ngFor="let validation of errorMessages.dateStart">
+          <mat-error class="error-message" *ngIf="trainForm.get('timeStart').hasError(validation.type) &&
+            (trainForm.get('timeStart').dirty || trainForm.get('timeStart').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <label>Heure fin</label>
+        <input matInput type="time" min="05:00" max="23:00" formControlName="timeEnd" required>
+        <mat-error *ngFor="let validation of errorMessages.dateStart">
+          <mat-error class="error-message" *ngIf="trainForm.get('timeEnd').hasError(validation.type) &&
+            (trainForm.get('timeEnd').dirty || trainForm.get('timeEnd').touched)">{{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+  </div>
   <mat-form-field>
     <input type="text" matInput placeholder="Nom de l'entrainement" formControlName="title" required>
     <mat-error *ngFor="let validation of errorMessages.title">

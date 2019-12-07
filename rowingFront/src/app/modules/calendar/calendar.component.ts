@@ -1,13 +1,4 @@
-// import {
-//   startOfDay,
-//   endOfDay,
-//   subDays,
-//   addDays,
-//   endOfMonth,
-//   isSameDay,
-//   isSameMonth,
-//   addHours
-// } from 'date-fns';
+
 import {
   isSameMonth,
   isSameDay,
@@ -21,25 +12,28 @@ import {
 } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarService} from '../../services/calendar.service';
-import {Component, ChangeDetectionStrategy, OnChanges, Input, ViewChild, TemplateRef, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnChanges, Input, ViewChild, TemplateRef, OnInit} from '@angular/core';
 import {
   CalendarEvent,
-  CalendarEventAction,
-  CalendarView,
-  CalendarEventTimesChangedEvent
+  CalendarEventAction, collapseAnimation,
 } from 'angular-calendar';
 import {Subject} from 'rxjs';
 import {Entrainements} from '../../domaines/entrainements';
 import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
 import {ServiceService} from '../../services/service.service';
-import {MatDialog} from '@angular/material';
+import {MatDatepickerModule, MatDialog, MatNativeDateModule} from '@angular/material';
 import {PopupCalendarTrainingComponent} from '../../components/popup-calendar-training/popup-calendar-training.component';
+import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
+import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
+import {Color} from '../../domaines/color';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [collapseAnimation],
+  providers: [MatNativeDateModule, MatDatepickerModule]
+
 })
 
 
@@ -49,8 +43,8 @@ export class CalendarComponent implements  OnChanges, OnInit {
   refresh: Subject<any> = new Subject();
   view: string;
   viewDate: Date = new Date();
-  events: EntrainementsPlanning[] ;
-  // events: CalendarEvent[] ;
+  events: EntrainementsPlanning[];
+  event: EntrainementsPlanning;
   activeDayIsOpen: boolean ;
 
   e: EntrainementsPlanning;
@@ -60,31 +54,12 @@ export class CalendarComponent implements  OnChanges, OnInit {
     event: CalendarEvent;
   };
 
-
-
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.eventClicked('Edited', event);
-      }
-    },
-    {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.eventClicked('Deleted', event);
-      }
-    }
-  ];
   constructor(private modal: NgbModal, private service: CalendarService,  public dialog: MatDialog, private alertService: ServiceService) {}
 
   ngOnChanges() {
   }
 
   ngOnInit() {
-    // this. events = [];
     this.view = 'month';
     this.activeDayIsOpen = false;
     this.getAll();
@@ -104,7 +79,6 @@ export class CalendarComponent implements  OnChanges, OnInit {
         events.length === 0
       ) {
         this.activeDayIsOpen = false;
-        // console.log(this.events);
       } else {
         this.activeDayIsOpen = true;
         this.viewDate = date;
@@ -118,30 +92,34 @@ export class CalendarComponent implements  OnChanges, OnInit {
                  newEnd,
                  allDay
                }: any) {
-
-    // let e = new EntrainementsPlanning();
-    // let eventsIndex;
-
     if (typeof allDay !== 'undefined') {
       event.allDay = allDay;
     }
 
     if (event.end == null) {
-      newStart.setHours(newStart.getHours() - 1 );
-      newEnd = new Date(newStart);
-      newEnd.setHours(newEnd.getHours() + 2 );
+
+      newStart = new Date(newStart);
+      newStart.setHours(18, 0, 0);
+      newEnd = newStart;
+      newEnd.setHours(20, 0, 0);
 
       this.e = {
         start: newStart,
         end: newEnd,
+        dayStart: newStart ,
+        dayEnd: newEnd,
         training: event,
         title: event.title,
         draggable: event.draggable,
       };
 
     } else {
+
+
       this.e = {
         id: event.id,
+        dayStart: newStart,
+        dayEnd: newEnd,
         start: newStart,
         end: newEnd,
         title: event.title,
@@ -157,7 +135,6 @@ export class CalendarComponent implements  OnChanges, OnInit {
   getAll() {
     this.service.getAll().subscribe(
       (trainingCalendar: EntrainementsPlanning[]) => {
-        // this.events = trainingCalendar;
         this.events = [];
         for (const calendar in trainingCalendar) {
           this.events.push({
@@ -167,7 +144,6 @@ export class CalendarComponent implements  OnChanges, OnInit {
             title: trainingCalendar[calendar].title,
             color: trainingCalendar[calendar].training.color,
             id: trainingCalendar[calendar].id,
-            actions: this.actions,
             training: trainingCalendar[calendar].training,
           });
         }
@@ -176,13 +152,11 @@ export class CalendarComponent implements  OnChanges, OnInit {
 
   }
 
-  eventClicked(action: string, event: CalendarEvent): void {
-    // this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
+  eventClicked(action: string, event: EntrainementsPlanning): void {
 
-    const dialogPop = this.dialog.open(PopupCalendarTrainingComponent, {
+    const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
       width: '750px',
-      data: { training: event, actions: action  }
+      data: { training: event.training, colors: Color, calendar: true, eventStart: event.start, eventEnd: event.end}
 
     });
 
@@ -218,10 +192,50 @@ export class CalendarComponent implements  OnChanges, OnInit {
 
 
   externalDrop(event: EntrainementsPlanning) {
-  // externalDrop(event: CalendarEvent) {
     if (this.events.indexOf(event) === -1) {
       this.events = this.events.filter(iEvent => iEvent !== event);
       this.events.push(event);
     }
+  }
+
+
+  deleteTrainingCalendar(event: EntrainementsPlanning) {
+    this.event = event;
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Suppression',
+        message: 'Êtes-vous sûr de vouloir supprimer cet entrainement du calendrier?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.doDelete();
+      }
+    });
+  }
+
+  doDelete() {
+    this.service.delete(this.event.id, this.event).subscribe(() => {
+        this.getAll();
+      },
+      error => {
+        this.alertService.error(error);
+      });
+  }
+
+
+  displayTrainingCalendar(event: EntrainementsPlanning) {
+    const dialogPop = this.dialog.open(PopupCalendarTrainingComponent, {
+      width: '750px',
+      data: { training: event}
+    });
+
+    dialogPop.afterClosed().subscribe(result => {
+      if (result) {
+        this.save(result.training);
+      }
+    });
   }
 }

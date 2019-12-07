@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MarkAsTouch} from '../../utils/mark-as-touch';
+import {MarkAsTouch} from '../../../utils/mark-as-touch';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {PopupNewTrainingService} from '../../services/popup-new-training.service';
-import {StuctureError} from '../../utils/stucture-error';
+import {StuctureError} from '../../../utils/stucture-error';
 import {Exercice} from '../../domaines/exercice';
 import {TypeExercice} from '../../domaines/type-exercice';
 import {TypeExerciceService} from '../../services/type-exercice.service';

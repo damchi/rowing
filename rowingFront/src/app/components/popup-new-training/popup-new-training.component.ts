@@ -1,14 +1,13 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef, MatRadioChange, MatSelectChange} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSelectChange} from '@angular/material';
 import {PopupNewTrainingService} from '../../services/popup-new-training.service';
-import {CoachTypeExerciceService} from '../../services/coach-type-exercice.service';
 import {Categories} from '../../domaines/categories';
 import {Entrainements} from '../../domaines/entrainements';
-import {StuctureError} from '../../utils/stucture-error';
+import {StuctureError} from '../../../utils/stucture-error';
 import {Roles} from '../../domaines/roles';
 import {RolesService} from '../../services/roles.service';
-import {MarkAsTouch} from '../../utils/mark-as-touch';
+import {MarkAsTouch} from '../../../utils/mark-as-touch';
 import {Exercice} from '../../domaines/exercice';
 import {CoachExerciceService} from '../../services/coach-exercice.service';
 import {SeasonService} from '../../services/season.service';
@@ -16,6 +15,7 @@ import {Season} from '../../domaines/season';
 import {ColorService} from '../../services/color.service';
 import {Color} from '../../domaines/color';
 import {CoachEntrainementsCategoriesService} from '../../services/coach-entrainements-categories.service';
+import {Util} from '../../../utils/util';
 
 export class ErrorMessages  {
   title: StuctureError[];
@@ -29,11 +29,18 @@ export class ErrorMessages  {
   color: StuctureError[];
   exerciceMuscu: StuctureError[];
   exerciceCore: StuctureError[];
+  dateStart: StuctureError[];
+  dateEnd: StuctureError[];
+  timeStart: StuctureError[];
+  timeEnd: StuctureError[];
 }
 
 export class PopupEntrainement  {
   training: Entrainements;
   colors: Color;
+  calendar: boolean;
+  eventStart: Date;
+  eventEnd: Date;
 }
 
 @Component({
@@ -53,11 +60,13 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public roles: Roles[];
   public exercicesDrill: Exercice[];
   public exercicesMuscu: Exercice[];
-  // public exercicesErgo: Exercice[];
   public exercicesCore: Exercice[];
+  public exercices: Exercice[];
   public season: Season[];
   public seasonCurrent: number;
   public color: Color[];
+  public timeEnd: string;
+  public timeStart: string;
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
               public data: PopupEntrainement,
@@ -90,7 +99,17 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       color: new FormControl( this.data.training.color, [Validators.required]),
       cadence: new FormControl( this.data.training.cadence, [Validators.required]),
       entrainement: new FormControl( this.data.training.entrainement, [Validators.required]),
-  });
+    });
+
+    if (this.data.eventStart) {
+      this.timeStart = this.data.eventStart ? Util.getTimeString(this.data.eventStart) : '';
+      this.timeEnd = this.data.eventEnd ? Util.getTimeString(this.data.eventEnd) : '';
+
+      this.trainForm.addControl('dateStart', new FormControl( this.data.eventStart, [Validators.required]));
+      this.trainForm.addControl('dateEnd', new FormControl( this.data.eventEnd, [Validators.required]));
+      this.trainForm.addControl('timeStart', new FormControl( this.timeStart, [Validators.required]));
+      this.trainForm.addControl('timeEnd', new FormControl( this.timeEnd, [Validators.required]));
+    }
 
 
     this.errorMessages = {
@@ -126,6 +145,18 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       ],
       entrainement: [
         {type: 'required', message: 'L\' entrainement est requis'}
+      ],
+      dateStart: [
+        {type: 'required', message: 'La date de début l\'entrainement est requise'}
+      ],
+      dateEnd: [
+        {type: 'required', message: 'La date de fin l\'entrainement est requise'}
+      ],
+      timeStart: [
+        {type: 'required', message: 'L\'heure de début l\'entrainement est requise'}
+      ],
+      timeEnd: [
+        {type: 'required', message: 'L\'heure de fin l\'entrainement est requise'}
       ]
     };
 
@@ -150,24 +181,29 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
   getExercices() {
     this.serviceExercice.getAll().subscribe( (exercices: Exercice[]) => {
-    this.exercicesDrill = exercices.filter( e => e.typeExercices.id === 1);
-    this.exercicesMuscu = exercices.filter( e => e.typeExercices.id === 2);
-    this.exercicesCore = exercices.filter( e => e.typeExercices.id === 3);
+      this.exercicesDrill = exercices.filter( e => e.typeExercices.id === 1);
+      this.exercicesMuscu = exercices.filter( e => e.typeExercices.id === 2);
+      this.exercicesCore = exercices.filter( e => e.typeExercices.id === 3);
       // this.exercicesErgo = exercices.filter( e => e.typeExercices.id === 4);
 
-    if (this.data.training.exerciceDrill && this.data.training.exerciceDrill.length > 0) {
-      const idExerciceDrill = this.data.training.exerciceDrill.map(e => e.id);
-      this.trainForm.get('exerciceDrill').patchValue( this.exercicesDrill.filter( e => idExerciceDrill.indexOf(e.id) !== -1));
-    }
-    if (this.data.training.exerciceMuscu && this.data.training.exerciceMuscu.length > 0) {
-      const idExerciceMuscu = this.data.training.exerciceMuscu.map(e => e.id);
-      this.trainForm.get('exerciceMuscu').patchValue( this.exercicesMuscu.filter( e => idExerciceMuscu.indexOf(e.id) !== -1));
-    }
-    if (this.data.training.exerciceCore && this.data.training.exerciceCore.length > 0) {
-      const idExerciceCore = this.data.training.exerciceCore.map(e => e.id);
-      this.trainForm.get('exerciceCore').patchValue( this.exercicesCore.filter( e => idExerciceCore.indexOf(e.id) !== -1));
-    }
-});
+      if (this.data.training.exercices)   {
+        for (let i = 0; i < this.data.training.exercices.length; i++) {
+          if (this.data.training.exercices[i].typeExercices.id === 1 && this.data.training.exercices.length > 0) {
+            const idExerciceDrill = this.data.training.exercices.map(e => e.id);
+            this.trainForm.get('exerciceDrill').patchValue( this.exercicesDrill.filter( e => idExerciceDrill.indexOf(e.id) !== -1));
+          }
+
+          if (this.data.training.exercices[i].typeExercices.id === 2 && this.data.training.exercices.length > 0) {
+              const idExerciceMuscu = this.data.training.exercices.map(e => e.id);
+              this.trainForm.get('exerciceMuscu').patchValue( this.exercicesMuscu.filter( e => idExerciceMuscu.indexOf(e.id) !== -1));
+            }
+          if (this.data.training.exercices[i].typeExercices.id === 3 && this.data.training.exercices.length > 0) {
+            const idExerciceCore = this.data.training.exercices.map(e => e.id);
+            this.trainForm.get('exerciceCore').patchValue( this.exercicesCore.filter( e => idExerciceCore.indexOf(e.id) !== -1));
+          }
+        }
+      }
+    });
   }
 
   getCategoriesMembres() {
@@ -206,15 +242,27 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   changeSeason(event: MatSelectChange) {
     if (this.seasonCurrent && this.seasonCurrent === 1) {
       this.trainForm.removeControl('strokesStart');
-      this.trainForm.removeControl('exerciceDrill');
       this.data.training.strokesStart = null;
-      this.data.training.exerciceDrill = null;
+      // for (let i = 0; i < this.data.training.exercices.length; i++) {
+      //   if (this.data.training.exercices[i].typeExercices.id === 1) {
+      this.trainForm.removeControl('exerciceDrill');
+      this.exercicesDrill = null;
+        // }
+      // }
     }
+
     if (this.seasonCurrent && this.seasonCurrent === 2) {
-      this.trainForm.removeControl('exerciceMuscu');
-      this.trainForm.removeControl('exerciceCore');
-      this.data.training.exerciceMuscu = null;
-      this.data.training.exerciceCore = null;
+      // for (let i = 0; i < this.data.training.exercices.length; i++) {
+      //   if (this.data.training.exercices[i].typeExercices.id === 2) {
+          this.trainForm.removeControl('exerciceMuscu');
+          this.trainForm.removeControl('exerciceCore');
+          this.exercicesMuscu = null;
+          this.exercicesCore = null;
+        // }
+      // }
+      // this.trainForm.removeControl('exerciceMuscu');
+      // this.trainForm.removeControl('exerciceCore');
+
     }
     this.seasonCurrent = event.value;
     this.addControl();
@@ -223,16 +271,19 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   addControl() {
     if (this.seasonCurrent === 1 || ( this.data.training.season && this.data.training.season.id === 1)) {
       this.trainForm.addControl('strokesStart', new FormControl( this.data.training.strokesStart));
-      this.trainForm.addControl('exerciceDrill', new FormControl( this.data.training.exerciceDrill));
+
+      // this.trainForm.addControl('exerciceDrill', new FormControl( this.data.training.exercices.find( e => e.typeExercices.id === 1)));
+      this.trainForm.addControl('exerciceDrill', new FormControl());
     }
 
     if (this.seasonCurrent === 2 || ( this.data.training.season && this.data.training.season.id === 2)) {
-      this.trainForm.addControl('exerciceMuscu', new FormControl( this.data.training.exerciceMuscu));
-      this.trainForm.addControl('exerciceCore', new FormControl( this.data.training.exerciceCore));
+        this.trainForm.addControl('exerciceMuscu', new FormControl( ));
+        this.trainForm.addControl('exerciceCore', new FormControl( ));
     }
   }
 
   create() {
+
     if (this.trainForm.valid) {
       const t = this.trainForm.value;
       const e = new Entrainements();
@@ -246,9 +297,6 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       e.warmUp = t.warmUp;
       e.cadence = t.cadence;
       e.entrainement = t.entrainement;
-
-
-
       if (t.color.id === undefined) {
         const c = new Color();
         c.id = this.data.colors.id;
@@ -261,18 +309,22 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
       if (t.season === 1) {
         e.strokesStart = t.strokesStart;
-        e.exerciceDrill = t.exerciceDrill;
-        e.exerciceMuscu = null;
-        e.exerciceCore = null;
+        // e.exerciceDrill = t.exerciceDrill;
+        t.exerciceMuscu = null;
+        t.exerciceCore = null;
+        e.exercices = [...t.exerciceDrill];
+
 
       }
-
       if (t.season === 2) {
-        e.exerciceMuscu = t.exerciceMuscu;
-        e.exerciceCore = t.exerciceCore;
+        // e.exerciceMuscu = t.exerciceMuscu;
+        // e.exerciceCore = t.exerciceCore;
         e.strokesStart = null;
-        e.exerciceDrill = null;
+        t.exerciceDrill = null;
+        e.exercices = [...t.exerciceCore, ...t.exerciceMuscu];
+
       }
+
       this.dialogPop.close({training: e});
     } else {
       this.markAsTouched(this.trainForm);

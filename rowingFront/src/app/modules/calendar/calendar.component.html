@@ -8,15 +8,8 @@
     >
 
       <div class="card-body">
-<!--        <p *ngIf="externalEvents.length === 0"><em>No events added</em></p>       -->
         <p *ngIf="trainings.length === 0"><em>No events added</em></p>
         <ul>
-<!--          <li-->
-<!--            *ngFor="let event of externalEvents"-->
-<!--            mwlDraggable-->
-<!--            [dropData]="{event: event}"-->
-<!--            dragActiveClass="drag-active"-->
-<!--          >-->
           <li
             *ngFor="let event of trainings"
             mwlDraggable
@@ -59,6 +52,7 @@
         (dayClicked)="dayClicked($event.day)"
         (eventClicked)="eventClicked('Clicked', $event.event)"
         (eventTimesChanged)="eventDropped($event)"
+        [openDayEventsTemplate]="customActionTemplate"
       >
       </mwl-calendar-month-view>
       <mwl-calendar-week-view
@@ -101,3 +95,47 @@
       </button>
     </div>
   </ng-template>
+
+
+
+  <ng-template
+    #customActionTemplate
+    let-events="events"
+    let-eventClicked="eventClicked"
+    let-isOpen="isOpen">
+    <div class="cal-open-day-events" [@collapse] *ngIf="isOpen">
+      <div
+        *ngFor="let event of events;"
+        [ngClass]="event?.cssClass"
+        mwlDraggable
+        [class.cal-draggable]="event.draggable"
+        dragActiveClass="cal-drag-active"
+        [dropData]="{event: event}"
+        [dragAxis]="{x: event.draggable, y: event.draggable}">
+<!--          <span-->
+<!--            class="cal-event"-->
+<!--            [style.backgroundColor]="event.color?.primary">-->
+<!--          </span>-->
+<!--        <mwl-calendar-event-title-->
+<!--          [event]="event"-->
+<!--          view="month"-->
+<!--          (mwlClick)="eventClicked.emit({event: event})">-->
+<!--        </mwl-calendar-event-title>-->
+<!--        <mwl-calendar-event-actions-->
+<!--          [event]="event">-->
+<!--        </mwl-calendar-event-actions>-->
+
+        <div>
+          <span
+            class="cal-event"
+            [style.backgroundColor]="event.color?.primary">
+          </span>
+          <p>{{event.title}}</p>
+          <i (click)="displayTrainingCalendar(event)" class="fa fa-fw fa-pencil"></i>
+          <i (click)="deleteTrainingCalendar(event)" class="fa fa-fw fa-times"></i>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+

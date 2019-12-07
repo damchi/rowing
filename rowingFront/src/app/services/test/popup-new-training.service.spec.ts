@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PopupNewTrainingService } from './popup-new-training.service';
+import { PopupNewTrainingService } from '../popup-new-training.service';
 
 describe('PopupNewTrainingService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TypeExerciceService } from './type-exercice.service';
+import { TypeExerciceService } from '../type-exercice.service';
 
 describe('TypeExerciceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

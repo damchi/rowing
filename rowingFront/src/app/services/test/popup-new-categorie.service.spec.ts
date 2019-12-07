@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PopupNewCategorieService } from './popup-new-categorie.service';
+import { PopupNewCategorieService } from '../popup-new-categorie.service';
 
 describe('PopupNewCategorieService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
