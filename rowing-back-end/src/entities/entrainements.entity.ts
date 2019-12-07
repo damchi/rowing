@@ -8,59 +8,57 @@ import {Color} from './color.entity';
 
 @Entity()
 export class Entrainements extends HistoriqueEntity {
-    @Column()
-    title: string;
+    @Column({nullable: true})
+    cadence: string;
 
-    @ManyToMany( () => Categories )
+    @ManyToMany( () => Categories, {cascade: true, eager: true} )
     @JoinTable()
     category: Categories[];
 
-    @Column()
-    entrainement: string;
-
-    @Column({nullable: true})
-    strokesStart: number;
+    @ManyToOne(type => Color, color => color.primary, {cascade: true,  eager: true})
+    color: Color;
 
     @Column({nullable: true})
     comments: string;
 
-    @Column()
-    warmUp: string;
-
     @Column({nullable: true})
-    cadence: string;
+    draggable: boolean;
 
-    @ManyToOne(type => Season, season => season.name)
-    season: Season;
+    @Column()
+    entrainement: string;
+
+    @ManyToMany( () => Exercices, {cascade: true})
+    @JoinTable()
+    exercices: Exercices[];
+
+    // @ManyToMany( () => Exercices, {eager: true})
+    // @JoinTable()
+    // exerciceDrill: Exercices[];
+    //
+    // @ManyToMany( () => Exercices,)
+    // @JoinTable()
+    // exerciceCore: Exercices[];
+    //
+    // @ManyToMany( () => Exercices)
+    // @JoinTable()
+    // exerciceMuscu: Exercices[];
 
     @Column()
     rest: string;
 
-    @ManyToOne(type => Color, color => color.primary, {cascade: true})
-    color: Color;
-
-    @Column({nullable: true})
-    start: Date;
-
-    @Column({nullable: true})
-    end: Date;
-
-    @Column({nullable: true})
-    draggable: boolean;
-
-    @ManyToOne(type => Roles, role => role.entrainements)
+    @ManyToOne(type => Roles, role => role.entrainements, {cascade: true,  eager: true})
     role: Roles;
 
-    @ManyToMany( () => Exercices, {cascade: true} )
-    @JoinTable()
-    exerciceDrill: Exercices[];
+    @Column({nullable: true})
+    strokesStart: number;
 
-    @ManyToMany( () => Exercices, {cascade: true} )
-    @JoinTable()
-    exerciceCore: Exercices[];
+    @Column()
+    title: string;
 
-    @ManyToMany( () => Exercices, {cascade: true} )
-    @JoinTable()
-    exerciceMuscu: Exercices[];
+    @Column()
+    warmUp: string;
+
+    @ManyToOne(type => Season, season => season.name, {cascade: true,  eager: true})
+    season: Season;
 
 }

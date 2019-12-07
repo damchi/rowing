@@ -37,7 +37,10 @@ export class CoachEntrainementsComponent implements OnInit {
     const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
       width: '750px',
       data: { training: training || new Entrainements() ,
-        colors: Color || new Color() }
+        colors: Color || new Color(),
+        // calendar: false,
+        // eventDate: null
+      }
     });
 
     dialogPop.afterClosed().subscribe(result => {
@@ -49,15 +52,6 @@ export class CoachEntrainementsComponent implements OnInit {
   }
 
   save(training: Entrainements) {
-    // if (training.id) {
-    //   this.service.update(training.id, training).subscribe(
-    //     () => {
-    //       this.getAll();
-    //     },
-    //     error => {
-    //       this.alertService.error(error);
-    //     });
-    // } else {
     this.service.save(training).subscribe(
       () => {
         this.getAll();
@@ -65,7 +59,6 @@ export class CoachEntrainementsComponent implements OnInit {
       error => {
         this.alertService.error(error);
       });
-    // }
   }
 
 

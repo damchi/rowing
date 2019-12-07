@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
 import {EntrainementsPlanning} from '../domaines/entrainements-planning';
+import {Entrainements} from '../domaines/entrainements';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,13 @@ export class CalendarService extends ServiceService {
     return this.http.put(`${environment.apiUrl}/entrainementCalendar/${training.id}/update`, training, this.getOptions()).pipe(
       tap((train: EntrainementsPlanning) => console.log(`update trainning w/ id=${train.id}`)),
       catchError(this.handleError<EntrainementsPlanning>('update'))
+    );
+  }
+
+  delete(id: number, training: EntrainementsPlanning): Observable<Entrainements> {
+    return this.http.delete(`${environment.apiUrl}/entrainementCalendar/${training.id}/delete`, this.getOptions()).pipe(
+      tap((train: Entrainements) => console.log(`update trainning w/ id=${train.id}`)),
+      catchError(this.handleError<Entrainements>('delete'))
     );
   }
 }

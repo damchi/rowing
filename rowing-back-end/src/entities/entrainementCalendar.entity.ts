@@ -1,4 +1,4 @@
-import {Column, Entity, JoinTable, ManyToOne} from 'typeorm';
+import {Column, Entity, JoinTable, ManyToOne, Timestamp} from 'typeorm';
 import {HistoriqueEntity} from './historique.entity';
 import {Entrainements} from './entrainements.entity';
 import {ManyToMany} from 'typeorm/browser';
@@ -7,16 +7,17 @@ import {ManyToMany} from 'typeorm/browser';
 
 export class EntrainementCalendar extends HistoriqueEntity {
     @Column()
+    dayStart: Date;
+    @Column()
+    dayEnd: Date;
+    @Column()
     start: Date;
-    @Column({nullable: true})
+    @Column()
     end: Date;
     @Column()
     title: string;
-
-
-    @ManyToOne( type => Entrainements, training => training.id, {  cascade: true})
+    @ManyToOne( type => Entrainements, training => training.id, {cascade: true})
     training: Entrainements;
-
     @Column()
     draggable: boolean;
 }

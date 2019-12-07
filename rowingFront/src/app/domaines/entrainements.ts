@@ -4,31 +4,36 @@ import {Roles} from './roles';
 import {Season} from './season';
 import {CalendarEvent, EventColor} from 'calendar-utils';
 import {Color} from './color';
+import {Exercice} from './exercice';
 
 export class Entrainements  {
   id: number;
   title: string;
   category: Categories[];
   entrainement: string;
-  ergometre: string;
   strokesStart: number;
   comments: string;
   cadence: string;
   role: Roles;
   season: Season;
-  exerciceDrill: TypeExercice[];
-  exerciceMuscu: TypeExercice[];
-  exerciceCore: TypeExercice[];
+  exercices: Exercice[];
+  // exerciceDrill: TypeExercice[];
+  // exerciceMuscu: TypeExercice[];
+  // exerciceCore: TypeExercice[];
   rest: string;
   warmUp: string;
   color: Color;
 
 
-constructor(id?: number, title?: string, category?: Categories[], entrainement?: string,
-            comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
-            season?: Season, exerciceDrill?: TypeExercice[], exerciceMuscu?: TypeExercice[], exerciceCore?: TypeExercice[],
-            rest?: string, warmUp?: string,
-            color?: Color) {
+// constructor(id?: number, title?: string, category?: Categories[], entrainement?: string,
+//             comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
+//             season?: Season, exerciceDrill?: TypeExercice[], exerciceMuscu?: TypeExercice[], exerciceCore?: TypeExercice[],
+//             rest?: string, warmUp?: string,
+//             color?: Color) {
+  constructor(id?: number, title?: string, category?: Categories[], entrainement?: string,
+              comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
+              season?: Season, exercices?: Exercice[], rest?: string, warmUp?: string, color?: Color)
+ {
 
     this.id = id;
     this.title = title;
@@ -39,9 +44,10 @@ constructor(id?: number, title?: string, category?: Categories[], entrainement?:
     this.cadence = cadence;
     this.season = season;
     this.role = role;
-    this.exerciceMuscu = exerciceMuscu;
-    this.exerciceDrill = exerciceDrill;
-    this.exerciceCore = exerciceCore;
+    this.exercices = exercices;
+    // this.exerciceMuscu = exerciceMuscu;
+    // this.exerciceDrill = exerciceDrill;
+    // this.exerciceCore = exerciceCore;
     this.rest = rest;
     this.warmUp = warmUp;
     this.color = color;

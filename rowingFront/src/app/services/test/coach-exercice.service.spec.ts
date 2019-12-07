@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SeasonService } from './season.service';
+import { CoachExerciceService } from '../coach-exercice.service';
 
-describe('SeasonService', () => {
+describe('CoachExerciceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SeasonService = TestBed.get(SeasonService);
+    const service: CoachExerciceService = TestBed.get(CoachExerciceService);
     expect(service).toBeTruthy();
   });
 });

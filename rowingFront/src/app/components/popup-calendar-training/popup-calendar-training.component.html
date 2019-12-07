@@ -1,2 +1,199 @@
-<h1 mat-dialog-title> Entrainement du  {{data.training.start}}</h1>
-{{data.actions}}
+<!--<h1 mat-dialog-title> Entrainement du {{day}} {{month}} {{year}}  - {{data.training.title}} </h1>-->
+<!--<div mat-dialog-content>-->
+
+<!--  <form [formGroup]="trainCalendarForm">-->
+<!--    <mat-form-field>-->
+<!--      <label>Date  début</label>-->
+<!--      <input matInput [matDatepicker]="picker"  formControlName="dateStart" required>-->
+<!--      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--      <mat-datepicker #picker></mat-datepicker>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.dateStart">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('dateStart').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('dateStart').dirty || trainCalendarForm.get('dateStart').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--   <mat-form-field>-->
+<!--      <label>Date  fin</label>-->
+<!--      <input matInput [matDatepicker]="pickerEnd"  formControlName="dateEnd" required>-->
+<!--      <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>-->
+<!--      <mat-datepicker #pickerEnd></mat-datepicker>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.dateStart">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('dateEnd').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('dateEnd').dirty || trainCalendarForm.get('dateEnd').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <label>Heure début</label>-->
+<!--      <input matInput type="time" min="05:00" max="23:00" formControlName="timeStart" required>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.dateStart">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('timeStart').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('timeStart').dirty || trainCalendarForm.get('timeStart').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <label>Heure fin</label>-->
+<!--      <input matInput type="time" min="05:00" max="23:00" formControlName="timeEnd" required>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.dateStart">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('timeEnd').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('timeEnd').dirty || trainCalendarForm.get('timeEnd').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+
+<!--    <mat-form-field>-->
+<!--      <input type="text" matInput placeholder="Nom de l'entrainement" formControlName="title" required>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.title">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('title').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('title').dirty || trainCalendarForm.get('title').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <mat-label>Categories des membres</mat-label>-->
+<!--      <mat-select formControlName="role">-->
+<!--        <mat-option *ngFor="let role of roles" [value]="role.id">{{role.name}}</mat-option>-->
+<!--      </mat-select>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.role">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('role').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('role').dirty || trainCalendarForm.get('role').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+<!--    <mat-form-field>-->
+<!--      <mat-label>Categories de l'entrainement</mat-label>-->
+<!--      <mat-select formControlName="categorie" multiple>-->
+<!--        <mat-option *ngFor="let categorie of categories" [value]="categorie">{{categorie.name}}</mat-option>-->
+<!--      </mat-select>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.categorie">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('categorie').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('categorie').dirty || trainCalendarForm.get('categorie').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <h5>Warm Up</h5>-->
+<!--    <mat-form-field>-->
+<!--      <textarea  matInput placeholder="WarmUp" formControlName="warmUp"></textarea>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.warmUp">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('warmUp').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('warmUp').dirty || trainCalendarForm.get('warmUp').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <mat-label>Saison</mat-label>-->
+<!--      <mat-select formControlName="season" (selectionChange)="changeSeason($event)">-->
+<!--        <mat-option *ngFor="let season of season" [value]="season.id">{{season.name}}</mat-option>-->
+<!--      </mat-select>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.season">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('season').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('season').dirty || trainCalendarForm.get('season').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <div class="input-container">-->
+<!--      <div *ngIf="seasonCurrent == 1 ">-->
+<!--        <h5>Entrainenment d'été</h5>-->
+
+<!--        <mat-form-field>-->
+<!--          <input type="number" matInput placeholder="Nombre strokes start" formControlName="strokesStart">-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field>-->
+<!--          <mat-label>Exercice de l'entrainement</mat-label>-->
+<!--          <mat-select formControlName="exerciceDrill" multiple>-->
+<!--            <mat-option  *ngFor="let exercice of exercicesDrill" [value]="exercice"> {{exercice.name}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+
+<!--      </div>-->
+<!--      <div *ngIf="seasonCurrent == 2">-->
+<!--        <h5>Entrainenment d'hiver</h5>-->
+<!--        <h6>Muscu / corps</h6>-->
+
+<!--        <mat-form-field>-->
+<!--          <mat-label>Exercice de musculation</mat-label>-->
+<!--          <mat-select formControlName="exerciceMuscu" multiple>-->
+<!--            <mat-option  *ngFor="let exerciceMuscu of exercicesMuscu" [value]="exerciceMuscu"> {{exerciceMuscu.name}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--          <mat-error *ngFor="let validation of errorMessages.exerciceMuscu">-->
+<!--            <mat-error class="error-message" *ngIf="trainCalendarForm.get('exerciceMuscu').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('exerciceMuscu').dirty || trainCalendarForm.get('exerciceMuscu').touched)">{{validation.message}}-->
+<!--            </mat-error>-->
+<!--          </mat-error>-->
+
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field>-->
+<!--          <mat-label>Exercice de corps</mat-label>-->
+<!--          <mat-select formControlName="exerciceCore" multiple>-->
+<!--            <mat-option  *ngFor="let exerciceCore of exercicesCore" [value]="exerciceCore"> {{exerciceCore.name}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <mat-form-field>-->
+<!--      <input type="text" matInput placeholder="Ex: 4 x 2000m " formControlName="entrainement" required>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.entrainement">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('entrainement').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('entrainement').dirty || trainCalendarForm.get('entrainement').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <input type="text" matInput placeholder="Strokes rate" formControlName="cadence" required>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.cadence">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('cadence').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('cadence').dirty || trainCalendarForm.get('cadence').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <textarea  matInput placeholder="Repos" formControlName="rest" required></textarea>-->
+<!--      <mat-error *ngFor="let validation of errorMessages.rest">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('rest').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('rest').dirty || trainCalendarForm.get('rest').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <textarea  matInput placeholder="Commentaires" formControlName="comments" ></textarea>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <input type="color" matInput placeholder="Couleur" formControlName="color">-->
+<!--      <mat-error *ngFor="let validation of errorMessages.color">-->
+<!--        <mat-error class="error-message" *ngIf="trainCalendarForm.get('color').hasError(validation.type) &&-->
+<!--          (trainCalendarForm.get('color').dirty || trainCalendarForm.get('color').touched)">{{validation.message}}-->
+<!--        </mat-error>-->
+<!--      </mat-error>-->
+<!--    </mat-form-field>-->
+<!--    <div mat-dialog-actions>-->
+<!--      <button mat-button type="button" (click)="close()">Annuler</button>-->
+<!--      <button mat-button color="primary" mat-raised-button (click)="create()">{{data.training.id ? 'Modifier' : 'Créer'}}-->
+<!--      </button>-->
+<!--    </div>-->
+
+
+<!--  </form>-->
+
+
+
+<!--</div>-->

@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { CoachTypeExerciceRoutingModule } from './coach-type-exercice-routing.module';
 import { CoachTypeExerciceComponent } from './coach-type-exercice.component';
-import {ShareModule} from '../share/share.module';
 import {PopupNewTypeExerciceComponent} from '../../components/popup-new-type-exercice/popup-new-type-exercice.component';
 import {CoachTypeExerciceService} from '../../services/coach-type-exercice.service';
+import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,14 @@ import {CoachTypeExerciceService} from '../../services/coach-type-exercice.servi
   imports: [
     CommonModule,
     CoachTypeExerciceRoutingModule,
-    ShareModule
+    MatTableModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
   ],
   entryComponents: [PopupNewTypeExerciceComponent],
   providers: [CoachTypeExerciceService]

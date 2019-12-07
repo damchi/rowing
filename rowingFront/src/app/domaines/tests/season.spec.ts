@@ -1,4 +1,4 @@
-import { Season } from './season';
+import { Season } from '../season';
 
 describe('Season', () => {
   it('should create an instance', () => {

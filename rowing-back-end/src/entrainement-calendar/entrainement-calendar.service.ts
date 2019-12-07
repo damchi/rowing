@@ -10,7 +10,8 @@ export class EntrainementCalendarService {
     constructor( @InjectRepository(EntrainementCalendar) private readonly entrainementsCalendarRepository: Repository<EntrainementCalendar> ) { }
 
     async findAll(): Promise<EntrainementCalendar[]> {
-        return await this.entrainementsCalendarRepository.find({  relations: ['training', 'training.color'],
+        return await this.entrainementsCalendarRepository.find({
+            relations: ['training', 'training.exercices', 'training.exercices.typeExercices'],
             where: [{ deleteAt: null }],
         });
     }

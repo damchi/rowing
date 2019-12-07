@@ -5,16 +5,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class EntrainementsService {
+    private readonly logger = new Logger(EntrainementsService.name);
 
     constructor( @InjectRepository(Entrainements) private readonly entrainementsRepository: Repository<Entrainements> ) { }
 
     async findAll(): Promise<Entrainements[]> {
-        return await this.entrainementsRepository.find({  relations: ['role', 'category', 'exerciceDrill', 'exerciceCore','exerciceMuscu', 'season', 'color'],
-            where: [{ deleteAt: null }],
+        return await this.entrainementsRepository.find({ relations: ['exercices', 'exercices.typeExercices'], where: [{ deleteAt: null }],
         });
     }
 
     async save( training: Entrainements): Promise<Entrainements> {
+        this.logger.log(training);
+
         return this.entrainementsRepository.save(training);
     }
 

@@ -23,6 +23,8 @@ export class EntrainementsController {
     @Post('create')
     create( @Body() training: Entrainements): Promise<Entrainements> {
         training.draggable = true;
+        // this.logger.log(training);
+
         return this.service.save(training);
     }
 

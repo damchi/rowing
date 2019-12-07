@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {StuctureError} from '../../utils/stucture-error';
+import {StuctureError} from '../../../utils/stucture-error';
 import {Exercice} from '../../domaines/exercice';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TypeExercice} from '../../domaines/type-exercice';

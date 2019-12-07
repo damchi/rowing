@@ -11,6 +11,6 @@ export class Exercices extends HistoriqueEntity {
     @Column()
     description: string;
 
-    @ManyToOne(type => TypeExercices, typeExercices => typeExercices.exercices)
+    @ManyToOne(type => TypeExercices, typeExercices => typeExercices.exercices, {cascade: true})
     typeExercices: TypeExercices;
 }
