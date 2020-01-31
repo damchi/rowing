@@ -17,6 +17,7 @@ import {Color} from '../../domaines/color';
 import {CoachEntrainementsCategoriesService} from '../../services/coach-entrainements-categories.service';
 import {Util} from '../../../utils/util';
 import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
+import {getDate} from "date-fns";
 
 
 export class ErrorMessages  {
@@ -71,6 +72,8 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public timeEnd: string;
   public timeStart: string;
   public calendarTraining: EntrainementsPlanning;
+  public errorDate: any = { isError: false, errorMessage: ''};
+
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
               public data: PopupEntrainement,
@@ -113,6 +116,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       this.trainForm.addControl('dateEnd', new FormControl( this.data.eventEnd, [Validators.required]));
       this.trainForm.addControl('timeStart', new FormControl( this.timeStart, [Validators.required]));
       this.trainForm.addControl('timeEnd', new FormControl( this.timeEnd, [Validators.required]));
+
     }
 
 
@@ -287,6 +291,10 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   }
 
   create() {
+    if (new Date(this.trainForm.value.dateStart) < new Date(this.trainForm.value.dateEnd)) {
+      this.errorDate = { isError: true, errorMessage: 'La date de fin ne peut pas être superieure à la date de début' };
+      this.trainForm.invalid;
+    }
 
     if (this.trainForm.valid) {
       const t = this.trainForm.value;
@@ -329,6 +337,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
       }
       if (this.data.calendar) {
+
         this.calendarTraining = {
           id: this.data.id,
           dayStart: t.dateStart,

@@ -46,6 +46,11 @@
           </mat-error>
         </mat-error>
       </mat-form-field>
+
+    <div *ngIf="errorDate.isError" class="alert alert-danger">
+      {{ errorDate.errorMessage }}
+    </div>
+
   </div>
   <mat-form-field>
     <input type="text" matInput placeholder="Nom de l'entrainement" formControlName="title" required>
