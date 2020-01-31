@@ -6,6 +6,7 @@ import {ServiceService} from '../../services/service.service';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {Color} from '../../domaines/color';
 import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
+import {EntrainementsPlanning} from "../../domaines/entrainements-planning";
 
 @Component({
   selector: 'app-coach-entrainements',

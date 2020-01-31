@@ -32,9 +32,7 @@ export class Entrainements  {
 //             color?: Color) {
   constructor(id?: number, title?: string, category?: Categories[], entrainement?: string,
               comments?: string, cadence?: string, role?: Roles, strokesStart?: number,
-              season?: Season, exercices?: Exercice[], rest?: string, warmUp?: string, color?: Color)
- {
-
+              season?: Season, exercices?: Exercice[], rest?: string, warmUp?: string, color?: Color) {
     this.id = id;
     this.title = title;
     this.category = category;

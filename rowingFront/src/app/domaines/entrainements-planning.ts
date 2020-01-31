@@ -3,7 +3,7 @@ import {CalendarEvent} from 'calendar-utils';
 
 
 
-export  interface EntrainementsPlanning extends CalendarEvent {
+export interface EntrainementsPlanning extends CalendarEvent {
 
   id?: number;
   training?: Entrainements;

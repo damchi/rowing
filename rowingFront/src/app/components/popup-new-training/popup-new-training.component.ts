@@ -16,6 +16,8 @@ import {ColorService} from '../../services/color.service';
 import {Color} from '../../domaines/color';
 import {CoachEntrainementsCategoriesService} from '../../services/coach-entrainements-categories.service';
 import {Util} from '../../../utils/util';
+import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
+
 
 export class ErrorMessages  {
   title: StuctureError[];
@@ -36,6 +38,7 @@ export class ErrorMessages  {
 }
 
 export class PopupEntrainement  {
+  id: number;
   training: Entrainements;
   colors: Color;
   calendar: boolean;
@@ -67,6 +70,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public color: Color[];
   public timeEnd: string;
   public timeStart: string;
+  public calendarTraining: EntrainementsPlanning;
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
               public data: PopupEntrainement,
@@ -324,8 +328,18 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
         e.exercices = [...t.exerciceCore, ...t.exerciceMuscu];
 
       }
-
-      this.dialogPop.close({training: e});
+      if (this.data.calendar) {
+        this.calendarTraining = {
+          id: this.data.id,
+          dayStart: t.dateStart,
+          dayEnd: t.dateEnd,
+          start: t.dateStart,
+          end: t.dateEnd,
+          title: t.title,
+          training: e
+        };
+      }
+      this.dialogPop.close({training: this.calendarTraining ? this.calendarTraining : e});
     } else {
       this.markAsTouched(this.trainForm);
     }

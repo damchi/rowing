@@ -50,7 +50,7 @@
         [events]="events"
         [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)"
-        (eventClicked)="eventClicked('Clicked', $event.event)"
+        (eventClicked)="trainingClicked($event.event)"
         (eventTimesChanged)="eventDropped($event)"
         [openDayEventsTemplate]="customActionTemplate"
       >
@@ -59,7 +59,7 @@
         *ngSwitchCase="'week'"
         [viewDate]="viewDate"
         [events]="events"
-        (eventClicked)="eventClicked('Clicked', $event.event)"
+        (eventClicked)="trainingClicked($event.event)"
         (eventTimesChanged)="eventDropped($event)"
       >
       </mwl-calendar-week-view>
@@ -67,7 +67,7 @@
         *ngSwitchCase="'day'"
         [viewDate]="viewDate"
         [events]="events"
-        (eventClicked)="eventClicked('Clicked',$event.event)"
+        (eventClicked)="trainingClicked($event.event)"
         (eventTimesChanged)="eventDropped($event)"
       >
       </mwl-calendar-day-view>
@@ -101,7 +101,7 @@
   <ng-template
     #customActionTemplate
     let-events="events"
-    let-eventClicked="eventClicked"
+    let-eventClicked="trainingClicked"
     let-isOpen="isOpen">
     <div class="cal-open-day-events" [@collapse] *ngIf="isOpen">
       <div
@@ -131,7 +131,7 @@
             [style.backgroundColor]="event.color?.primary">
           </span>
           <p>{{event.title}}</p>
-          <i (click)="displayTrainingCalendar(event)" class="fa fa-fw fa-pencil"></i>
+          <i (click)="trainingClicked(event)" class="fa fa-fw fa-pencil"></i>
           <i (click)="deleteTrainingCalendar(event)" class="fa fa-fw fa-times"></i>
         </div>
       </div>

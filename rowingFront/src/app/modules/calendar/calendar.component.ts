@@ -22,7 +22,6 @@ import {Entrainements} from '../../domaines/entrainements';
 import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
 import {ServiceService} from '../../services/service.service';
 import {MatDatepickerModule, MatDialog, MatNativeDateModule} from '@angular/material';
-import {PopupCalendarTrainingComponent} from '../../components/popup-calendar-training/popup-calendar-training.component';
 import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {Color} from '../../domaines/color';
@@ -152,17 +151,17 @@ export class CalendarComponent implements  OnChanges, OnInit {
 
   }
 
-  eventClicked(action: string, event: EntrainementsPlanning): void {
+  trainingClicked(event: EntrainementsPlanning): void {
 
     const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
       width: '750px',
-      data: { training: event.training, colors: Color, calendar: true, eventStart: event.start, eventEnd: event.end}
+      data: { id: event.id, training: event.training, colors: Color, calendar: true, eventStart: event.start, eventEnd: event.end}
 
     });
 
     dialogPop.afterClosed().subscribe(result => {
       if (result) {
-        this.save(result.exercice);
+        this.save(result.training);
       }
     });
 
@@ -170,15 +169,15 @@ export class CalendarComponent implements  OnChanges, OnInit {
 
   save(event: EntrainementsPlanning) {
     //
-    if (event.id) {
-      this.service.update(event.id, event).subscribe(
-        () => {
-          this.getAll();
-        },
-        error => {
-          this.alertService.error(error);
-        });
-    } else {
+    // if (event.id) {
+    //   this.service.update(event.id, event).subscribe(
+    //     () => {
+    //       this.getAll();
+    //     },
+    //     error => {
+    //       this.alertService.error(error);
+    //     });
+    // } else {
       this.service.save(event).subscribe(
         () => {
           this.getAll();
@@ -186,7 +185,7 @@ export class CalendarComponent implements  OnChanges, OnInit {
         error => {
           this.alertService.error(error);
         });
-    }
+    // }
   }
 
 
@@ -223,19 +222,5 @@ export class CalendarComponent implements  OnChanges, OnInit {
       error => {
         this.alertService.error(error);
       });
-  }
-
-
-  displayTrainingCalendar(event: EntrainementsPlanning) {
-    const dialogPop = this.dialog.open(PopupCalendarTrainingComponent, {
-      width: '750px',
-      data: { training: event}
-    });
-
-    dialogPop.afterClosed().subscribe(result => {
-      if (result) {
-        this.save(result.training);
-      }
-    });
   }
 }
