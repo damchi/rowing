@@ -1,4 +1,3 @@
-
 import {
   isSameMonth,
   isSameDay,
@@ -10,7 +9,7 @@ import {
   endOfDay,
   format
 } from 'date-fns';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarService} from '../../services/calendar.service';
 import {Component, OnChanges, Input, ViewChild, TemplateRef, OnInit} from '@angular/core';
 import {
@@ -18,8 +17,8 @@ import {
   CalendarEventAction, collapseAnimation,
 } from 'angular-calendar';
 import {Subject} from 'rxjs';
-import {Entrainements} from '../../domaines/entrainements';
-import {EntrainementsPlanning} from '../../domaines/entrainements-planning';
+import {Training} from '../../domaines/training';
+import {TrainingPlanning} from '../../domaines/training-planning';
 import {ServiceService} from '../../services/service.service';
 import {MatDatepickerModule, MatDialog, MatNativeDateModule} from '@angular/material';
 import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
@@ -36,24 +35,25 @@ import {Color} from '../../domaines/color';
 })
 
 
-export class CalendarComponent implements  OnChanges, OnInit {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-  @Input() trainings: Entrainements[];
+export class CalendarComponent implements OnChanges, OnInit {
+  @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
+  @Input() trainings: Training[];
   refresh: Subject<any> = new Subject();
   view: string;
   viewDate: Date = new Date();
-  events: EntrainementsPlanning[];
-  event: EntrainementsPlanning;
-  activeDayIsOpen: boolean ;
+  events: TrainingPlanning[];
+  event: TrainingPlanning;
+  activeDayIsOpen: boolean;
 
-  e: EntrainementsPlanning;
+  e: TrainingPlanning;
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
 
-  constructor(private modal: NgbModal, private service: CalendarService,  public dialog: MatDialog, private alertService: ServiceService) {}
+  constructor(private modal: NgbModal, private service: CalendarService, public dialog: MatDialog, private alertService: ServiceService) {
+  }
 
   ngOnChanges() {
   }
@@ -105,8 +105,7 @@ export class CalendarComponent implements  OnChanges, OnInit {
       this.e = {
         start: newStart,
         end: newEnd,
-        dayStart: newStart ,
-        dayEnd: newEnd,
+        dayStart: newStart,
         training: event,
         title: event.title,
         draggable: event.draggable,
@@ -118,7 +117,6 @@ export class CalendarComponent implements  OnChanges, OnInit {
       this.e = {
         id: event.id,
         dayStart: newStart,
-        dayEnd: newEnd,
         start: newStart,
         end: newEnd,
         title: event.title,
@@ -131,19 +129,20 @@ export class CalendarComponent implements  OnChanges, OnInit {
     }
     this.save(this.e);
   }
+
   getAll() {
     this.service.getAll().subscribe(
-      (trainingCalendar: EntrainementsPlanning[]) => {
+      (trainingCalendar: TrainingPlanning[]) => {
         this.events = [];
-        for (const calendar in trainingCalendar) {
+        for (const calendar of trainingCalendar) {
           this.events.push({
-            start: new Date(trainingCalendar[calendar].start),
-            draggable: trainingCalendar[calendar].draggable,
-            end: new Date(trainingCalendar[calendar].end),
-            title: trainingCalendar[calendar].title,
-            color: trainingCalendar[calendar].training.color,
-            id: trainingCalendar[calendar].id,
-            training: trainingCalendar[calendar].training,
+            start: new Date(calendar.start),
+            draggable: calendar.draggable,
+            end: new Date(calendar.end),
+            title: calendar.title,
+            color: calendar.training.color,
+            id: calendar.id,
+            training: calendar.training,
           });
         }
       });
@@ -151,11 +150,18 @@ export class CalendarComponent implements  OnChanges, OnInit {
 
   }
 
-  trainingClicked(event: EntrainementsPlanning): void {
+  trainingClicked(event: TrainingPlanning): void {
 
     const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
       width: '750px',
-      data: { id: event.id, training: event.training, colors: Color, calendar: true, eventStart: event.start, eventEnd: event.end}
+      data: {
+        id: event.id,
+        training: event.training,
+        colors: Color,
+        calendar: true,
+        eventStart: event.start,
+        eventEnd: event.end
+      }
 
     });
 
@@ -167,7 +173,7 @@ export class CalendarComponent implements  OnChanges, OnInit {
 
   }
 
-  save(event: EntrainementsPlanning) {
+  save(event: TrainingPlanning) {
     //
     // if (event.id) {
     //   this.service.update(event.id, event).subscribe(
@@ -178,19 +184,18 @@ export class CalendarComponent implements  OnChanges, OnInit {
     //       this.alertService.error(error);
     //     });
     // } else {
-      this.service.save(event).subscribe(
-        () => {
-          this.getAll();
-        },
-        error => {
-          this.alertService.error(error);
-        });
+    this.service.save(event).subscribe(
+      () => {
+        this.getAll();
+      },
+      error => {
+        this.alertService.error(error);
+      });
     // }
   }
 
 
-
-  externalDrop(event: EntrainementsPlanning) {
+  externalDrop(event: TrainingPlanning) {
     if (this.events.indexOf(event) === -1) {
       this.events = this.events.filter(iEvent => iEvent !== event);
       this.events.push(event);
@@ -198,7 +203,7 @@ export class CalendarComponent implements  OnChanges, OnInit {
   }
 
 
-  deleteTrainingCalendar(event: EntrainementsPlanning) {
+  deleteTrainingCalendar(event: TrainingPlanning) {
     this.event = event;
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',

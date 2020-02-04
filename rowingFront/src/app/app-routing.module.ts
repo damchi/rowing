@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: 'coach',
     loadChildren: () => import('./modules/coach/coach.module').then(m => m.CoachModule),
   },
-  { path: 'coach-categorie', loadChildren: () => import('./modules/coach-type-exercice/coach-type-exercice.module').then(m => m.CoachTypeExerciceModule) },
+  { path: 'coach-categorie',
+    loadChildren: () => import('./modules/coach-type-exercice/coach-type-exercice.module').then(m => m.CoachTypeExerciceModule)
+  },
 
 
 ];

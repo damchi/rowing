@@ -6,7 +6,7 @@ import {CalendarEvent, EventColor} from 'calendar-utils';
 import {Color} from './color';
 import {Exercice} from './exercice';
 
-export class Entrainements  {
+export class Training  {
   id: number;
   title: string;
   category: Categories[];

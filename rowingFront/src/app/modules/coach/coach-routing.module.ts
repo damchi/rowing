@@ -10,8 +10,8 @@ const routes: Routes = [
     component: CoachComponent,
     children: [
       {
-        path: 'entrainement',
-        loadChildren: () => import('../coach-entrainements/coach-entrainements.module').then(m => m.CoachEntrainementsModule)
+        path: 'training',
+        loadChildren: () => import('../coach-training/coach-training.module').then(m => m.CoachTrainingModule)
       },
       {
         path: 'exercice',

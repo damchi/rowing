@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
-import {EntrainementsPlanning} from '../domaines/entrainements-planning';
-import {Entrainements} from '../domaines/entrainements';
+import {TrainingPlanning} from '../domaines/training-planning';
+import {Training} from '../domaines/training';
 
 @Injectable({
   providedIn: 'root'
@@ -17,32 +17,32 @@ export class CalendarService extends ServiceService {
   }
 
 
-  getAll(): Observable<EntrainementsPlanning[]> {
-    return this.http.get<EntrainementsPlanning[]>(`${environment.apiUrl}/entrainementCalendar`)
+  getAll(): Observable<TrainingPlanning[]> {
+    return this.http.get<TrainingPlanning[]>(`${environment.apiUrl}/entrainementCalendar`)
       .pipe(
         tap(trainings => console.log('fetched trainnings')),
         catchError(this.handleError('getAll', []))
       );
   }
 
-  save(training: EntrainementsPlanning): Observable<EntrainementsPlanning> {
-    return this.http.post<EntrainementsPlanning>(`${environment.apiUrl}/entrainementCalendar/create`, training, this.getOptions()).pipe(
-      tap((train: EntrainementsPlanning) => console.log(`added trainning w/ id=${train.id}`)),
-      catchError(this.handleError<EntrainementsPlanning>('save'))
+  save(training: TrainingPlanning): Observable<TrainingPlanning> {
+    return this.http.post<TrainingPlanning>(`${environment.apiUrl}/entrainementCalendar/create`, training, this.getOptions()).pipe(
+      tap((train: TrainingPlanning) => console.log(`added trainning w/ id=${train.id}`)),
+      catchError(this.handleError<TrainingPlanning>('save'))
     );
   }
 
-  // update(id: number, training: EntrainementsPlanning): Observable<EntrainementsPlanning> {
+  // update(id: number, training: TrainingPlanning): Observable<TrainingPlanning> {
   //   return this.http.put(`${environment.apiUrl}/entrainementCalendar/${training.id}/update`, training, this.getOptions()).pipe(
-  //     tap((train: EntrainementsPlanning) => console.log(`update trainning w/ id=${train.id}`)),
-  //     catchError(this.handleError<EntrainementsPlanning>('update'))
+  //     tap((train: TrainingPlanning) => console.log(`update trainning w/ id=${train.id}`)),
+  //     catchError(this.handleError<TrainingPlanning>('update'))
   //   );
   // }
 
-  delete(id: number, training: EntrainementsPlanning): Observable<Entrainements> {
+  delete(id: number, training: TrainingPlanning): Observable<Training> {
     return this.http.delete(`${environment.apiUrl}/entrainementCalendar/${training.id}/delete`, this.getOptions()).pipe(
-      tap((train: Entrainements) => console.log(`update trainning w/ id=${train.id}`)),
-      catchError(this.handleError<Entrainements>('delete'))
+      tap((train: Training) => console.log(`update trainning w/ id=${train.id}`)),
+      catchError(this.handleError<Training>('delete'))
     );
   }
 }

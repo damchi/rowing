@@ -1,15 +1,12 @@
 import {Column, Entity, JoinTable, ManyToOne, Timestamp} from 'typeorm';
 import {HistoriqueEntity} from './historique.entity';
 import {Entrainements} from './entrainements.entity';
-import {ManyToMany} from 'typeorm/browser';
 
 @Entity()
 
 export class EntrainementCalendar extends HistoriqueEntity {
     @Column()
     dayStart: Date;
-    @Column()
-    dayEnd: Date;
     @Column()
     start: Date;
     @Column()
