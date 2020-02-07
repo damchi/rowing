@@ -7,5 +7,6 @@ export interface TrainingPlanning extends CalendarEvent {
 
   id?: number;
   training?: Training;
-  dayStart?: Date;
+  start: Date;
+  end?: Date;
 }

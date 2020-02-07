@@ -41,9 +41,9 @@ export class PopupEntrainement {
   id: number;
   training: Training;
   colors: Color;
-  calendar: boolean;
-  eventStart: Date;
-  eventEnd: Date;
+  // calendar: boolean;
+  // eventStart: Date;
+  end: Date;
   start: Date;
   title: string;
 }
@@ -72,7 +72,6 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public color: Color[];
   public timeEnd: string;
   public timeStart: string;
-  public calendarTraining: TrainingPlanning;
   public oldTraining: TrainingPlanning;
 
 
@@ -109,11 +108,11 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       entrainement: new FormControl(this.data.training.entrainement, [Validators.required]),
     });
 
-    if (this.data.eventStart) {
-      this.timeStart = this.data.eventStart ? Util.getTimeString(this.data.eventStart) : '';
-      this.timeEnd = this.data.eventEnd ? Util.getTimeString(this.data.eventEnd) : '';
+    if (this.data.start) {
+      this.timeStart = this.data.start ? Util.getTimeString(this.data.start) : '';
+      this.timeEnd = this.data.end ? Util.getTimeString(this.data.end) : '';
 
-      this.trainForm.addControl('dateStart', new FormControl(this.data.eventStart, [Validators.required]));
+      this.trainForm.addControl('dateStart', new FormControl(this.data.start, [Validators.required]));
       this.trainForm.addControl('timeStart', new FormControl(this.timeStart, [Validators.required]));
       this.trainForm.addControl('timeEnd', new FormControl(this.timeEnd, [Validators.required]));
 
@@ -239,7 +238,6 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     });
   }
 
-
   close() {
     this.dialogPop.close();
   }
@@ -275,78 +273,81 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
     }
   }
 
-  compareTraining() {
-
-
-  }
-
-  create() {
+  updateUnique() {
 
     if (this.trainForm.valid) {
+
+      const newTraining = this.createTraining();
+      newTraining.id = null;
+
       const t = this.trainForm.value;
-      const e = new Training();
-      e.id = this.data.training.id;
-      e.title = t.title;
-      e.category = t.categorie;
-      e.role = t.role;
-      e.season = t.season;
-      e.comments = t.comments;
-      e.rest = t.rest;
-      e.warmUp = t.warmUp;
-      e.cadence = t.cadence;
-      e.entrainement = t.entrainement;
-      if (t.color.id === undefined) {
-        const c = new Color();
-        c.id = this.data.colors.id;
-        c.primary = t.color;
-        e.color = c;
+      const calendarTraining = {
+            id: this.data.id,
+            start: t.dateStart,
+            title: t.title,
+            training: newTraining
+          };
+
+      if (this.data.start) {
+      // if (this.data.start && (this.oldTraining.start !== this.data.start)) {
+        this.dialogPop.close({updateAll: false, trainingCalendar: calendarTraining});
       } else {
-        e.color = t.color;
+        this.create();
       }
 
-
-      if (t.season === 1) {
-        e.strokesStart = t.strokesStart;
-        t.exerciceMuscu = null;
-        t.exerciceCore = null;
-        e.exercices = [...t.exerciceDrill];
-
-
-      }
-      if (t.season === 2) {
-        e.strokesStart = null;
-        t.exerciceDrill = null;
-        e.exercices = [...t.exerciceCore, ...t.exerciceMuscu];
-
-      }
-      if (this.data.calendar) {
-
-        this.calendarTraining = {
-          id: this.data.id,
-          dayStart: t.dateStart,
-          start: t.dateStart,
-          title: t.title,
-          training: e
-        };
-
-        if (this.oldTraining.training !== this.calendarTraining.training) {
-          console.log('eee');
-        }
-      }
-      this.dialogPop.close({training: this.calendarTraining ? this.calendarTraining : e});
     } else {
       this.markAsTouched(this.trainForm);
     }
   }
 
-  // save(training: Training) {
-  //   this.serviceCategorieEntrainement.save(training).subscribe(
-  //     () => {
-  //       this.getAll();
-  //     },
-  //     error => {
-  //       this.alertService.error(error);
-  //     });
-  // }
+  create() {
+    if (this.trainForm.valid) {
+      const e = this.createTraining();
+      if (this.data.start && (this.oldTraining.start === this.data.start)) {
+        this.dialogPop.close({training: e, updateAll: true});
+      } else {
+        this.updateUnique();
+      }
+    } else {
+      this.markAsTouched(this.trainForm);
+    }
+  }
 
+  createTraining() {
+    const t = this.trainForm.value;
+    const e = new Training();
+    e.id = this.data.training.id;
+    e.title = t.title;
+    e.category = t.categorie;
+    e.role = t.role;
+    e.season = t.season;
+    e.comments = t.comments;
+    e.rest = t.rest;
+    e.warmUp = t.warmUp;
+    e.cadence = t.cadence;
+    e.entrainement = t.entrainement;
+    e.draggable = true;
+    if (t.color.id === undefined) {
+      const c = new Color();
+      c.id = this.data.colors.id;
+      c.primary = t.color;
+      e.color = c;
+    } else {
+      e.color = t.color;
+    }
+    if (t.season === 1) {
+      e.strokesStart = t.strokesStart;
+      t.exerciceMuscu = null;
+      t.exerciceCore = null;
+      e.exercices = [...t.exerciceDrill];
+    }
+    if (t.season === 2) {
+      e.strokesStart = null;
+      t.exerciceDrill = null;
+      e.exercices = [...t.exerciceCore, ...t.exerciceMuscu];
+
+    }
+
+    return e;
+  }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {CoachComponent} from './pages/coach/coach.component';
+// import {CoachComponent} from './pages/coach/coach.component';
 import {CoachPlanningComponent} from './modules/coach-planning/coach-planning.component';
 import {CoachExerciceComponent} from './modules/coach-exercice/coach-exercice.component';
 

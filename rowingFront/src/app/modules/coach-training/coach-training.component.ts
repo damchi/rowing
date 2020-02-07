@@ -6,10 +6,9 @@ import {ServiceService} from '../../services/service.service';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {Color} from '../../domaines/color';
 import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
-import {TrainingPlanning} from "../../domaines/training-planning";
 
 @Component({
-  selector: 'app-coach-entrainements',
+  selector: 'app-coach-training',
   templateUrl: './coach-training.component.html',
   styleUrls: ['./coach-training.component.css']
 })
@@ -19,7 +18,9 @@ export class CoachTrainingComponent implements OnInit {
   public trainings: Training[];
   public training: Training;
 
-  constructor(private service: CoachTrainingService, public dialog: MatDialog, private alertService: ServiceService) { }
+  constructor(private service: CoachTrainingService,
+              public dialog: MatDialog,
+              private alertService: ServiceService) { }
 
   ngOnInit() {
     this.getAll();

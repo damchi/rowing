@@ -6,8 +6,6 @@ import {Entrainements} from './entrainements.entity';
 
 export class EntrainementCalendar extends HistoriqueEntity {
     @Column()
-    dayStart: Date;
-    @Column()
     start: Date;
     @Column()
     end: Date;

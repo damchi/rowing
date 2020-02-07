@@ -24,6 +24,7 @@ import {MatDatepickerModule, MatDialog, MatNativeDateModule} from '@angular/mate
 import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
 import {Color} from '../../domaines/color';
+import {CoachTrainingService} from '../../services/coach-training.service';
 
 @Component({
   selector: 'app-calendar',
@@ -36,7 +37,6 @@ import {Color} from '../../domaines/color';
 
 
 export class CalendarComponent implements OnChanges, OnInit {
-  @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
   @Input() trainings: Training[];
   refresh: Subject<any> = new Subject();
   view: string;
@@ -44,15 +44,13 @@ export class CalendarComponent implements OnChanges, OnInit {
   events: TrainingPlanning[];
   event: TrainingPlanning;
   activeDayIsOpen: boolean;
+  trainingCalendar: TrainingPlanning;
 
-  e: TrainingPlanning;
-
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  };
-
-  constructor(private modal: NgbModal, private service: CalendarService, public dialog: MatDialog, private alertService: ServiceService) {
+  constructor(private modal: NgbModal,
+              private serviceCalendar: CalendarService,
+              private serviceTraining: CoachTrainingService,
+              public dialog: MatDialog,
+              private alertService: ServiceService) {
   }
 
   ngOnChanges() {
@@ -102,21 +100,17 @@ export class CalendarComponent implements OnChanges, OnInit {
       newEnd = newStart;
       newEnd.setHours(20, 0, 0);
 
-      this.e = {
+      this.trainingCalendar = {
         start: newStart,
         end: newEnd,
-        dayStart: newStart,
         training: event,
         title: event.title,
         draggable: event.draggable,
       };
 
     } else {
-
-
-      this.e = {
+      this.trainingCalendar = {
         id: event.id,
-        dayStart: newStart,
         start: newStart,
         end: newEnd,
         title: event.title,
@@ -127,11 +121,11 @@ export class CalendarComponent implements OnChanges, OnInit {
       this.viewDate = newStart;
       this.activeDayIsOpen = true;
     }
-    this.save(this.e);
+    this.saveTrainingCalendar(this.trainingCalendar);
   }
 
   getAll() {
-    this.service.getAll().subscribe(
+    this.serviceCalendar.getAll().subscribe(
       (trainingCalendar: TrainingPlanning[]) => {
         this.events = [];
         for (const calendar of trainingCalendar) {
@@ -147,7 +141,15 @@ export class CalendarComponent implements OnChanges, OnInit {
         }
       });
     this.refresh.next();
+  }
 
+  getAllTrainings() {
+    this.serviceTraining.getAll().subscribe( (trainings: Training[]) => {
+        this.trainings = trainings;
+      },
+      error => {
+        alert(error.toString());
+      });
   }
 
   trainingClicked(event: TrainingPlanning): void {
@@ -158,42 +160,43 @@ export class CalendarComponent implements OnChanges, OnInit {
         id: event.id,
         training: event.training,
         colors: Color,
-        calendar: true,
-        eventStart: event.start,
-        eventEnd: event.end
+        // calendar: true,
+        start: event.start,
+        end: event.end
       }
 
     });
 
     dialogPop.afterClosed().subscribe(result => {
-      if (result) {
-        this.save(result.training);
+      if (result && result.updateAll) {
+        this.saveTraining(result.training);
+      } else {
+        // this.saveTraining(result.training);
+        this.saveTrainingCalendar(result.trainingCalendar);
+        this.getAllTrainings();
       }
     });
-
   }
 
-  save(event: TrainingPlanning) {
-    //
-    // if (event.id) {
-    //   this.service.update(event.id, event).subscribe(
-    //     () => {
-    //       this.getAll();
-    //     },
-    //     error => {
-    //       this.alertService.error(error);
-    //     });
-    // } else {
-    this.service.save(event).subscribe(
+  saveTraining(training: Training) {
+    this.serviceTraining.save(training).subscribe(
       () => {
         this.getAll();
       },
       error => {
         this.alertService.error(error);
       });
-    // }
   }
 
+  saveTrainingCalendar(event: TrainingPlanning) {
+    this.serviceCalendar.save(event).subscribe(
+      () => {
+        this.getAll();
+      },
+      error => {
+        this.alertService.error(error);
+      });
+  }
 
   externalDrop(event: TrainingPlanning) {
     if (this.events.indexOf(event) === -1) {
@@ -221,7 +224,7 @@ export class CalendarComponent implements OnChanges, OnInit {
   }
 
   doDelete() {
-    this.service.delete(this.event.id, this.event).subscribe(() => {
+    this.serviceCalendar.delete(this.event.id, this.event).subscribe(() => {
         this.getAll();
       },
       error => {
