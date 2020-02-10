@@ -1,7 +1,7 @@
-import { EntrainementsPlanning } from '../entrainements-planning';
+import { TrainingPlanning } from '../training-planning';
 
-describe('EntrainementsPlanning', () => {
+describe('TrainingPlanning', () => {
   it('should create an instance', () => {
-    expect(new EntrainementsPlanning()).toBeTruthy();
+    expect(new TrainingPlanning()).toBeTruthy();
   });
 });

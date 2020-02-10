@@ -1,11 +1,11 @@
-import {Entrainements} from './entrainements';
+import {Training} from './training';
 
 export class Season {
   id: number;
   name: string;
-  entrainements: Entrainements[];
+  entrainements: Training[];
 
-  constructor(id?: number, name?: string, entrainements?: Entrainements[] ) {
+  constructor(id?: number, name?: string, entrainements?: Training[] ) {
     this.id = id;
     this.name = name;
     this.entrainements = entrainements;

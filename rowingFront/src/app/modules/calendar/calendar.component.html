@@ -34,74 +34,49 @@
     (viewChange)="getAll()"
   >
   </app-calendar-header>
-
-  <ng-template #loading>
+</div>
+  <!--<ng-template #loading>
     <div class="text-center">
       <i class="fa fa-spin fa-spinner fa-5x"></i> <br />
       Loading events...
     </div>
-  </ng-template>
+  </ng-template>-->
 
 
     <div [ngSwitch]="view">
       <mwl-calendar-month-view
         *ngSwitchCase="'month'"
         [viewDate]="viewDate"
-        [events]="events"
+        [events]="trainingPlannings"
         [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)"
-        (eventClicked)="eventClicked('Clicked', $event.event)"
-        (eventTimesChanged)="eventDropped($event)"
+        (eventClicked)="trainingClicked($event.event)"
+        (eventTimesChanged)="trainingDropped($event)"
         [openDayEventsTemplate]="customActionTemplate"
       >
       </mwl-calendar-month-view>
       <mwl-calendar-week-view
         *ngSwitchCase="'week'"
         [viewDate]="viewDate"
-        [events]="events"
-        (eventClicked)="eventClicked('Clicked', $event.event)"
-        (eventTimesChanged)="eventDropped($event)"
+        [events]="trainingPlannings"
+        (eventClicked)="trainingClicked($event.event)"
+        (eventTimesChanged)="trainingDropped($event)"
       >
       </mwl-calendar-week-view>
       <mwl-calendar-day-view
         *ngSwitchCase="'day'"
         [viewDate]="viewDate"
-        [events]="events"
-        (eventClicked)="eventClicked('Clicked',$event.event)"
-        (eventTimesChanged)="eventDropped($event)"
+        [events]="trainingPlannings"
+        (eventClicked)="trainingClicked($event.event)"
+        (eventTimesChanged)="trainingDropped($event)"
       >
       </mwl-calendar-day-view>
     </div>
-  <ng-template #modalContent let-close="close">
-    <div class="modal-header">
-      <h5 class="modal-title">Event action occurred</h5>
-      <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div>
-        Action:
-        <pre>{{ modalData?.action }}</pre>
-      </div>
-      <div>
-        Event:
-        <pre>{{ modalData?.event | json }}</pre>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="close()">
-        OK
-      </button>
-    </div>
-  </ng-template>
-
-
 
   <ng-template
     #customActionTemplate
     let-events="events"
-    let-eventClicked="eventClicked"
+    let-eventClicked="trainingClicked"
     let-isOpen="isOpen">
     <div class="cal-open-day-events" [@collapse] *ngIf="isOpen">
       <div
@@ -131,7 +106,7 @@
             [style.backgroundColor]="event.color?.primary">
           </span>
           <p>{{event.title}}</p>
-          <i (click)="displayTrainingCalendar(event)" class="fa fa-fw fa-pencil"></i>
+          <i (click)="trainingClicked(event)" class="fa fa-fw fa-pencil"></i>
           <i (click)="deleteTrainingCalendar(event)" class="fa fa-fw fa-times"></i>
         </div>
       </div>

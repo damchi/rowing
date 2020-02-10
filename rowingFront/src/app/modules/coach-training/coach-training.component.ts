@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Entrainements} from '../../domaines/entrainements';
-import {CoachEntrainementsService} from '../../services/coach-entrainements.service';
+import {Training} from '../../domaines/training';
+import {CoachTrainingService} from '../../services/coach-training.service';
 import {MatDialog} from '@angular/material';
 import {ServiceService} from '../../services/service.service';
 import {PopupNewTrainingComponent} from '../../components/popup-new-training/popup-new-training.component';
@@ -8,24 +8,26 @@ import {Color} from '../../domaines/color';
 import {ConfirmDialogComponent} from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'app-coach-entrainements',
-  templateUrl: './coach-entrainements.component.html',
-  styleUrls: ['./coach-entrainements.component.css']
+  selector: 'app-coach-training',
+  templateUrl: './coach-training.component.html',
+  styleUrls: ['./coach-training.component.css']
 })
-export class CoachEntrainementsComponent implements OnInit {
+export class CoachTrainingComponent implements OnInit {
   public displayedColumns: string[] = ['nom', 'saison', 'type', 'role', 'entrainement', 'option'];
   public displayedColumnsMobile: string[] = ['nom', 'saison', 'role', 'option'];
-  public trainings: Entrainements[];
-  public training: Entrainements;
+  public trainings: Training[];
+  public training: Training;
 
-  constructor(private service: CoachEntrainementsService, public dialog: MatDialog, private alertService: ServiceService) { }
+  constructor(private service: CoachTrainingService,
+              public dialog: MatDialog,
+              private alertService: ServiceService) { }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.service.getAll().subscribe( (trainings: Entrainements[]) => {
+    this.service.getAll().subscribe( (trainings: Training[]) => {
         this.trainings = trainings;
       },
       error => {
@@ -33,10 +35,10 @@ export class CoachEntrainementsComponent implements OnInit {
       });
   }
 
-  newTraining(training?: Entrainements) {
+  newTraining(training?: Training) {
     const dialogPop = this.dialog.open(PopupNewTrainingComponent, {
       width: '750px',
-      data: { training: training || new Entrainements() ,
+      data: { training: training || new Training() ,
         colors: Color || new Color(),
         // calendar: false,
         // eventDate: null
@@ -51,7 +53,7 @@ export class CoachEntrainementsComponent implements OnInit {
 
   }
 
-  save(training: Entrainements) {
+  save(training: Training) {
     this.service.save(training).subscribe(
       () => {
         this.getAll();
@@ -62,7 +64,7 @@ export class CoachEntrainementsComponent implements OnInit {
   }
 
 
-  deleteTraining(training: Entrainements) {
+  deleteTraining(training: Training) {
     this.training = training;
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',

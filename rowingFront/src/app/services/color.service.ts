@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ServiceService} from './service.service';
 import {HttpClient} from '@angular/common/http';
-import {Entrainements} from '../domaines/entrainements';
+import {Training} from '../domaines/training';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';

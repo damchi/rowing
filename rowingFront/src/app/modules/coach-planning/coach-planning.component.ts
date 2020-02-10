@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Entrainements} from '../../domaines/entrainements';
-import {CoachEntrainementsService} from '../../services/coach-entrainements.service';
+import {Training} from '../../domaines/training';
+import {CoachTrainingService} from '../../services/coach-training.service';
 
 
 @Component({
@@ -9,15 +9,15 @@ import {CoachEntrainementsService} from '../../services/coach-entrainements.serv
   styleUrls: ['./coach-planning.component.css']
 })
 export class CoachPlanningComponent implements OnInit {
-  trainings: Entrainements[] = [];
-  constructor(private serviceTraining: CoachEntrainementsService ) { }
+  trainings: Training[] = [];
+  constructor(private serviceTraining: CoachTrainingService ) { }
 
   ngOnInit() {
     this.getAllTraining();
   }
 
   getAllTraining() {
-    this.serviceTraining.getAll().subscribe( (trainings: Entrainements[]) => {
+    this.serviceTraining.getAll().subscribe( (trainings: Training[]) => {
         this.trainings = trainings;
       },
       error => {
