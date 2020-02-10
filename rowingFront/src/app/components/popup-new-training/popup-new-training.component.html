@@ -8,7 +8,7 @@
         <input matInput [matDatepicker]="picker" formControlName="dateStart" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngFor="let validation of errorMessages.dateStart">-->
+        <mat-error *ngFor="let validation of errorMessages.dateStart">
           <mat-error class="error-message" *ngIf="trainForm.get('dateStart').hasError(validation.type) &&
           (trainForm.get('dateStart').dirty || trainForm.get('dateStart').touched)">{{validation.message}}
           </mat-error>

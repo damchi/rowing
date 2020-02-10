@@ -41,8 +41,8 @@ export class CalendarComponent implements OnChanges, OnInit {
   refresh: Subject<any> = new Subject();
   view: string;
   viewDate: Date = new Date();
-  events: TrainingPlanning[];
-  event: TrainingPlanning;
+  trainingPlannings: TrainingPlanning[];
+  trainingPlanning: TrainingPlanning;
   activeDayIsOpen: boolean;
   trainingCalendar: TrainingPlanning;
 
@@ -83,12 +83,12 @@ export class CalendarComponent implements OnChanges, OnInit {
     }
   }
 
-  eventDropped({
-                 event,
-                 newStart,
-                 newEnd,
-                 allDay
-               }: any) {
+  trainingDropped({
+                    event,
+                    newStart,
+                    newEnd,
+                    allDay
+                  }: any) {
     if (typeof allDay !== 'undefined') {
       event.allDay = allDay;
     }
@@ -127,9 +127,9 @@ export class CalendarComponent implements OnChanges, OnInit {
   getAll() {
     this.serviceCalendar.getAll().subscribe(
       (trainingCalendar: TrainingPlanning[]) => {
-        this.events = [];
+        this.trainingPlannings = [];
         for (const calendar of trainingCalendar) {
-          this.events.push({
+          this.trainingPlannings.push({
             start: new Date(calendar.start),
             draggable: calendar.draggable,
             end: new Date(calendar.end),
@@ -144,13 +144,14 @@ export class CalendarComponent implements OnChanges, OnInit {
   }
 
   getAllTrainings() {
-    this.serviceTraining.getAll().subscribe( (trainings: Training[]) => {
+    this.serviceTraining.getAll().subscribe((trainings: Training[]) => {
         this.trainings = trainings;
       },
       error => {
         alert(error.toString());
       });
   }
+
 
   trainingClicked(event: TrainingPlanning): void {
 
@@ -160,21 +161,18 @@ export class CalendarComponent implements OnChanges, OnInit {
         id: event.id,
         training: event.training,
         colors: Color,
-        // calendar: true,
         start: event.start,
-        end: event.end
+        end: event.end,
       }
-
     });
 
     dialogPop.afterClosed().subscribe(result => {
       if (result && result.updateAll) {
         this.saveTraining(result.training);
-      } else {
-        // this.saveTraining(result.training);
+      } else if (result && result.training === false) {
         this.saveTrainingCalendar(result.trainingCalendar);
-        this.getAllTrainings();
       }
+      this.getAllTrainings();
     });
   }
 
@@ -199,15 +197,15 @@ export class CalendarComponent implements OnChanges, OnInit {
   }
 
   externalDrop(event: TrainingPlanning) {
-    if (this.events.indexOf(event) === -1) {
-      this.events = this.events.filter(iEvent => iEvent !== event);
-      this.events.push(event);
+    if (this.trainingPlannings.indexOf(event) === -1) {
+      this.trainingPlannings = this.trainingPlannings.filter(iEvent => iEvent !== event);
+      this.trainingPlannings.push(event);
     }
   }
 
 
   deleteTrainingCalendar(event: TrainingPlanning) {
-    this.event = event;
+    this.trainingPlanning = event;
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: {
@@ -224,7 +222,7 @@ export class CalendarComponent implements OnChanges, OnInit {
   }
 
   doDelete() {
-    this.serviceCalendar.delete(this.event.id, this.event).subscribe(() => {
+    this.serviceCalendar.delete(this.trainingPlanning.id, this.trainingPlanning).subscribe(() => {
         this.getAll();
       },
       error => {

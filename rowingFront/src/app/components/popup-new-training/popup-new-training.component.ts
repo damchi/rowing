@@ -18,6 +18,7 @@ import {CoachEntrainementsCategoriesService} from '../../services/coach-entraine
 import {Util} from '../../../utils/util';
 import {TrainingPlanning} from '../../domaines/training-planning';
 import {CoachTrainingService} from '../../services/coach-training.service';
+import {CalendarService} from '../../services/calendar.service';
 
 
 export class ErrorMessages {
@@ -73,6 +74,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
   public timeEnd: string;
   public timeStart: string;
   public oldTraining: TrainingPlanning;
+  public trainingPlanning: TrainingPlanning[];
 
 
   constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA)
@@ -82,9 +84,10 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
               private serviceCoachTraining: CoachTrainingService,
               private serviceCategorieEntrainement: CoachEntrainementsCategoriesService,
               private serviceMembres: RolesService,
+              private serviceCalendar: CalendarService,
               private serviceExercice: CoachExerciceService,
-              private  serviceSeason: SeasonService,
-              private  serviceColor: ColorService) {
+              private serviceSeason: SeasonService,
+              private serviceColor: ColorService) {
     super();
 
     if (this.data.training.season) {
@@ -191,7 +194,7 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
       this.exercicesCore = exercices.filter(e => e.typeExercices.id === 3);
 
       if (this.data.training.exercices) {
-        for (const exercice of  this.data.training.exercices) {
+        for (const exercice of this.data.training.exercices) {
           if (exercice.typeExercices.id === 1 && this.data.training.exercices.length > 0) {
             const idExerciceDrill = this.data.training.exercices.map(e => e.id);
             this.trainForm.get('exerciceDrill').patchValue(this.exercicesDrill.filter(e => idExerciceDrill.indexOf(e.id) !== -1));
@@ -282,14 +285,13 @@ export class PopupNewTrainingComponent extends MarkAsTouch implements OnInit {
 
       const t = this.trainForm.value;
       const calendarTraining = {
-            id: this.data.id,
-            start: t.dateStart,
-            title: t.title,
-            training: newTraining
-          };
+        id: this.data.id,
+        start: t.dateStart,
+        title: t.title,
+        training: newTraining
+      };
 
       if (this.data.start) {
-      // if (this.data.start && (this.oldTraining.start !== this.data.start)) {
         this.dialogPop.close({updateAll: false, trainingCalendar: calendarTraining});
       } else {
         this.create();

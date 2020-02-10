@@ -34,41 +34,41 @@
     (viewChange)="getAll()"
   >
   </app-calendar-header>
-
-  <ng-template #loading>
+</div>
+  <!--<ng-template #loading>
     <div class="text-center">
       <i class="fa fa-spin fa-spinner fa-5x"></i> <br />
       Loading events...
     </div>
-  </ng-template>
+  </ng-template>-->
 
 
     <div [ngSwitch]="view">
       <mwl-calendar-month-view
         *ngSwitchCase="'month'"
         [viewDate]="viewDate"
-        [events]="events"
+        [events]="trainingPlannings"
         [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)"
         (eventClicked)="trainingClicked($event.event)"
-        (eventTimesChanged)="eventDropped($event)"
+        (eventTimesChanged)="trainingDropped($event)"
         [openDayEventsTemplate]="customActionTemplate"
       >
       </mwl-calendar-month-view>
       <mwl-calendar-week-view
         *ngSwitchCase="'week'"
         [viewDate]="viewDate"
-        [events]="events"
+        [events]="trainingPlannings"
         (eventClicked)="trainingClicked($event.event)"
-        (eventTimesChanged)="eventDropped($event)"
+        (eventTimesChanged)="trainingDropped($event)"
       >
       </mwl-calendar-week-view>
       <mwl-calendar-day-view
         *ngSwitchCase="'day'"
         [viewDate]="viewDate"
-        [events]="events"
+        [events]="trainingPlannings"
         (eventClicked)="trainingClicked($event.event)"
-        (eventTimesChanged)="eventDropped($event)"
+        (eventTimesChanged)="trainingDropped($event)"
       >
       </mwl-calendar-day-view>
     </div>
